@@ -1,0 +1,24 @@
+name: 自选股盘中异动监控
+
+on:
+  schedule:
+    # UTC 1:00-3:30 与 5:00-7:30 每30分钟 = 北京 9:30-11:30 与 13:00-15:30
+    - cron: '0,30 1-3,5-7 * * 1-5'
+  workflow_dispatch:
+
+jobs:
+  watch:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+      - name: 安装依赖
+        run: pip install -r requirements.txt
+      - name: 检测自选股异动
+        env:
+          WECHAT_WEBHOOK_URL: ${{ secrets.WECHAT_WEBHOOK_URL }}
+          STOCK_LIST: ${{ secrets.STOCK_LIST }}
+        run: python watch_alert.py
