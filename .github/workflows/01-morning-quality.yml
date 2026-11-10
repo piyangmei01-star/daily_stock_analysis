@@ -1,0 +1,22 @@
+name: 盘前质量选股推送
+
+on:
+  schedule:
+    - cron: '25 1 * * 1-5'   # UTC 1:25 = 北京时间 9:25
+  workflow_dispatch:
+
+jobs:
+  screen:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+      - name: 安装依赖
+        run: pip install -r requirements.txt
+      - name: 运行质量选股并推送
+        env:
+          WECHAT_WEBHOOK_URL: ${{ secrets.WECHAT_WEBHOOK_URL }}
+        run: python quality_screen.py
