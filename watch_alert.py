@@ -24,7 +24,19 @@ def in_trading_time():
 
 
 def check():
-    df = ef.stock.get_realtime_quotes().rename(columns={
+    df = None
+    for i in range(4):
+        try:
+            df = ef.stock.get_realtime_quotes()
+            if df is not None and len(df) > 1000:
+                break
+        except Exception as e:
+            print(f"快照第{i+1}次尝试失败: {e}", flush=True)
+        time.sleep(3)
+    if df is None:
+        print("PUSH_FAIL")
+        return
+    df = df.rename(columns={
         "股票代码": "code", "股票名称": "name", "最新价": "price", "涨跌幅": "pct",
         "换手率": "turnover", "量比": "vol_ratio", "成交额": "amount"})
     for c in ["price", "pct", "turnover", "vol_ratio"]:
