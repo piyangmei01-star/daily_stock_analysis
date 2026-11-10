@@ -187,9 +187,30 @@ def main():
 
 
 def push(content):
-    r = requests.post(WEBHOOK, json={"msgtype": "markdown", "markdown": {"content": content}}, timeout=15)
-    print(r.text, flush=True)
-    return r.json().get("errcode") == 0
+    """发送纯文本（微信插件可读），超长自动分条"""
+    import re
+    plain = content.replace("**", "").replace("# ", "")
+    plain = "\n".join(l for l in plain.split("\n") if not l.strip().startswith(">"))
+    # text 类型上限 2048 字节，按行分块
+    chunks, cur, size = [], [], 0
+    for line in plain.split("\n"):
+        b = len(line.encode("utf-8")) + 1
+        if size + b > 1900 and cur:
+            chunks.append("\n".join(cur))
+            cur, size = [], 0
+        cur.append(line)
+        size += b
+    if cur:
+        chunks.append("\n".join(cur))
+    ok = True
+    for c in chunks:
+        r = requests.post(WEBHOOK, json={"msgtype": "text", "text": {"content": c}}, timeout=15)
+        print(r.text, flush=True)
+        try:
+            ok = ok and r.json().get("errcode") == 0
+        except Exception:
+            ok = False
+    return ok
 
 
 if __name__ == "__main__":
