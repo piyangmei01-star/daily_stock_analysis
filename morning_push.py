@@ -19,8 +19,18 @@ WATCHLIST = ["000860", "600007", "601919", "002724", "300616", "001239",
 
 
 def fetch_quotes():
-    """全市场实时快照：返回 DataFrame（代码/名称/现价/涨跌幅/换手率/量比/成交额/市值/PE）"""
-    df = ef.stock.get_realtime_quotes()
+    """全市场实时快照（带重试）：返回 DataFrame（代码/名称/现价/涨跌幅/换手率/量比/成交额/市值/PE）"""
+    df = None
+    for i in range(4):
+        try:
+            df = ef.stock.get_realtime_quotes()
+            if df is not None and len(df) > 1000:
+                break
+        except Exception as e:
+            print(f"快照第{i+1}次尝试失败: {e}", flush=True)
+        time.sleep(3)
+    if df is None:
+        raise RuntimeError("行情快照获取失败（重试4次）")
     df = df.rename(columns={
         "股票代码": "code", "股票名称": "name", "最新价": "price",
         "涨跌幅": "pct", "换手率": "turnover", "量比": "vol_ratio",
