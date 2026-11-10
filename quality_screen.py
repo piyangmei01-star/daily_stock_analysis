@@ -51,11 +51,31 @@ def get_industry_map():
     return m
 
 
+def fetch_quotes_df():
+    """全市场快照：efinance 重试3次，失败则用 akshare 兜底"""
+    last = None
+    for i in range(3):
+        try:
+            df = ef.stock.get_realtime_quotes()
+            if df is not None and len(df) > 1000:
+                return df.rename(columns={
+                    "股票代码": "code", "股票名称": "name", "最新价": "price", "涨跌幅": "pct",
+                    "换手率": "turnover", "量比": "vol_ratio", "成交额": "amount", "总市值": "mktcap"})
+        except Exception as e:
+            last = e
+        log(f"efinance 快照第{i+1}次尝试失败，重试...")
+        time.sleep(3)
+    log("切换 akshare 兜底数据源...")
+    df = ak.stock_zh_a_spot_em().rename(columns={
+        "代码": "code", "名称": "name", "最新价": "price", "涨跌幅": "pct",
+        "换手率": "换手率", "量比": "vol_ratio", "成交额": "amount", "总市值": "mktcap"})
+    df["turnover"] = df["换手率"]
+    return df
+
+
 def load_snapshot():
     """第一关：行情快照硬过滤"""
-    df = ef.stock.get_realtime_quotes().rename(columns={
-        "股票代码": "code", "股票名称": "name", "最新价": "price", "涨跌幅": "pct",
-        "换手率": "turnover", "量比": "vol_ratio", "成交额": "amount", "总市值": "mktcap"})
+    df = fetch_quotes_df()
     import numpy as np
     for c in ["price", "pct", "turnover", "vol_ratio", "amount", "mktcap"]:
         df[c] = pd.to_numeric(df[c], errors="coerce")
