@@ -65,8 +65,25 @@ def check():
 
 
 def push(text):
-    r = requests.post(WEBHOOK, json={"msgtype": "markdown", "markdown": {"content": text}}, timeout=15)
-    return r.json().get("errcode") == 0
+    plain = text.replace("**", "")
+    chunks, cur, size = [], [], 0
+    for line in plain.split("\n"):
+        b = len(line.encode("utf-8")) + 1
+        if size + b > 1900 and cur:
+            chunks.append("\n".join(cur))
+            cur, size = [], 0
+        cur.append(line)
+        size += b
+    if cur:
+        chunks.append("\n".join(cur))
+    ok = True
+    for c in chunks:
+        r = requests.post(WEBHOOK, json={"msgtype": "text", "text": {"content": c}}, timeout=15)
+        try:
+            ok = ok and r.json().get("errcode") == 0
+        except Exception:
+            ok = False
+    return ok
 
 
 def main():
