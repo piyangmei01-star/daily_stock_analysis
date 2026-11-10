@@ -1,0 +1,22 @@
+name: 盘前强势股推送
+
+on:
+  schedule:
+    - cron: '35 1 * * 1-5'   # UTC 1:35 = 北京时间 9:35
+  workflow_dispatch:
+
+jobs:
+  push:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+      - name: 安装依赖
+        run: pip install -r requirements.txt
+      - name: 运行强势股筛选并推送
+        env:
+          WECHAT_WEBHOOK_URL: ${{ secrets.WECHAT_WEBHOOK_URL }}
+        run: python morning_push.py
