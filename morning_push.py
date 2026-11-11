@@ -19,23 +19,41 @@ WATCHLIST = ["000860", "600007", "601919", "002724", "300616", "001239",
 
 
 def fetch_quotes():
-    """全市场实时快照（带重试）：返回 DataFrame（代码/名称/现价/涨跌幅/换手率/量比/成交额/市值/PE）"""
+    """全市场实时快照（带重试+akshare兜底）：返回 DataFrame"""
     df = None
     for i in range(4):
         try:
             df = ef.stock.get_realtime_quotes()
             if df is not None and len(df) > 1000:
+                df = df.rename(columns={
+                    "股票代码": "code", "股票名称": "name", "最新价": "price",
+                    "涨跌幅": "pct", "换手率": "turnover", "量比": "vol_ratio",
+                    "成交额": "amount", "总市值": "mktcap", "动态市盈率": "pe",
+                })
                 break
         except Exception as e:
-            print(f"快照第{i+1}次尝试失败: {e}", flush=True)
+            print(f"efinance 快照第{i+1}次尝试失败: {e}", flush=True)
+        df = None
         time.sleep(3)
     if df is None:
-        raise RuntimeError("行情快照获取失败（重试4次）")
-    df = df.rename(columns={
-        "股票代码": "code", "股票名称": "name", "最新价": "price",
-        "涨跌幅": "pct", "换手率": "turnover", "量比": "vol_ratio",
-        "成交额": "amount", "总市值": "mktcap", "动态市盈率": "pe",
-    })
+        # akshare 兜底（东财同源接口，独立请求通道）
+        import akshare as ak
+        for i in range(3):
+            try:
+                df = ak.stock_zh_a_spot_em().rename(columns={
+                    "代码": "code", "名称": "name", "最新价": "price",
+                    "涨跌幅": "pct", "换手率": "turnover", "量比": "vol_ratio",
+                    "成交额": "amount", "总市值": "mktcap", "市盈率-动态": "pe",
+                })
+                if df is not None and len(df) > 1000:
+                    print("已切换 akshare 兜底成功", flush=True)
+                    break
+            except Exception as e:
+                print(f"akshare 快照第{i+1}次尝试失败: {e}", flush=True)
+            df = None
+            time.sleep(3)
+    if df is None:
+        raise RuntimeError("行情快照获取失败（efinance重试4次+akshare重试3次均失败）")
     import pandas as pd
     for c in ["price", "pct", "turnover", "vol_ratio", "amount", "mktcap", "pe"]:
         df[c] = pd.to_numeric(df[c], errors="coerce")
