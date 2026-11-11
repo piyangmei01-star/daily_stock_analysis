@@ -2,21 +2,42 @@ name: 盘前质量选股推送
 
 on:
   schedule:
-    - cron: '25 1 * * 1-5'   # UTC 1:25 = 北京时间 9:25
+    - cron: '25 1 * * 1-5'   # 北京 9:25
+    - cron: '55 1 * * 1-5'   # 备用：北京 9:55（防GitHub延迟/跳过）
   workflow_dispatch:
 
 jobs:
   screen:
     runs-on: ubuntu-latest
     timeout-minutes: 30
+    env:
+      GH_TOKEN: ${{ github.token }}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
         with:
           python-version: '3.10'
+      - name: 判断近6小时是否已成功推送（防重复）
+        id: check
+        run: |
+          LAST=$(gh run list --workflow=01-morning-quality.yml --status=success --limit=1 --json createdAt --jq '.[0].createdAt' 2>/dev/null || echo "")
+          SKIP=$(python3 -c "
+import datetime
+last='$LAST'
+if not last:
+    print('no')
+else:
+    t=datetime.datetime.fromisoformat(last.replace('Z','+00:00'))
+    hrs=(datetime.datetime.now(datetime.timezone.utc)-t).total_seconds()/3600
+    print('yes' if hrs<6 else 'no')
+")
+          echo "skip=$SKIP" >> "$GITHUB_OUTPUT"
+          echo "上次成功推送: ${LAST:-无} -> skip=$SKIP"
       - name: 安装依赖
+        if: steps.check.outputs.skip != 'yes'
         run: pip install -r requirements.txt
       - name: 运行质量选股并推送
+        if: steps.check.outputs.skip != 'yes'
         env:
           WECHAT_WEBHOOK_URL: ${{ secrets.WECHAT_WEBHOOK_URL }}
         run: python quality_screen.py
