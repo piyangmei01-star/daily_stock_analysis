@@ -1,0 +1,41 @@
+name: 每日Top10 AI分析（V2）
+
+on:
+  schedule:
+    - cron: '0 10 * * 1-5'   # UTC 10:00 = 北京 18:00
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  ai:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+      - name: 安装依赖
+        run: pip install -r requirements.txt
+      - name: 分析当日质量Top10（DeepSeek）
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          OPENAI_BASE_URL: ${{ vars.OPENAI_BASE_URL || secrets.OPENAI_BASE_URL }}
+          OPENAI_MODEL: ${{ vars.OPENAI_MODEL || secrets.OPENAI_MODEL }}
+        run: python daily_ai_top10.py
+      - name: 业务结果校验与摘要
+        run: python verify_business.py daily_ai --allow-empty
+      - name: 归档数据提交回仓库
+        if: always()
+        run: |
+          git config user.name "v2-archive-bot"
+          git config user.email "v2-archive-bot@users.noreply.github.com"
+          git add data/ 2>/dev/null || true
+          if ! git diff --cached --quiet; then
+            git commit -m "data: daily_ai 归档 $(date -u +%Y%m%d-%H%M)"
+          fi
+          for i in 1 2 3; do
+            git pull --rebase origin main && git push && break || sleep 5
+          done
