@@ -29,16 +29,31 @@ def check():
         try:
             df = ef.stock.get_realtime_quotes()
             if df is not None and len(df) > 1000:
+                df = df.rename(columns={
+                    "股票代码": "code", "股票名称": "name", "最新价": "price", "涨跌幅": "pct",
+                    "换手率": "turnover", "量比": "vol_ratio", "成交额": "amount"})
                 break
         except Exception as e:
-            print(f"快照第{i+1}次尝试失败: {e}", flush=True)
+            print(f"efinance 快照第{i+1}次尝试失败: {e}", flush=True)
+        df = None
         time.sleep(3)
+    if df is None:
+        import akshare as ak
+        for i in range(3):
+            try:
+                df = ak.stock_zh_a_spot_em().rename(columns={
+                    "代码": "code", "名称": "name", "最新价": "price", "涨跌幅": "pct",
+                    "换手率": "turnover", "量比": "vol_ratio", "成交额": "amount"})
+                if df is not None and len(df) > 1000:
+                    print("已切换 akshare 兜底成功", flush=True)
+                    break
+            except Exception as e:
+                print(f"akshare 快照第{i+1}次尝试失败: {e}", flush=True)
+            df = None
+            time.sleep(3)
     if df is None:
         print("PUSH_FAIL")
         return
-    df = df.rename(columns={
-        "股票代码": "code", "股票名称": "name", "最新价": "price", "涨跌幅": "pct",
-        "换手率": "turnover", "量比": "vol_ratio", "成交额": "amount"})
     for c in ["price", "pct", "turnover", "vol_ratio"]:
         df[c] = pd.to_numeric(df[c], errors="coerce")
     alerts = []
