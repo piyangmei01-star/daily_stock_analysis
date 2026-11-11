@@ -21,16 +21,11 @@ jobs:
         id: check
         run: |
           LAST=$(gh run list --workflow=02-morning-momentum.yml --status=success --limit=1 --json createdAt --jq '.[0].createdAt' 2>/dev/null || echo "")
-          SKIP=$(python3 -c "
-            import datetime
-            last='$LAST'
-            if not last:
-                print('no')
-            else:
-                t=datetime.datetime.fromisoformat(last.replace('Z','+00:00'))
-                hrs=(datetime.datetime.now(datetime.timezone.utc)-t).total_seconds()/3600
-                print('yes' if hrs<6 else 'no')
-            ")
+          SKIP=no
+          if [ -n "$LAST" ]; then
+            AGE=$(( $(date +%s) - $(date -d "$LAST" +%s) ))
+            if [ "$AGE" -lt 21600 ]; then SKIP=yes; fi
+          fi
           echo "skip=$SKIP" >> "$GITHUB_OUTPUT"
           echo "上次成功推送: ${LAST:-无} -> skip=$SKIP"
       - name: 安装依赖
