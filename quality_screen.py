@@ -21,33 +21,39 @@ def log(msg):
     print(f"[{time.strftime('%H:%M:%S')}] {msg}", flush=True)
 
 
-def get_industry_map():
-    """东财行业分类映射（缓存7天）"""
+def get_industry_map(codes=None):
+    """行业分类映射（东财直连接口，缓存到 data/industry_map.json，只查缺失代码）"""
     import json
     import os
     path = "data/industry_map.json"
-    if os.path.exists(path) and time.time() - os.path.getmtime(path) < 7 * 86400:
-        with open(path) as fh:
-            return json.load(fh)
     m = {}
-    try:
-        boards = ak.stock_board_industry_name_em()
-        for _, b in boards.iterrows():
-            try:
-                cons = ak.stock_board_industry_cons_em(symbol=b["板块名称"])
-                for c in cons["代码"]:
-                    m[str(c)] = b["板块名称"]
-            except Exception:
-                continue
-    except Exception as e:
-        log(f"行业分类加载失败: {e}")
-        if os.path.exists(path):
+    if os.path.exists(path):
+        try:
             with open(path) as fh:
-                return json.load(fh)
-    os.makedirs("data", exist_ok=True)
-    with open(path, "w") as fh:
-        json.dump(m, fh, ensure_ascii=False)
-    log(f"行业映射已缓存: {len(m)} 只")
+                m = json.load(fh)
+        except Exception:
+            m = {}
+    if not codes:
+        return m
+    todo = [c for c in codes if c not in m]
+    for c in todo:
+        secid = ("1." if c.startswith("6") else "0.") + c
+        for _ in range(3):
+            try:
+                r = requests.get("https://push2.eastmoney.com/api/qt/stock/get",
+                                 params={"secid": secid, "fields": "f127"}, timeout=10,
+                                 headers={"User-Agent": "Mozilla/5.0"})
+                ind = (r.json().get("data") or {}).get("f127")
+                if ind:
+                    m[c] = ind
+                break
+            except Exception:
+                time.sleep(2)
+    if todo:
+        os.makedirs("data", exist_ok=True)
+        with open(path, "w") as fh:
+            json.dump(m, fh, ensure_ascii=False)
+        log(f"行业映射: 本次查询 {len(todo)} 只，缓存共 {len(m)} 只")
     return m
 
 
@@ -146,8 +152,8 @@ def main():
     final["total"] = final["fund_score"] * 0.65 + (30 - final["trend20"].clip(0, 30)) / 30 * 35
     top = final.sort_values("total", ascending=False).head(10)
 
-    # 行业分散：同行业最多保留2只
-    industry = get_industry_map()
+    # 行业分散：同行业最多保留2只（只查 Top10 的行业，速度快）
+    industry = get_industry_map(top["code"].tolist())
     picked, cnt = [], {}
     for _, r in top.iterrows():
         ind = industry.get(r["code"], "其他")
