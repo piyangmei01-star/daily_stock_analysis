@@ -35,9 +35,22 @@ def main():
     conn = hs.get_conn()
     run_date = hs.today()
     try:
-        if v1.ef is None:
-            raise RuntimeError("efinance 未安装")
-        df = v1.fetch_quotes()
+        import market_data as md
+        df, meta = md.fetch_snapshot()
+        hs.log_event(TASK, "INFO",
+                     f"行情快照 source={meta['source']} rows={meta['rows']} "
+                     f"data_date={meta['data_date']} basis={meta['quote_basis']}")
+        # 新浪备用源不提供量比：先用其余硬条件缩小候选域，再由腾讯批量补齐。
+        # 不允许把「量比缺失」静默当作 0 而产出空名单或错误筛选。
+        if df["vol_ratio"].isna().all():
+            cand = df[~df["name"].str.contains("ST|退", na=False)]
+            cand = cand[cand["code"].str.match(r"^(00|30|60)")]
+            cand = cand[(cand["amount"] >= 1e8) & (cand["mktcap"] >= 3e9)
+                        & (cand["price"].between(3, 200)) & (cand["pct"].between(1.0, 9.5))]
+            df, n, src = md.enrich_vol_ratio_from_tencent(df, cand["code"].tolist())
+            hs.log_event(TASK, "INFO", f"量比/PE补齐 {n}/{len(cand)} 只, 备用来源={src}")
+            if n == 0:
+                raise RuntimeError("备用源量比补齐失败，强势股筛选终止（不使用缺失量比的名单）")
         picks = v1.screen(df)
 
         counts = {"universe": len(df), "pass1": len(df), "pass2": len(picks), "pass3": len(picks)}
