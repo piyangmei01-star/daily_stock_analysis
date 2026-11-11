@@ -59,7 +59,66 @@ def snapshot_of(r):
     return {k: (round(float(r[k]), 4) if k in r and pd.notna(r[k]) else None) for k in keys}
 
 
+def robust_fetch_quotes_df():
+    """V2 增强版全市场快照（接口/字段与 V1 完全一致，V1 文件不改动）：
+    多主机轮询 + 每页8次重试 + 当日缓存兜底（缓存亦来自真实行情，标注来源）"""
+    import json
+    import time
+    fields = "f12,f14,f2,f3,f8,f10,f6,f20"
+    hosts = ["82.push2.eastmoney.com", "82.push2delay.eastmoney.com",
+             "33.push2.eastmoney.com", "push2delay.eastmoney.com",
+             "1.push2.eastmoney.com", "7.push2.eastmoney.com",
+             "90.push2.eastmoney.com", "push2.eastmoney.com"]
+    headers = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36",
+               "Referer": "https://quote.eastmoney.com/"}
+    fs = "m:0+t:6,m:0+t:80,m:1+t:2,m:1+t:23"
+    rows, page, total = [], 1, None
+    sess = requests.Session()
+    sess.headers.update(headers)
+    while True:
+        params = {"pn": page, "pz": 200, "po": 1, "np": 1, "fltt": 2, "invt": 2,
+                  "fid": "f12", "fs": fs, "fields": fields}
+        got = None
+        for attempt in range(8):
+            host = hosts[(page - 1 + attempt) % len(hosts)]
+            try:
+                r = sess.get(f"https://{host}/api/qt/clist/get", params=params, timeout=20)
+                j = r.json().get("data")
+                if j and j.get("diff") is not None:
+                    got = j
+                    break
+            except Exception:
+                time.sleep(min(2 + attempt, 6))
+        if got is None:
+            hs.log_event(TASK, "WARN", f"快照第{page}页8次重试均失败，已获取{len(rows)}条")
+            break
+        diff = got["diff"]
+        if isinstance(diff, dict):
+            diff = list(diff.values())
+        rows.extend(diff)
+        total = got.get("total") or total
+        if (total and len(rows) >= total) or not diff:
+            break
+        page += 1
+    if len(rows) >= 1000:
+        df = pd.DataFrame(rows).rename(columns={
+            "f12": "code", "f14": "name", "f2": "price", "f3": "pct",
+            "f8": "turnover", "f10": "vol_ratio", "f6": "amount", "f20": "mktcap"})
+        os.makedirs("data/cache", exist_ok=True)
+        df.to_csv(f"data/cache/snapshot_{hs.yyyymmdd()}.csv", index=False)
+        print(f"全市场快照: {len(rows)} 只（实时）", flush=True)
+        return df
+    # 当日缓存兜底（真实历史行情，明确标注）
+    cache = f"data/cache/snapshot_{hs.yyyymmdd()}.csv"
+    if os.path.exists(cache):
+        hs.log_event(TASK, "WARN", f"实时快照不完整({len(rows)}条)，使用当日缓存快照 {cache}")
+        print(f"⚠️ 使用当日缓存快照: {cache}", flush=True)
+        return pd.read_csv(cache, dtype={"code": str})
+    raise RuntimeError(f"全市场快照拉取不完整: 仅 {len(rows)} 条，且无当日缓存")
+
+
 def main():
+    v1.fetch_quotes_df = robust_fetch_quotes_df  # V2侧替换数据获取，V1过滤算法不变
     conn = hs.get_conn()
     run_date = hs.today()
     env = market_env()
