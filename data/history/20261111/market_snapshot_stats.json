@@ -1,0 +1,38 @@
+{
+  "expected_data_date": "2026-11-11",
+  "expected_basis": "intraday",
+  "source": "sina_market_center",
+  "data_date": "2026-11-11",
+  "date_source": "calendar_inferred",
+  "quote_basis": "intraday",
+  "universe_total": 5106,
+  "rows": 5106,
+  "complete": true,
+  "fetched_at": "2026-11-11 22:48:34",
+  "price_basis": "unadjusted",
+  "amount_unit": "CNY",
+  "mktcap_unit": "CNY",
+  "code_rule": "6位数字字符串，去市场前缀",
+  "board_counts": {
+    "00": 1505,
+    "30": 1337,
+    "60": 1696,
+    "68": 568
+  },
+  "missing_field_counts": {
+    "price": 0,
+    "pct": 0,
+    "turnover": 0,
+    "vol_ratio": 5106,
+    "amount": 0,
+    "mktcap": 0,
+    "open": 0,
+    "high": 0,
+    "low": 0,
+    "prev_close": 0,
+    "pe": 0
+  },
+  "raw_total_including_bj": 5341,
+  "excluded_beijing": 244,
+  "universe_scope": "沪深主板00/60 + 创业板30 + 科创板68（排除北交所）"
+}

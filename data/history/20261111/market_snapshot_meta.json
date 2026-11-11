@@ -1,0 +1,18 @@
+{
+  "source": "sina_market_center",
+  "data_date": "2026-11-11",
+  "date_source": "calendar_inferred",
+  "quote_basis": "intraday",
+  "universe_total": 5106,
+  "rows": 5106,
+  "complete": true,
+  "fetched_at": "2026-11-11 22:48:34",
+  "price_basis": "unadjusted",
+  "kline_basis": "forward_adjusted_fqt1 (V1 trend_ok 使用，不与快照混用)",
+  "code_rule": "6位数字字符串，去市场前缀",
+  "amount_unit": "CNY",
+  "mktcap_unit": "CNY",
+  "raw_total_including_bj": 5341,
+  "excluded_beijing": 244,
+  "universe_scope": "沪深主板00/60 + 创业板30 + 科创板68（排除北交所）"
+}
