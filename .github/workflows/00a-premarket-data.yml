@@ -1,0 +1,35 @@
+name: 盘前数据准备(全市场校验)
+
+on:
+  schedule:
+    - cron: '15 1 * * 1-5'   # UTC 1:15 = 北京时间 9:15（盘前）
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  premarket:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+      - name: 安装依赖
+        run: pip install -r requirements.txt
+      - name: 盘前全市场数据准备与完整性校验
+        run: python premarket_data.py
+      - name: 归档数据提交回仓库(缓存供9:25/9:35复用)
+        if: always()
+        run: |
+          git config user.name "v2-archive-bot"
+          git config user.email "v2-archive-bot@users.noreply.github.com"
+          git add -f data/ 2>/dev/null || true
+          if ! git diff --cached --quiet; then
+            git commit -m "data: premarket 全市场快照 $(date -u +%Y%m%d-%H%M)"
+          fi
+          for i in 1 2 3; do
+            git pull --rebase origin main && git push && break || sleep 5
+          done
