@@ -11,6 +11,9 @@ on:
         type: boolean
         default: false
 
+permissions:
+  contents: write
+
 jobs:
   screen:
     runs-on: ubuntu-latest
@@ -36,8 +39,23 @@ jobs:
       - name: 安装依赖
         if: steps.check.outputs.skip != 'yes' || inputs.force == true
         run: pip install -r requirements.txt
-      - name: 运行质量选股并推送
+      - name: 运行质量选股V2（归档+推送）
         if: steps.check.outputs.skip != 'yes' || inputs.force == true
         env:
           WECHAT_WEBHOOK_URL: ${{ secrets.WECHAT_WEBHOOK_URL }}
-        run: python quality_screen.py
+        run: python quality_screen_v2.py
+      - name: 业务结果校验与摘要
+        if: steps.check.outputs.skip != 'yes' || inputs.force == true
+        run: python verify_business.py quality --allow-empty
+      - name: 归档数据提交回仓库
+        if: always()
+        run: |
+          git config user.name "v2-archive-bot"
+          git config user.email "v2-archive-bot@users.noreply.github.com"
+          git add data/ 2>/dev/null || true
+          if ! git diff --cached --quiet; then
+            git commit -m "data: quality 归档 $(date -u +%Y%m%d-%H%M)"
+          fi
+          for i in 1 2 3; do
+            git pull --rebase origin main && git push && break || sleep 5
+          done
