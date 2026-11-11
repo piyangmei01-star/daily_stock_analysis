@@ -62,17 +62,13 @@ def session_status(now=None):
 
 
 def fetch_stock(code):
-    """东财直连实时行情（单股）"""
-    secid = ("1." if code.startswith("6") else "0.") + code
-    r = requests.get("https://push2.eastmoney.com/api/qt/stock/get",
-                     params={"secid": secid, "fltt": 2, "invt": 2,
-                             "fields": "f58,f43,f170,f168,f50,f46,f60,f47,f48"},
-                     headers=HEADERS, timeout=12)
-    d = r.json().get("data") or {}
-    if not d or d.get("f43") in (None, "-"):
-        return None
-    return {"code": code, "name": d.get("f58"), "price": d.get("f43"), "pct": d.get("f170"),
-            "turnover": d.get("f168"), "vol_ratio": d.get("f50"), "prev_close": d.get("f60")}
+    """单股行情：统一数据层多源备用（东财 -> 腾讯 -> 新浪）。
+
+    返回字段与 V1 一致，额外带 source / data_date 用于标注备用数据实际来源与日期。
+    全部来源失败返回 None，由 check() 明确记 WARN，不静默忽略。
+    """
+    import market_data as md
+    return md.fetch_stock_quote(code)
 
 
 def check():
@@ -94,6 +90,11 @@ def check():
             hs.log_event("alert", "WARN", f"{code} 行情获取失败或停牌无数据")
             continue
         checked += 1
+        # 启用备用数据源时必须明确标注来源与实际数据日期
+        if q.get("source") != "eastmoney_stock_get":
+            hs.log_event("alert", "INFO",
+                         f"{code} 使用备用行情 source={q.get('source')} "
+                         f"data_date={q.get('data_date')}")
         tags = []
         if q["pct"] is None:
             continue
