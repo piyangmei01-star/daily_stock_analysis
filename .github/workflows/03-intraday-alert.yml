@@ -5,6 +5,18 @@ on:
     # UTC 1:00-3:30 与 5:00-7:30 每30分钟 = 北京 9:30-11:30 与 13:00-15:30
     - cron: '0,30 1-3,5-7 * * 1-5'
   workflow_dispatch:
+    inputs:
+      force:
+        description: '非交易时段也执行检测（用于验证）'
+        type: boolean
+        default: false
+      no_push:
+        description: '只检测归档不推送'
+        type: boolean
+        default: false
+
+permissions:
+  contents: write
 
 jobs:
   watch:
@@ -17,8 +29,26 @@ jobs:
           python-version: '3.10'
       - name: 安装依赖
         run: pip install -r requirements.txt
-      - name: 检测自选股异动
+      - name: 检测自选股异动V2（北京时间+交易日历+留痕）
         env:
           WECHAT_WEBHOOK_URL: ${{ secrets.WECHAT_WEBHOOK_URL }}
           STOCK_LIST: ${{ secrets.STOCK_LIST }}
-        run: python watch_alert.py
+        run: |
+          ARGS=""
+          if [ "${{ inputs.force }}" = "true" ]; then ARGS="$ARGS --force"; fi
+          if [ "${{ inputs.no_push }}" = "true" ]; then ARGS="$ARGS --no-push"; fi
+          python watch_alert_v2.py $ARGS
+      - name: 业务结果校验与摘要
+        run: python verify_business.py alert
+      - name: 归档数据提交回仓库
+        if: always()
+        run: |
+          git config user.name "v2-archive-bot"
+          git config user.email "v2-archive-bot@users.noreply.github.com"
+          git add data/ 2>/dev/null || true
+          if ! git diff --cached --quiet; then
+            git commit -m "data: alert 归档 $(date -u +%Y%m%d-%H%M)"
+          fi
+          for i in 1 2 3; do
+            git pull --rebase origin main && git push && break || sleep 5
+          done
