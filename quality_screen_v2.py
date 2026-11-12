@@ -100,6 +100,7 @@ def main():
         if not passed:
             hs.save_run(conn, TASK, run_date, MODEL_VERSION, "success", counts, env, hs._ts())
             hs.log_event(TASK, "INFO", "今日无同时满足业绩+趋势的候选")
+            hs.export_run_snapshot(conn, run_date, TASK)
             if "--no-push" not in sys.argv:
                 v1.push("今日无同时满足「业绩质量+趋势多头」的候选，建议观望。")
             return
@@ -160,6 +161,7 @@ def main():
         hs.archive_text(run_date, "quality_top10.txt", ",".join(top["code"].tolist()))
         log(f"归档完成: 新增候选 {n_cand} 条, 新增Top10 {n_pick} 条 (重复运行时为0)")
         log(f"Top10: {','.join(top['code'].tolist())}")
+        hs.export_run_snapshot(conn, run_date, TASK)  # 归档真相源: append-only JSON
 
         # 兼容 V1 的 AI 下游文件
         with open("data/screened_top10.txt", "w") as f:
