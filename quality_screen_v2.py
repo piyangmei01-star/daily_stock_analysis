@@ -78,8 +78,36 @@ def robust_fetch_quotes_df():
     return df
 
 
+# V2 侧容错趋势判断：MA20/MA60/追高≤15% 逻辑与 V1 完全一致，
+# 仅替换数据获取为多源；V1 文件零改动。统计用于硬校验，防止残缺数据冒充完整选股。
+import threading
+_KLINE_LOCK = threading.Lock()
+_KLINE_STAT = {"ok": 0, "fail": 0, "sources": {}, "adjustments": {}}
+
+
+def trend_ok_v2(code):
+    import market_data as md
+    try:
+        close, src, adj, ddate = md.fetch_daily_kline(code)
+    except Exception:
+        with _KLINE_LOCK:
+            _KLINE_STAT["fail"] += 1
+        return None
+    with _KLINE_LOCK:
+        _KLINE_STAT["ok"] += 1
+        _KLINE_STAT["sources"][src] = _KLINE_STAT["sources"].get(src, 0) + 1
+        _KLINE_STAT["adjustments"][adj] = _KLINE_STAT["adjustments"].get(adj, 0) + 1
+    ma20 = close.rolling(20).mean().iloc[-1]
+    ma60 = close.rolling(60).mean().iloc[-1]
+    c = close.iloc[-1]
+    chg20 = (c / close.iloc[-21] - 1) * 100
+    if c > ma20 > ma60 and 0 <= chg20 <= 15:
+        return code, ma20, ma60, chg20
+    return None
+
 def main():
     v1.fetch_quotes_df = robust_fetch_quotes_df  # V2侧替换数据获取，V1过滤算法不变
+    v1.trend_ok = trend_ok_v2  # V2侧替换日K数据获取，MA/趋势判断逻辑与V1完全一致
     conn = hs.get_conn()
     run_date = hs.today()
     env = market_env()
@@ -95,6 +123,20 @@ def main():
                 if res:
                     passed[res[0]] = res[1:]
         log(f"趋势过滤后: {len(passed)} 只")
+        tot = _KLINE_STAT["ok"] + _KLINE_STAT["fail"]
+        rate = (_KLINE_STAT["ok"] / tot) if tot else 0.0
+        env["kline_integrity"] = {"ok": _KLINE_STAT["ok"], "total": tot,
+                                  "rate": round(rate, 4),
+                                  "sources": dict(_KLINE_STAT["sources"]),
+                                  "adjustments": dict(_KLINE_STAT["adjustments"])}
+        hs.log_event(TASK, "INFO",
+                     f"日K完整性 ok={_KLINE_STAT['ok']}/{tot} 成功率={rate:.1%} "
+                     f"来源={_KLINE_STAT['sources']} 复权口径={_KLINE_STAT['adjustments']}")
+        print(f"日K完整性: ok={_KLINE_STAT['ok']}/{tot} 成功率={rate:.1%} "
+              f"来源={_KLINE_STAT['sources']} 口径={_KLINE_STAT['adjustments']}", flush=True)
+        if tot and rate < 0.80:
+            hs.log_event(TASK, "ERROR", f"日K成功率{rate:.1%}<80%，拒绝产出残缺Top10名单")
+            raise RuntimeError(f"日K数据不完整(成功率{rate:.1%})，拒绝用残缺数据冒充完整选股")
         counts = {"universe": len(snap), "pass1": len(snap), "pass2": len(fund), "pass3": len(passed)}
 
         if not passed:
