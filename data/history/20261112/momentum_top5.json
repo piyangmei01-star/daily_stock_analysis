@@ -1,0 +1,132 @@
+{
+  "run_id": "momentum_20261112",
+  "model_version": "v2.0-stage1",
+  "data_updated_at": "2026-11-12 10:31:09",
+  "picks": [
+    {
+      "code": "002593",
+      "name": "日上集团",
+      "rank": 1,
+      "score": 74.941,
+      "scores": {
+        "vol_ratio": 14.17,
+        "turnover": 19.67,
+        "pct": 1.9
+      },
+      "reason": "量比14.2≥1.5放量，换手19.7%，涨幅+1.90%，成交额5.5亿，PE 34.6",
+      "risk_tags": "开盘已涨(追涨属性);高换手(>15%);量比异常放大(>5)",
+      "close_price": 4.84,
+      "snapshot": {
+        "price": 4.84,
+        "pct": 1.895,
+        "turnover": 19.6743,
+        "vol_ratio": 14.17,
+        "amount": 553610334.0,
+        "mktcap": 3890672860.36,
+        "pe": 34.571,
+        "score": 74.9409
+      },
+      "industry": null
+    },
+    {
+      "code": "603586",
+      "name": "金麒麟",
+      "rank": 2,
+      "score": 67.967,
+      "scores": {
+        "vol_ratio": 14.65,
+        "turnover": 6.47,
+        "pct": 5.28
+      },
+      "reason": "量比14.7≥1.5放量，换手6.5%，涨幅+5.28%，成交额2.0亿，PE 22.5",
+      "risk_tags": "开盘已涨(追涨属性);当日涨幅较大(>5%);量比异常放大(>5)",
+      "close_price": 15.75,
+      "snapshot": {
+        "price": 15.75,
+        "pct": 5.281,
+        "turnover": 6.4692,
+        "vol_ratio": 14.65,
+        "amount": 200972710.0,
+        "mktcap": 3087831285.0,
+        "pe": 22.5,
+        "score": 67.9674
+      },
+      "industry": null
+    },
+    {
+      "code": "002703",
+      "name": "浙江世宝",
+      "rank": 3,
+      "score": 60.396,
+      "scores": {
+        "vol_ratio": 6.21,
+        "turnover": 10.93,
+        "pct": 2.54
+      },
+      "reason": "量比6.2≥1.5放量，换手10.9%，涨幅+2.54%，成交额11.1亿，PE 77.4",
+      "risk_tags": "开盘已涨(追涨属性);量比异常放大(>5)",
+      "close_price": 16.98,
+      "snapshot": {
+        "price": 16.98,
+        "pct": 2.536,
+        "turnover": 10.9287,
+        "vol_ratio": 6.21,
+        "amount": 1108177873.0,
+        "mktcap": 13968297880.32,
+        "pe": 77.393,
+        "score": 60.3957
+      },
+      "industry": null
+    },
+    {
+      "code": "601188",
+      "name": "龙江交通",
+      "rank": 4,
+      "score": 59.4,
+      "scores": {
+        "vol_ratio": 3.43,
+        "turnover": 17.23,
+        "pct": 6.06
+      },
+      "reason": "量比3.4≥1.5放量，换手17.2%，涨幅+6.06%，成交额9.9亿，PE 35.3",
+      "risk_tags": "开盘已涨(追涨属性);当日涨幅较大(>5%);高换手(>15%)",
+      "close_price": 4.55,
+      "snapshot": {
+        "price": 4.55,
+        "pct": 6.061,
+        "turnover": 17.226,
+        "vol_ratio": 3.43,
+        "amount": 992282610.0,
+        "mktcap": 5939888113.25,
+        "pe": 35.326,
+        "score": 59.4
+      },
+      "industry": null
+    },
+    {
+      "code": "301520",
+      "name": "万邦医药",
+      "rank": 5,
+      "score": 57.522,
+      "scores": {
+        "vol_ratio": 3.07,
+        "turnover": 20.83,
+        "pct": 3.72
+      },
+      "reason": "量比3.1≥1.5放量，换手20.8%，涨幅+3.72%，成交额4.6亿，PE 115.0",
+      "risk_tags": "开盘已涨(追涨属性);高换手(>15%);高估值(PE>80)",
+      "close_price": 63.25,
+      "snapshot": {
+        "price": 63.25,
+        "pct": 3.723,
+        "turnover": 20.8264,
+        "vol_ratio": 3.07,
+        "amount": 455918499.0,
+        "mktcap": 5893089342.25,
+        "pe": 115.0,
+        "score": 57.5216
+      },
+      "industry": null
+    }
+  ]
+}
