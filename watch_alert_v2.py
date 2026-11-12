@@ -154,6 +154,7 @@ def main():
         hs.save_alert_check(conn, in_session=False, checked=0, anomaly=0, data_ok=True,
                             error_msg="非交易时段跳过" if is_day else "非交易日跳过")
         print("SKIP_NON_TRADING（已按北京时间+交易日历判定）", flush=True)
+        hs.export_run_snapshot(conn, hs.today(), "alert")
         return
 
     try:
@@ -188,6 +189,7 @@ def main():
     hs.log_event("alert", "INFO",
                  f"检测{checked}只/异常{len(events)}条/新增事件{n}条/推送={pushed}/in_session={in_sess}")
     print(f"ALERT_DONE 新增事件 {n} 条（重复运行为0）", flush=True)
+    hs.export_run_snapshot(conn, hs.today(), "alert")  # 归档真相源: append-only JSON
 
 
 if __name__ == "__main__":
