@@ -112,6 +112,7 @@ def main():
     conn.commit()
     hs.log_event(TASK, "INFO", f"AI分析完成: 成功{len(results)}/失败{len(failed)}")
     print(f"AI_DONE 成功{len(results)} 失败{len(failed)}", flush=True)
+    hs.export_run_snapshot(conn, run_date, TASK)  # 归档真相源: append-only JSON
 
 
 if __name__ == "__main__":
