@@ -1,0 +1,21 @@
+[
+  {
+    "event_id": "20261112_111619_300616_pct_up5",
+    "run_date": "2026-11-12",
+    "time_bj": "11:16:19",
+    "code": "300616",
+    "name": "尚品宅配",
+    "event_type": "pct_up5",
+    "observed": 7.03,
+    "threshold": 5.0,
+    "price": 12.03,
+    "detail": {
+      "label": "🔥 大涨",
+      "turnover": 9.29,
+      "vol_ratio": 2.75,
+      "pct": 7.03,
+      "prev_close": 11.24
+    },
+    "_label": "🔥 大涨"
+  }
+]
