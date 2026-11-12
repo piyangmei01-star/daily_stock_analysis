@@ -56,6 +56,10 @@ jobs:
           if ! git diff --cached --quiet; then
             git commit -m "data: momentum 归档 $(date -u +%Y%m%d-%H%M)"
           fi
+          # 运行时派生文件(db/缓存/txt)被脚本改动会造成 "cannot pull with rebase: unstaged changes"
+          # 归档已 commit，此处只丢弃这些派生改动，绝不动已提交的 data/history/ 归档
+          git checkout -- . 2>/dev/null || true
+          git clean -fdq data/ 2>/dev/null || true
           OK=no
           for i in 1 2 3; do
             if git pull --rebase origin main && git push; then OK=yes; break; fi
