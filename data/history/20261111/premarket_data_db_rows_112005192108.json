@@ -1,0 +1,54 @@
+{
+  "schema": "v2_db_rows/1",
+  "run_date": "2026-11-11",
+  "task": "premarket_data",
+  "exported_at": "2026-11-12 11:20:05",
+  "tables": {
+    "screening_runs": [
+      {
+        "run_id": "premarket_data_20261111",
+        "task": "premarket_data",
+        "run_date": "2026-11-11",
+        "run_time_bj": "2026-11-11 22:48:35",
+        "model_version": "v2.0-stage1",
+        "status": "success",
+        "universe_count": 5106,
+        "pass1": null,
+        "pass2": null,
+        "pass3": null,
+        "market_env_json": "{\"expected_data_date\": \"2026-11-11\", \"expected_basis\": \"intraday\", \"source\": \"sina_market_center\", \"data_date\": \"2026-11-11\", \"date_source\": \"calendar_inferred\", \"quote_basis\": \"intraday\", \"universe_total\": 5106, \"rows\": 5106, \"complete\": true, \"fetched_at\": \"2026-11-11 22:48:34\", \"price_basis\": \"unadjusted\", \"amount_unit\": \"CNY\", \"mktcap_unit\": \"CNY\", \"code_rule\": \"6位数字字符串，去市场前缀\", \"board_counts\": {\"00\": 1505, \"30\": 1337, \"60\": 1696, \"68\": 568}, \"missing_field_counts\": {\"price\": 0, \"pct\": 0, \"turnover\": 0, \"vol_ratio\": 5106, \"amount\": 0, \"mktcap\": 0, \"open\": 0, \"high\": 0, \"low\": 0, \"prev_close\": 0, \"pe\": 0}, \"raw_total_including_bj\": 5341, \"excluded_beijing\": 244, \"universe_scope\": \"沪深主板00/60 + 创业板30 + 科创板68（排除北交所）\"}",
+        "data_updated_at": "2026-11-11 22:48:35",
+        "error_msg": null,
+        "created_at": "2026-11-11 22:48:35"
+      }
+    ],
+    "picks": [],
+    "candidates": [],
+    "ai_reports": [],
+    "alert_checks": [
+      {
+        "check_id": "20261111_221137",
+        "run_date": "2026-11-11",
+        "time_bj": "22:11:37",
+        "in_session": 0,
+        "checked_count": 2,
+        "anomaly_count": 0,
+        "data_ok": 1,
+        "error_msg": "14只行情缺失:601919,002724,300616,001239,300314,603273,920418,002626,002613,600736,301314,300145,920509,920593",
+        "created_at": "2026-11-11 22:11:37"
+      }
+    ],
+    "alert_events": [],
+    "run_logs": [
+      {
+        "id": 19,
+        "run_date": "2026-11-11",
+        "time_bj": "2026-11-11 22:48:35",
+        "task": "premarket_data",
+        "level": "INFO",
+        "message": "盘前数据准备完成: {\"expected_data_date\": \"2026-11-11\", \"expected_basis\": \"intraday\", \"source\": \"sina_market_center\", \"data_date\": \"2026-11-11\", \"date_source\": \"calendar_inferred\", \"quote_basis\": \"intraday\", \"universe_total\": 5106, \"rows\": 5106, \"complete\": true, \"fetched_at\": \"2026-11-11 22:48:34\", \"price_basis\": \"unadjusted\", \"amount_unit\": \"CNY\", \"mktcap_unit\": \"CNY\", \"code_rule\": \"6位数字字符串，去市场前缀\", \"board_counts\": {\"00\": 1505, \"30\": 1337, \"60\": 1696, \"68\": 568}, \"missing_field_counts\": {\"price\": 0, \"pct\": 0, \"turnover\": 0, \"vol_ratio\": 5106, \"amount\": 0, \"mktcap\": 0, \"open\": 0, \"high\": 0, \"low\": 0, \"prev_close\": 0, \"pe\": 0}, \"raw_total_including_bj\": 5341, \"excluded_beijing\": 244, \"universe_scope\": \"沪深主板00/60 + 创业板30 + 科创板68（排除北交所）\"}",
+        "created_at": "2026-11-11 22:48:35"
+      }
+    ]
+  }
+}
