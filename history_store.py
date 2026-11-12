@@ -110,11 +110,128 @@ def _ts():
     return now_bj().strftime("%Y-%m-%d %H:%M:%S")
 
 
-def get_conn(db_path=DB_PATH):
-    os.makedirs(os.path.dirname(db_path), exist_ok=True)
+# ---------------------------------------------------------------- 归档真相源 / db 重建
+# GitHub Actions 每个 runner 都是全新环境，且多个工作流并发向 main 提交归档。
+# SQLite 是二进制文件，git rebase 无法自动合并；同名缓存 CSV 也会 add/add 冲突。
+# 2026-11-12 事故：质量选股归档因该冲突 push 失败，却被 "|| sleep 5" 吞成 success，
+# 导致当日 Top10 未落仓库。据此改为：按日 JSON = 唯一真相源（append-only、时间戳文件名），
+# 仓库不再提交 data/v2_history.db 与 data/cache/；db 每次启动从归档幂等重建。
+_TABLES = ("screening_runs", "picks", "candidates", "alert_events",
+           "alert_checks", "ai_reports", "run_logs")
+
+
+def _table_cols(conn, table):
+    return [r[1] for r in conn.execute(f"PRAGMA table_info({table})")]
+
+
+def export_run_snapshot(conn, run_date, task):
+    """导出本次运行的全部 db 行为不可变 JSON（归档真相源）。
+    文件名带 HHMMSS：同日重复运行产生新文件而非覆盖历史，满足「禁止覆盖」。"""
+    rid = f"{task}_{run_date.replace('-', '')}"
+    queries = {
+        "screening_runs": ("SELECT * FROM screening_runs WHERE run_id=?", (rid,)),
+        "picks": ("SELECT * FROM picks WHERE run_id=?", (rid,)),
+        "candidates": ("SELECT * FROM candidates WHERE run_id=?", (rid,)),
+        "ai_reports": ("SELECT * FROM ai_reports WHERE run_date=?", (run_date,)),
+        "alert_checks": ("SELECT * FROM alert_checks WHERE run_date=?", (run_date,)),
+        "alert_events": ("SELECT * FROM alert_events WHERE run_date=?", (run_date,)),
+        "run_logs": ("SELECT * FROM run_logs WHERE run_date=? AND task=?", (run_date, task)),
+    }
+    tables = {}
+    for t, (sql, args) in queries.items():
+        cur = conn.execute(sql, args)
+        cols = [d[0] for d in cur.description]
+        tables[t] = [dict(zip(cols, row)) for row in cur.fetchall()]
+    obj = {"schema": "v2_db_rows/1", "run_date": run_date, "task": task,
+           "exported_at": _ts(), "tables": tables}
+    # 微秒粒度：同一秒内重复运行也产生新文件，绝不覆盖历史归档
+    return archive_json(run_date, f"{task}_db_rows_{now_bj().strftime('%H%M%S%f')}.json", obj)
+
+
+def export_all_history(conn):
+    """迁移基线：把库内全部历史按 (日期, 任务) 导出为归档 JSON。
+    用于把「旧二进制 db 里的历史」一次性转成不可变真相源，
+    保证即便 db 丢失也能从归档完整重建，不丢任何历史记录。"""
+    dates = set()
+    for t in _TABLES:
+        if "run_date" in _table_cols(conn, t):
+            dates |= {r[0] for r in conn.execute(f"SELECT DISTINCT run_date FROM {t}")}
+    tasks = {r[0] for r in conn.execute("SELECT DISTINCT task FROM run_logs")}
+    tasks |= {r[0] for r in conn.execute("SELECT DISTINCT task FROM screening_runs")}
+    tasks |= {"quality", "momentum", "alert", "daily_ai", "premarket_data"}
+    files = []
+    for d in sorted(x for x in dates if x):
+        for t in sorted(x for x in tasks if x):
+            p = export_run_snapshot(conn, d, t)
+            with open(p, encoding="utf-8") as fh:
+                obj = json.load(fh)
+            if any(obj["tables"].values()):
+                files.append(p)
+            else:
+                os.remove(p)          # 不往仓库塞空归档
+    return files
+
+
+def rebuild_from_archive(conn):
+    """从全部按日归档 JSON 幂等重建 db（文件按路径含时间戳升序，后写覆盖先写）。"""
+    import glob
+    files = sorted(glob.glob(os.path.join(ARCHIVE_ROOT, "*", "*_db_rows_*.json")))
+    cols_map = {t: _table_cols(conn, t) for t in _TABLES}
+    n = 0
+    for fp in files:
+        try:
+            with open(fp, encoding="utf-8") as f:
+                d = json.load(f)
+        except Exception:
+            continue
+        for t, rws in (d.get("tables") or {}).items():
+            if t not in cols_map or not rws:
+                continue
+            cols = cols_map[t]
+            ph = ",".join(["?"] * len(cols))
+            sql = f"INSERT OR REPLACE INTO {t}({','.join(cols)}) VALUES({ph})"
+            for r in rws:
+                try:
+                    conn.execute(sql, [r.get(c) for c in cols])
+                    n += 1
+                except Exception:
+                    pass
+    # AI 结论的真相源是 ai_top10.json，重建时回填 picks.ai_conclusion
+    for fp in sorted(glob.glob(os.path.join(ARCHIVE_ROOT, "*", "ai_top10.json"))):
+        try:
+            d = json.load(open(fp, encoding="utf-8"))
+            for r in d.get("results", []):
+                conn.execute(
+                    "UPDATE picks SET ai_conclusion=? WHERE run_date=? AND code=? AND task='quality'",
+                    (f"{r.get('direction')}(信心分{r.get('score')})", d.get("date"), r.get("code")))
+        except Exception:
+            pass
+    conn.commit()
+    return n, len(files)
+
+
+def _raw_conn(db_path):
+    os.makedirs(os.path.dirname(db_path) or ".", exist_ok=True)
     conn = sqlite3.connect(db_path)
     conn.execute("PRAGMA journal_mode=WAL")
     conn.executescript(_SCHEMA)
+    return conn
+
+
+def get_conn(db_path=DB_PATH, auto_rebuild=True):
+    conn = _raw_conn(db_path)
+    if auto_rebuild:
+        try:
+            rebuild_from_archive(conn)
+        except Exception as e:
+            # 归档缺失不阻断主流程，但必须留痕，不能静默忽略
+            try:
+                conn.execute(
+                    "INSERT INTO run_logs(run_date,time_bj,task,level,message,created_at) VALUES(?,?,?,?,?,?)",
+                    (today(), _ts(), "history_store", "ERROR", f"归档重建失败: {e}"[:2000], _ts()))
+                conn.commit()
+            except Exception:
+                pass
     return conn
 
 
