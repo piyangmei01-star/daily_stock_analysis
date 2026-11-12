@@ -1,0 +1,163 @@
+{
+  "schema": "v2_db_rows/1",
+  "run_date": "2026-11-11",
+  "task": "alert",
+  "exported_at": "2026-11-12 11:20:05",
+  "tables": {
+    "screening_runs": [],
+    "picks": [],
+    "candidates": [],
+    "ai_reports": [],
+    "alert_checks": [
+      {
+        "check_id": "20261111_221137",
+        "run_date": "2026-11-11",
+        "time_bj": "22:11:37",
+        "in_session": 0,
+        "checked_count": 2,
+        "anomaly_count": 0,
+        "data_ok": 1,
+        "error_msg": "14只行情缺失:601919,002724,300616,001239,300314,603273,920418,002626,002613,600736,301314,300145,920509,920593",
+        "created_at": "2026-11-11 22:11:37"
+      }
+    ],
+    "alert_events": [],
+    "run_logs": [
+      {
+        "id": 1,
+        "run_date": "2026-11-11",
+        "time_bj": "2026-11-11 22:09:55",
+        "task": "alert",
+        "level": "WARN",
+        "message": "601919 行情获取失败或停牌无数据",
+        "created_at": "2026-11-11 22:09:55"
+      },
+      {
+        "id": 2,
+        "run_date": "2026-11-11",
+        "time_bj": "2026-11-11 22:10:03",
+        "task": "alert",
+        "level": "WARN",
+        "message": "002724 行情获取失败或停牌无数据",
+        "created_at": "2026-11-11 22:10:03"
+      },
+      {
+        "id": 3,
+        "run_date": "2026-11-11",
+        "time_bj": "2026-11-11 22:10:11",
+        "task": "alert",
+        "level": "WARN",
+        "message": "300616 行情获取失败或停牌无数据",
+        "created_at": "2026-11-11 22:10:11"
+      },
+      {
+        "id": 4,
+        "run_date": "2026-11-11",
+        "time_bj": "2026-11-11 22:10:19",
+        "task": "alert",
+        "level": "WARN",
+        "message": "001239 行情获取失败或停牌无数据",
+        "created_at": "2026-11-11 22:10:19"
+      },
+      {
+        "id": 5,
+        "run_date": "2026-11-11",
+        "time_bj": "2026-11-11 22:10:26",
+        "task": "alert",
+        "level": "WARN",
+        "message": "300314 行情获取失败或停牌无数据",
+        "created_at": "2026-11-11 22:10:26"
+      },
+      {
+        "id": 6,
+        "run_date": "2026-11-11",
+        "time_bj": "2026-11-11 22:10:34",
+        "task": "alert",
+        "level": "WARN",
+        "message": "603273 行情获取失败或停牌无数据",
+        "created_at": "2026-11-11 22:10:34"
+      },
+      {
+        "id": 7,
+        "run_date": "2026-11-11",
+        "time_bj": "2026-11-11 22:10:42",
+        "task": "alert",
+        "level": "WARN",
+        "message": "920418 行情获取失败或停牌无数据",
+        "created_at": "2026-11-11 22:10:42"
+      },
+      {
+        "id": 8,
+        "run_date": "2026-11-11",
+        "time_bj": "2026-11-11 22:10:50",
+        "task": "alert",
+        "level": "WARN",
+        "message": "002626 行情获取失败或停牌无数据",
+        "created_at": "2026-11-11 22:10:50"
+      },
+      {
+        "id": 9,
+        "run_date": "2026-11-11",
+        "time_bj": "2026-11-11 22:10:58",
+        "task": "alert",
+        "level": "WARN",
+        "message": "002613 行情获取失败或停牌无数据",
+        "created_at": "2026-11-11 22:10:58"
+      },
+      {
+        "id": 10,
+        "run_date": "2026-11-11",
+        "time_bj": "2026-11-11 22:11:06",
+        "task": "alert",
+        "level": "WARN",
+        "message": "600736 行情获取失败或停牌无数据",
+        "created_at": "2026-11-11 22:11:06"
+      },
+      {
+        "id": 11,
+        "run_date": "2026-11-11",
+        "time_bj": "2026-11-11 22:11:13",
+        "task": "alert",
+        "level": "WARN",
+        "message": "301314 行情获取失败或停牌无数据",
+        "created_at": "2026-11-11 22:11:13"
+      },
+      {
+        "id": 12,
+        "run_date": "2026-11-11",
+        "time_bj": "2026-11-11 22:11:21",
+        "task": "alert",
+        "level": "WARN",
+        "message": "300145 行情获取失败或停牌无数据",
+        "created_at": "2026-11-11 22:11:21"
+      },
+      {
+        "id": 13,
+        "run_date": "2026-11-11",
+        "time_bj": "2026-11-11 22:11:29",
+        "task": "alert",
+        "level": "WARN",
+        "message": "920509 行情获取失败或停牌无数据",
+        "created_at": "2026-11-11 22:11:29"
+      },
+      {
+        "id": 14,
+        "run_date": "2026-11-11",
+        "time_bj": "2026-11-11 22:11:37",
+        "task": "alert",
+        "level": "WARN",
+        "message": "920593 行情获取失败或停牌无数据",
+        "created_at": "2026-11-11 22:11:37"
+      },
+      {
+        "id": 15,
+        "run_date": "2026-11-11",
+        "time_bj": "2026-11-11 22:11:37",
+        "task": "alert",
+        "level": "INFO",
+        "message": "检测2只/异常0条/新增事件0条/推送=False/in_session=False",
+        "created_at": "2026-11-11 22:11:37"
+      }
+    ]
+  }
+}
