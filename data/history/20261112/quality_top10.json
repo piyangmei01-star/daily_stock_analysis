@@ -1,0 +1,249 @@
+{
+  "run_id": "quality_20261112",
+  "model_version": "v2.0-stage1",
+  "market_env": {
+    "captured_at": "2026-11-12 11:33:42",
+    "hs300_price": 4080.14,
+    "hs300_pct": 0.11,
+    "sh_index_price": 3688.05,
+    "sh_index_pct": 0.2,
+    "kline_integrity": {
+      "ok": 324,
+      "total": 328,
+      "rate": 0.9878,
+      "sources": {
+        "eastmoney_kline_fqt1": 324
+      },
+      "adjustments": {
+        "qfq": 324
+      }
+    }
+  },
+  "data_updated_at": "2026-11-12 11:35:50",
+  "picks": [
+    {
+      "code": "002265",
+      "name": "建设工业",
+      "rank": 1,
+      "score": 64.356,
+      "scores": {
+        "fund_score": 69.821,
+        "trend20": 13.74,
+        "profit_g": 321.78,
+        "rev_g": 35.7,
+        "roe": 3.22
+      },
+      "reason": "净利+322%/营收+36%双增，ROE 3.2%；收盘>MA20>MA60多头，20日涨幅13.7%≤15%；行业分散[汽车零部件]",
+      "risk_tags": "20日涨幅偏高(>10%)",
+      "close_price": 20.9,
+      "snapshot": {
+        "price": 20.9,
+        "pct": -1.508,
+        "turnover": 0.7328,
+        "vol_ratio": null,
+        "amount": 159253232.0,
+        "mktcap": 21590544506.3,
+        "profit_g": 321.78,
+        "rev_g": 35.7018,
+        "roe": 3.22,
+        "eps": 0.12,
+        "trend20": 13.738,
+        "fund_score": 69.8213,
+        "total": 64.3561
+      },
+      "industry": "汽车零部件"
+    },
+    {
+      "code": "002292",
+      "name": "奥飞娱乐",
+      "rank": 2,
+      "score": 63.943,
+      "scores": {
+        "fund_score": 57.7,
+        "trend20": 7.34,
+        "profit_g": 267.21,
+        "rev_g": 8.96,
+        "roe": 6.19
+      },
+      "reason": "净利+267%/营收+9%双增，ROE 6.2%；收盘>MA20>MA60多头，20日涨幅7.3%≤15%；行业分散[文娱用品]",
+      "risk_tags": "无显著风险标签",
+      "close_price": 9.92,
+      "snapshot": {
+        "price": 9.92,
+        "pct": -0.402,
+        "turnover": 4.9294,
+        "vol_ratio": null,
+        "amount": 498809908.0,
+        "mktcap": 14668700994.24,
+        "profit_g": 267.21,
+        "rev_g": 8.9617,
+        "roe": 6.19,
+        "eps": 0.1264,
+        "trend20": 7.3384,
+        "fund_score": 57.6996,
+        "total": 63.9432
+      },
+      "industry": "文娱用品"
+    },
+    {
+      "code": "600189",
+      "name": "泉阳泉",
+      "rank": 3,
+      "score": 63.674,
+      "scores": {
+        "fund_score": 60.84,
+        "trend20": 9.32,
+        "profit_g": 89.94,
+        "rev_g": 17.11,
+        "roe": 3.75
+      },
+      "reason": "净利+90%/营收+17%双增，ROE 3.8%；收盘>MA20>MA60多头，20日涨幅9.3%≤15%；行业分散[饮料乳品]",
+      "risk_tags": "市值偏小(<100亿)",
+      "close_price": 9.19,
+      "snapshot": {
+        "price": 9.19,
+        "pct": 4.67,
+        "turnover": 5.8494,
+        "vol_ratio": null,
+        "amount": 378686955.0,
+        "mktcap": 6572667892.28,
+        "profit_g": 89.94,
+        "rev_g": 17.1107,
+        "roe": 3.75,
+        "eps": 0.066,
+        "trend20": 9.319,
+        "fund_score": 60.8399,
+        "total": 63.6738
+      },
+      "industry": "饮料乳品"
+    },
+    {
+      "code": "002811",
+      "name": "郑中设计",
+      "rank": 4,
+      "score": 63.342,
+      "scores": {
+        "fund_score": 54.171,
+        "trend20": 5.89,
+        "profit_g": 17.97,
+        "rev_g": 36.05,
+        "roe": 10.75
+      },
+      "reason": "净利+18%/营收+36%双增，ROE 10.8%；收盘>MA20>MA60多头，20日涨幅5.9%≤15%；行业分散[装修装饰Ⅱ]",
+      "risk_tags": "市值偏小(<100亿)",
+      "close_price": 21.62,
+      "snapshot": {
+        "price": 21.62,
+        "pct": -0.231,
+        "turnover": 4.4073,
+        "vol_ratio": null,
+        "amount": 271599094.0,
+        "mktcap": 6658311508.1,
+        "profit_g": 17.97,
+        "rev_g": 36.0505,
+        "roe": 10.75,
+        "eps": 0.53,
+        "trend20": 5.8883,
+        "fund_score": 54.1715,
+        "total": 63.3418
+      },
+      "industry": "装修装饰Ⅱ"
+    },
+    {
+      "code": "300378",
+      "name": "鼎捷数智",
+      "rank": 5,
+      "score": 59.628,
+      "scores": {
+        "fund_score": 61.347,
+        "trend20": 13.07,
+        "profit_g": 289.32,
+        "rev_g": 10.66,
+        "roe": 8.14
+      },
+      "reason": "净利+289%/营收+11%双增，ROE 8.1%；收盘>MA20>MA60多头，20日涨幅13.1%≤15%；行业分散[软件开发]",
+      "risk_tags": "20日涨幅偏高(>10%)",
+      "close_price": 40.32,
+      "snapshot": {
+        "price": 40.32,
+        "pct": 0.249,
+        "turnover": 4.2606,
+        "vol_ratio": null,
+        "amount": 458443620.0,
+        "mktcap": 10949131347.84,
+        "profit_g": 289.32,
+        "rev_g": 10.6552,
+        "roe": 8.14,
+        "eps": 0.74,
+        "trend20": 13.0695,
+        "fund_score": 61.3466,
+        "total": 59.6276
+      },
+      "industry": "软件开发"
+    },
+    {
+      "code": "600276",
+      "name": "恒瑞医药",
+      "rank": 6,
+      "score": 58.223,
+      "scores": {
+        "fund_score": 41.506,
+        "trend20": 3.22,
+        "profit_g": 20.38,
+        "rev_g": 5.26,
+        "roe": 12.17
+      },
+      "reason": "净利+20%/营收+5%双增，ROE 12.2%；收盘>MA20>MA60多头，20日涨幅3.2%≤15%；行业分散[其他]",
+      "risk_tags": "无显著风险标签",
+      "close_price": 47.5,
+      "snapshot": {
+        "price": 47.5,
+        "pct": -1.493,
+        "turnover": 0.3704,
+        "vol_ratio": null,
+        "amount": 1120474720.0,
+        "mktcap": 315266994015.0,
+        "profit_g": 20.38,
+        "rev_g": 5.2643,
+        "roe": 12.17,
+        "eps": 1.05,
+        "trend20": 3.2189,
+        "fund_score": 41.5058,
+        "total": 58.2234
+      },
+      "industry": "其他"
+    },
+    {
+      "code": "300827",
+      "name": "上能电气",
+      "rank": 7,
+      "score": 57.501,
+      "scores": {
+        "fund_score": 60.409,
+        "trend20": 14.37,
+        "profit_g": 28.68,
+        "rev_g": 33.05,
+        "roe": 9.19
+      },
+      "reason": "净利+29%/营收+33%双增，ROE 9.2%；收盘>MA20>MA60多头，20日涨幅14.4%≤15%；行业分散[其他]",
+      "risk_tags": "20日涨幅偏高(>10%)",
+      "close_price": 27.11,
+      "snapshot": {
+        "price": 27.11,
+        "pct": -1.704,
+        "turnover": 1.6412,
+        "vol_ratio": null,
+        "amount": 195404418.0,
+        "mktcap": 15091908706.69,
+        "profit_g": 28.68,
+        "rev_g": 33.0481,
+        "roe": 9.19,
+        "eps": 0.72,
+        "trend20": 14.37,
+        "fund_score": 60.4085,
+        "total": 57.5005
+      },
+      "industry": "其他"
+    }
+  ]
+}
