@@ -1,0 +1,377 @@
+{
+  "schema": "v2_db_rows/1",
+  "run_date": "2026-11-12",
+  "task": "alert",
+  "exported_at": "2026-11-12 14:54:31",
+  "tables": {
+    "screening_runs": [],
+    "picks": [],
+    "candidates": [],
+    "ai_reports": [
+      {
+        "report_id": "20261112_002265",
+        "run_date": "2026-11-12",
+        "code": "002265",
+        "name": "建设工业",
+        "direction": "偏多",
+        "score": 62.0,
+        "reason": "净利+322%、营收+36%高增长，fund_score 69.8尚可；收盘价20.9站上MA20/MA60呈多头，20日涨幅13.7%未超阈值。但ROE仅3.22%、EPS 0.12偏低，当日跌1.5%且量比缺失，动能存疑。",
+        "risk": "20日涨幅偏高(>10%)，短期回调压力；ROE仅3.2%盈利质量弱，高增长可持续性未验证。",
+        "evidence_insufficient": 0,
+        "model": "deepseek-chat",
+        "raw_json": "{\"direction\": \"偏多\", \"score\": 62, \"reason\": \"净利+322%、营收+36%高增长，fund_score 69.8尚可；收盘价20.9站上MA20/MA60呈多头，20日涨幅13.7%未超阈值。但ROE仅3.22%、EPS 0.12偏低，当日跌1.5%且量比缺失，动能存疑。\", \"risk\": \"20日涨幅偏高(>10%)，短期回调压力；ROE仅3.2%盈利质量弱，高增长可持续性未验证。\", \"evidence_insufficient\": false}",
+        "created_at": "2026-11-12 11:51:58"
+      },
+      {
+        "report_id": "20261112_002292",
+        "run_date": "2026-11-12",
+        "code": "002292",
+        "name": "奥飞娱乐",
+        "direction": "偏多",
+        "score": 68.0,
+        "reason": "净利+267%、营收+9%双增，ROE6.2%中等；收盘价9.92站上MA20/MA60呈多头，20日涨幅7.3%未过热；综合评分63.9偏正面，但当日微跌、量比缺失，故偏多非看多。",
+        "risk": "净利增速267%或含低基数/非经常性因素，可持续性存疑；换手4.93%偏高，短线波动与获利回吐压力需警惕。",
+        "evidence_insufficient": 0,
+        "model": "deepseek-chat",
+        "raw_json": "{\"direction\": \"偏多\", \"score\": 68, \"reason\": \"净利+267%、营收+9%双增，ROE6.2%中等；收盘价9.92站上MA20/MA60呈多头，20日涨幅7.3%未过热；综合评分63.9偏正面，但当日微跌、量比缺失，故偏多非看多。\", \"risk\": \"净利增速267%或含低基数/非经常性因素，可持续性存疑；换手4.93%偏高，短线波动与获利回吐压力需警惕。\", \"evidence_insufficient\": false}",
+        "created_at": "2026-11-12 11:51:59"
+      },
+      {
+        "report_id": "20261112_002811",
+        "run_date": "2026-11-12",
+        "code": "002811",
+        "name": "郑中设计",
+        "direction": "偏多",
+        "score": 62.0,
+        "reason": "营收+36%、净利+18%双增，ROE10.8%，收盘价站上MA20/MA60呈多头，20日涨幅5.9%未过热，量化评分63.3偏正面。但当日微跌、换手4.4%一般，量比缺失，动能证据有限。",
+        "risk": "市值仅66.6亿偏小，波动与流动性风险高；装修装饰行业景气与回款周期敏感，盈利质量待验证。",
+        "evidence_insufficient": 0,
+        "model": "deepseek-chat",
+        "raw_json": "{\"direction\": \"偏多\", \"score\": 62, \"reason\": \"营收+36%、净利+18%双增，ROE10.8%，收盘价站上MA20/MA60呈多头，20日涨幅5.9%未过热，量化评分63.3偏正面。但当日微跌、换手4.4%一般，量比缺失，动能证据有限。\", \"risk\": \"市值仅66.6亿偏小，波动与流动性风险高；装修装饰行业景气与回款周期敏感，盈利质量待验证。\", \"evidence_insufficient\": false}",
+        "created_at": "2026-11-12 11:52:02"
+      },
+      {
+        "report_id": "20261112_300378",
+        "run_date": "2026-11-12",
+        "code": "300378",
+        "name": "鼎捷数智",
+        "direction": "偏多",
+        "score": 62.0,
+        "reason": "净利+289%、营收+11%双增，ROE8.1%，多头排列且20日涨幅13.1%未过热，量能温和，综合评分59.6偏中性偏多。",
+        "risk": "20日涨幅偏高存在回调压力；净利增速异常高需警惕低基数或非经常性损益，缺现金流与估值数据。",
+        "evidence_insufficient": 0,
+        "model": "deepseek-chat",
+        "raw_json": "{\"direction\": \"偏多\", \"score\": 62, \"reason\": \"净利+289%、营收+11%双增，ROE8.1%，多头排列且20日涨幅13.1%未过热，量能温和，综合评分59.6偏中性偏多。\", \"risk\": \"20日涨幅偏高存在回调压力；净利增速异常高需警惕低基数或非经常性损益，缺现金流与估值数据。\", \"evidence_insufficient\": false}",
+        "created_at": "2026-11-12 11:52:03"
+      },
+      {
+        "report_id": "20261112_300827",
+        "run_date": "2026-11-12",
+        "code": "300827",
+        "name": "上能电气",
+        "direction": "偏多",
+        "score": 62.0,
+        "reason": "净利+28.7%、营收+33%双增，ROE9.2%，fund_score60.4；收盘>MA20>MA60多头，20日涨幅14.4%接近15%上限。当日回调1.7%属正常波动，量能温和。",
+        "risk": "20日涨幅偏高(>10%)，接近模型15%阈值，短期回调压力大；换手率1.64%偏低，量比缺失，资金承接力度不明。",
+        "evidence_insufficient": 0,
+        "model": "deepseek-chat",
+        "raw_json": "{\"direction\": \"偏多\", \"score\": 62, \"reason\": \"净利+28.7%、营收+33%双增，ROE9.2%，fund_score60.4；收盘>MA20>MA60多头，20日涨幅14.4%接近15%上限。当日回调1.7%属正常波动，量能温和。\", \"risk\": \"20日涨幅偏高(>10%)，接近模型15%阈值，短期回调压力大；换手率1.64%偏低，量比缺失，资金承接力度不明。\", \"evidence_insufficient\": false}",
+        "created_at": "2026-11-12 11:52:07"
+      },
+      {
+        "report_id": "20261112_600189",
+        "run_date": "2026-11-12",
+        "code": "600189",
+        "name": "泉阳泉",
+        "direction": "偏多",
+        "score": 68.0,
+        "reason": "净利+90%、营收+17%双增，多头排列且20日涨幅9.3%未过热，量能放大4.67%上攻，综合评分63.7偏正面。但ROE仅3.75%偏低，盈利质量待验证。",
+        "risk": "市值仅65.7亿偏小，波动与流动性风险高；ROE 3.75%偏低，高净利增速可持续性存疑，缺换手率对比与资金流向数据。",
+        "evidence_insufficient": 0,
+        "model": "deepseek-chat",
+        "raw_json": "{\"direction\": \"偏多\", \"score\": 68, \"reason\": \"净利+90%、营收+17%双增，多头排列且20日涨幅9.3%未过热，量能放大4.67%上攻，综合评分63.7偏正面。但ROE仅3.75%偏低，盈利质量待验证。\", \"risk\": \"市值仅65.7亿偏小，波动与流动性风险高；ROE 3.75%偏低，高净利增速可持续性存疑，缺换手率对比与资金流向数据。\", \"evidence_insufficient\": false}",
+        "created_at": "2026-11-12 11:52:01"
+      },
+      {
+        "report_id": "20261112_600276",
+        "run_date": "2026-11-12",
+        "code": "600276",
+        "name": "恒瑞医药",
+        "direction": "观望",
+        "score": 52.0,
+        "reason": "基本面双增且ROE12.2%尚可，但fund_score仅41.5偏弱；技术面多头排列但20日涨幅仅3.2%动能不足，当日跌1.49%且量比缺失，缺乏资金面证据。",
+        "risk": "量比数据缺失无法判断资金动向；当日下跌且换手率仅0.37%，交投清淡，趋势延续性存疑。",
+        "evidence_insufficient": 1,
+        "model": "deepseek-chat",
+        "raw_json": "{\"direction\": \"观望\", \"score\": 52, \"reason\": \"基本面双增且ROE12.2%尚可，但fund_score仅41.5偏弱；技术面多头排列但20日涨幅仅3.2%动能不足，当日跌1.49%且量比缺失，缺乏资金面证据。\", \"risk\": \"量比数据缺失无法判断资金动向；当日下跌且换手率仅0.37%，交投清淡，趋势延续性存疑。\", \"evidence_insufficient\": true}",
+        "created_at": "2026-11-12 11:52:05"
+      }
+    ],
+    "alert_checks": [
+      {
+        "check_id": "20261112_145431",
+        "run_date": "2026-11-12",
+        "time_bj": "14:54:31",
+        "in_session": 1,
+        "checked_count": 16,
+        "anomaly_count": 0,
+        "data_ok": 1,
+        "error_msg": null,
+        "created_at": "2026-11-12 14:54:31"
+      },
+      {
+        "check_id": "20261112_134932",
+        "run_date": "2026-11-12",
+        "time_bj": "13:49:32",
+        "in_session": 1,
+        "checked_count": 14,
+        "anomaly_count": 0,
+        "data_ok": 1,
+        "error_msg": "2只行情缺失:920509,920593",
+        "created_at": "2026-11-12 13:49:32"
+      },
+      {
+        "check_id": "20261112_122528",
+        "run_date": "2026-11-12",
+        "time_bj": "12:25:28",
+        "in_session": 0,
+        "checked_count": 0,
+        "anomaly_count": 0,
+        "data_ok": 1,
+        "error_msg": "非交易时段跳过",
+        "created_at": "2026-11-12 12:25:28"
+      },
+      {
+        "check_id": "20261112_111650",
+        "run_date": "2026-11-12",
+        "time_bj": "11:16:50",
+        "in_session": 1,
+        "checked_count": 16,
+        "anomaly_count": 1,
+        "data_ok": 1,
+        "error_msg": null,
+        "created_at": "2026-11-12 11:16:50"
+      },
+      {
+        "check_id": "20261112_100535",
+        "run_date": "2026-11-12",
+        "time_bj": "10:05:35",
+        "in_session": 1,
+        "checked_count": 16,
+        "anomaly_count": 4,
+        "data_ok": 1,
+        "error_msg": null,
+        "created_at": "2026-11-12 10:05:35"
+      }
+    ],
+    "alert_events": [
+      {
+        "event_id": "20261112_111619_300616_pct_up5",
+        "run_date": "2026-11-12",
+        "time_bj": "11:16:19",
+        "code": "300616",
+        "name": "尚品宅配",
+        "event_type": "pct_up5",
+        "observed": 7.03,
+        "threshold": 5.0,
+        "price": 12.03,
+        "detail_json": "{\"label\": \"🔥 大涨\", \"turnover\": 9.29, \"vol_ratio\": 2.75, \"pct\": 7.03, \"prev_close\": 11.24}",
+        "pushed": 1,
+        "created_at": "2026-11-12 11:16:51"
+      },
+      {
+        "event_id": "20261112_100457_300616_pct_up5",
+        "run_date": "2026-11-12",
+        "time_bj": "10:04:57",
+        "code": "300616",
+        "name": "尚品宅配",
+        "event_type": "pct_up5",
+        "observed": 7.21,
+        "threshold": 5.0,
+        "price": 12.05,
+        "detail_json": "{\"label\": \"🔥 大涨\", \"turnover\": 7.13, \"vol_ratio\": 6.27, \"pct\": 7.21, \"prev_close\": 11.24}",
+        "pushed": 1,
+        "created_at": "2026-11-12 10:05:37"
+      },
+      {
+        "event_id": "20261112_100457_300616_vol_ratio3",
+        "run_date": "2026-11-12",
+        "time_bj": "10:04:57",
+        "code": "300616",
+        "name": "尚品宅配",
+        "event_type": "vol_ratio3",
+        "observed": 6.27,
+        "threshold": 3.0,
+        "price": 12.05,
+        "detail_json": "{\"label\": \"📣 放量(量比6.3)\", \"turnover\": 7.13, \"vol_ratio\": 6.27, \"pct\": 7.21, \"prev_close\": 11.24}",
+        "pushed": 1,
+        "created_at": "2026-11-12 10:05:37"
+      },
+      {
+        "event_id": "20261112_100457_301314_vol_ratio3",
+        "run_date": "2026-11-12",
+        "time_bj": "10:04:57",
+        "code": "301314",
+        "name": "科瑞思",
+        "event_type": "vol_ratio3",
+        "observed": 4.77,
+        "threshold": 3.0,
+        "price": 56.5,
+        "detail_json": "{\"label\": \"📣 放量(量比4.8)\", \"turnover\": 9.58, \"vol_ratio\": 4.77, \"pct\": 1.25, \"prev_close\": 55.8}",
+        "pushed": 1,
+        "created_at": "2026-11-12 10:05:37"
+      },
+      {
+        "event_id": "20261112_100457_920509_vol_ratio3",
+        "run_date": "2026-11-12",
+        "time_bj": "10:04:57",
+        "code": "920509",
+        "name": "同惠电子",
+        "event_type": "vol_ratio3",
+        "observed": 3.39,
+        "threshold": 3.0,
+        "price": 20.63,
+        "detail_json": "{\"label\": \"📣 放量(量比3.4)\", \"turnover\": 1.25, \"vol_ratio\": 3.39, \"pct\": 2.38, \"prev_close\": 20.15}",
+        "pushed": 1,
+        "created_at": "2026-11-12 10:05:37"
+      }
+    ],
+    "run_logs": [
+      {
+        "id": 20,
+        "run_date": "2026-11-12",
+        "time_bj": "2026-11-12 10:05:37",
+        "task": "alert",
+        "level": "INFO",
+        "message": "检测16只/异常4条/新增事件4条/推送=True/in_session=True",
+        "created_at": "2026-11-12 10:05:37"
+      },
+      {
+        "id": 29,
+        "run_date": "2026-11-12",
+        "time_bj": "2026-11-12 11:16:51",
+        "task": "alert",
+        "level": "INFO",
+        "message": "检测16只/异常1条/新增事件1条/推送=True/in_session=True",
+        "created_at": "2026-11-12 11:16:51"
+      },
+      {
+        "id": 34,
+        "run_date": "2026-11-12",
+        "time_bj": "2026-11-12 13:48:32",
+        "task": "alert",
+        "level": "INFO",
+        "message": "000860 使用备用行情 source=tencent_qt data_date=2026-11-12",
+        "created_at": "2026-11-12 13:48:32"
+      },
+      {
+        "id": 35,
+        "run_date": "2026-11-12",
+        "time_bj": "2026-11-12 13:48:44",
+        "task": "alert",
+        "level": "INFO",
+        "message": "600007 使用备用行情 source=tencent_qt data_date=2026-11-12",
+        "created_at": "2026-11-12 13:48:44"
+      },
+      {
+        "id": 36,
+        "run_date": "2026-11-12",
+        "time_bj": "2026-11-12 13:48:57",
+        "task": "alert",
+        "level": "INFO",
+        "message": "601919 使用备用行情 source=tencent_qt data_date=2026-11-12",
+        "created_at": "2026-11-12 13:48:57"
+      },
+      {
+        "id": 37,
+        "run_date": "2026-11-12",
+        "time_bj": "2026-11-12 13:49:00",
+        "task": "alert",
+        "level": "INFO",
+        "message": "002724 使用备用行情 source=tencent_qt data_date=2026-11-12",
+        "created_at": "2026-11-12 13:49:00"
+      },
+      {
+        "id": 38,
+        "run_date": "2026-11-12",
+        "time_bj": "2026-11-12 13:49:02",
+        "task": "alert",
+        "level": "INFO",
+        "message": "300616 使用备用行情 source=tencent_qt data_date=2026-11-12",
+        "created_at": "2026-11-12 13:49:02"
+      },
+      {
+        "id": 39,
+        "run_date": "2026-11-12",
+        "time_bj": "2026-11-12 13:49:04",
+        "task": "alert",
+        "level": "INFO",
+        "message": "001239 使用备用行情 source=tencent_qt data_date=2026-11-12",
+        "created_at": "2026-11-12 13:49:04"
+      },
+      {
+        "id": 40,
+        "run_date": "2026-11-12",
+        "time_bj": "2026-11-12 13:49:18",
+        "task": "alert",
+        "level": "INFO",
+        "message": "002613 使用备用行情 source=tencent_qt data_date=2026-11-12",
+        "created_at": "2026-11-12 13:49:18"
+      },
+      {
+        "id": 41,
+        "run_date": "2026-11-12",
+        "time_bj": "2026-11-12 13:49:20",
+        "task": "alert",
+        "level": "INFO",
+        "message": "600736 使用备用行情 source=tencent_qt data_date=2026-11-12",
+        "created_at": "2026-11-12 13:49:20"
+      },
+      {
+        "id": 42,
+        "run_date": "2026-11-12",
+        "time_bj": "2026-11-12 13:49:23",
+        "task": "alert",
+        "level": "INFO",
+        "message": "301314 使用备用行情 source=tencent_qt data_date=2026-11-12",
+        "created_at": "2026-11-12 13:49:23"
+      },
+      {
+        "id": 43,
+        "run_date": "2026-11-12",
+        "time_bj": "2026-11-12 13:49:29",
+        "task": "alert",
+        "level": "WARN",
+        "message": "920509 行情获取失败或停牌无数据",
+        "created_at": "2026-11-12 13:49:29"
+      },
+      {
+        "id": 44,
+        "run_date": "2026-11-12",
+        "time_bj": "2026-11-12 13:49:32",
+        "task": "alert",
+        "level": "WARN",
+        "message": "920593 行情获取失败或停牌无数据",
+        "created_at": "2026-11-12 13:49:32"
+      },
+      {
+        "id": 45,
+        "run_date": "2026-11-12",
+        "time_bj": "2026-11-12 13:49:32",
+        "task": "alert",
+        "level": "INFO",
+        "message": "检测14只/异常0条/新增事件0条/推送=False/in_session=True",
+        "created_at": "2026-11-12 13:49:32"
+      },
+      {
+        "id": 46,
+        "run_date": "2026-11-12",
+        "time_bj": "2026-11-12 14:54:31",
+        "task": "alert",
+        "level": "INFO",
+        "message": "检测16只/异常0条/新增事件0条/推送=False/in_session=True",
+        "created_at": "2026-11-12 14:54:31"
+      }
+    ]
+  }
+}
