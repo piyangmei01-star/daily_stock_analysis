@@ -78,6 +78,7 @@ def main():
                         {"run_id": run_id, "model_version": MODEL_VERSION,
                          "data_updated_at": hs._ts(), "picks": rows})
         print(f"归档完成: 新增Top5 {n_pick} 条, 候选 {n_cand} 条 (重复运行时为0)", flush=True)
+        hs.export_run_snapshot(conn, run_date, TASK)  # 归档真相源: append-only JSON
 
         if "--no-push" in sys.argv:
             print("NO_PUSH_OK")
