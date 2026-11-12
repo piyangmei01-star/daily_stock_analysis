@@ -437,6 +437,44 @@ def fetch_stock_quote(code):
 
 
 # ---------------------------------------------------------------- 缓存
+# ---------------------------------------------------------------- 日K（趋势判断用）
+KLINE_SINA_URL = ("https://quotes.sina.cn/cn/api/jsonp_v2.php/var%20_t=/"
+                  "CN_MarketDataService.getKLineData")
+
+
+def fetch_daily_kline(code, lmt=80):
+    """返回 (close_series, source, adjustment, data_date)。
+    主源东财 fqt=1 前复权（与 V1 口径一致）；失败切新浪不复权日K。
+    口径差异被显式返回并写入归档，绝不隐瞒；两源都失败抛异常，
+    绝不静默当作「趋势不通过」（2026-11-12 补录只出 2 只的根因）。"""
+    import pandas as pd
+    for host in ["push2his.eastmoney.com", "33.push2his.eastmoney.com"]:
+        try:
+            secid = ("1." if code.startswith("6") else "0.") + code
+            r = requests.get(f"https://{host}/api/qt/stock/kline/get",
+                params={"secid": secid, "klt": "101", "fqt": "1", "beg": "0",
+                        "end": "20500101", "fields1": "f1", "fields2": "f51,f53",
+                        "lmt": str(lmt)}, headers=EM_HEADERS, timeout=8)
+            ks = r.json()["data"]["klines"]
+            if ks and len(ks) >= 70:
+                return (pd.Series([float(x.split(",")[1]) for x in ks]),
+                        "eastmoney_kline_fqt1", "qfq", ks[-1].split(",")[0])
+        except Exception:
+            continue
+    try:
+        sym = ("sh" if code.startswith("6") else "sz") + code
+        r = requests.get(KLINE_SINA_URL,
+            params={"symbol": sym, "scale": "240", "ma": "no", "datalen": str(lmt)},
+            headers=SINA_HEADERS, timeout=8)
+        t = r.text
+        d = json.loads(t[t.find("(") + 1:t.rfind(")")])
+        if d and len(d) >= 70:
+            return (pd.Series([float(x["close"]) for x in d]),
+                    "sina_kline_day", "none", d[-1]["day"])
+    except Exception:
+        pass
+    raise MarketDataError(f"日K两源均失败: {code}")
+
 def _cache_paths(data_date, quote_basis):
     stem = f"snapshot_{data_date.replace('-', '')}_{quote_basis}"
     return os.path.join(CACHE_DIR, stem + ".csv"), os.path.join(CACHE_DIR, stem + ".meta.json")
