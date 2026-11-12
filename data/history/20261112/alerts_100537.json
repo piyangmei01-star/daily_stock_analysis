@@ -1,0 +1,78 @@
+[
+  {
+    "event_id": "20261112_100457_300616_pct_up5",
+    "run_date": "2026-11-12",
+    "time_bj": "10:04:57",
+    "code": "300616",
+    "name": "尚品宅配",
+    "event_type": "pct_up5",
+    "observed": 7.21,
+    "threshold": 5.0,
+    "price": 12.05,
+    "detail": {
+      "label": "🔥 大涨",
+      "turnover": 7.13,
+      "vol_ratio": 6.27,
+      "pct": 7.21,
+      "prev_close": 11.24
+    },
+    "_label": "🔥 大涨"
+  },
+  {
+    "event_id": "20261112_100457_300616_vol_ratio3",
+    "run_date": "2026-11-12",
+    "time_bj": "10:04:57",
+    "code": "300616",
+    "name": "尚品宅配",
+    "event_type": "vol_ratio3",
+    "observed": 6.27,
+    "threshold": 3.0,
+    "price": 12.05,
+    "detail": {
+      "label": "📣 放量(量比6.3)",
+      "turnover": 7.13,
+      "vol_ratio": 6.27,
+      "pct": 7.21,
+      "prev_close": 11.24
+    },
+    "_label": "📣 放量(量比6.3)"
+  },
+  {
+    "event_id": "20261112_100457_301314_vol_ratio3",
+    "run_date": "2026-11-12",
+    "time_bj": "10:04:57",
+    "code": "301314",
+    "name": "科瑞思",
+    "event_type": "vol_ratio3",
+    "observed": 4.77,
+    "threshold": 3.0,
+    "price": 56.5,
+    "detail": {
+      "label": "📣 放量(量比4.8)",
+      "turnover": 9.58,
+      "vol_ratio": 4.77,
+      "pct": 1.25,
+      "prev_close": 55.8
+    },
+    "_label": "📣 放量(量比4.8)"
+  },
+  {
+    "event_id": "20261112_100457_920509_vol_ratio3",
+    "run_date": "2026-11-12",
+    "time_bj": "10:04:57",
+    "code": "920509",
+    "name": "同惠电子",
+    "event_type": "vol_ratio3",
+    "observed": 3.39,
+    "threshold": 3.0,
+    "price": 20.63,
+    "detail": {
+      "label": "📣 放量(量比3.4)",
+      "turnover": 1.25,
+      "vol_ratio": 3.39,
+      "pct": 2.38,
+      "prev_close": 20.15
+    },
+    "_label": "📣 放量(量比3.4)"
+  }
+]
