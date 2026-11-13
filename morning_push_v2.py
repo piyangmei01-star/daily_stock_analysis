@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 """V2 强势短线推送：算法复用 V1（import morning_push），新增 Top5 历史归档。"""
+import os
 import sys
 
 import pandas as pd
@@ -54,6 +55,16 @@ def main():
         picks = v1.screen(df)
 
         counts = {"universe": len(df), "pass1": len(df), "pass2": len(picks), "pass3": len(picks)}
+        run_meta = {
+            "run_time_bj": hs._ts(),
+            "data_date": meta.get("data_date"),
+            "data_source": meta.get("source"),
+            "quote_basis": meta.get("quote_basis"),
+            "date_source": meta.get("date_source"),
+            "model_version": MODEL_VERSION,
+            "universe": counts.get("universe"), "counts": counts,
+            "market_env": {"captured_at": hs._ts()},
+        }
         run_id = hs.save_run(conn, TASK, run_date, MODEL_VERSION, "success",
                              counts, {"captured_at": hs._ts()}, hs._ts())
 
@@ -69,20 +80,14 @@ def main():
                            f"涨幅{r['pct']:+.2f}%，成交额{r['amount']/1e8:.1f}亿，PE {r['pe']:.1f}"),
                 "risk_tags": risk_tags(r),
                 "close_price": r["price"], "snapshot": snapshot_of(r), "industry": None})
-        n_pick = hs.save_picks(conn, run_id, TASK, run_date, MODEL_VERSION, rows)
+        n_pick = hs.save_picks(conn, run_id, TASK, run_date, MODEL_VERSION, rows,
+                               meta=run_meta)
         n_cand = hs.save_candidates(conn, run_id, [
             {"code": r["code"], "name": r["name"], "stage": "screened",
              "close_price": r["price"], "score": round(r["score"], 3),
              "snapshot": snapshot_of(r)} for _, r in picks.iterrows()])
-        hs.archive_json(run_date, "momentum_top5.json",
-                        {"run_id": run_id, "model_version": MODEL_VERSION,
-                         "data_updated_at": hs._ts(), "picks": rows})
-        print(f"归档完成: 新增Top5 {n_pick} 条, 候选 {n_cand} 条 (重复运行时为0)", flush=True)
-        hs.export_run_snapshot(conn, run_date, TASK)  # 归档真相源: append-only JSON
 
-        if "--no-push" in sys.argv:
-            print("NO_PUSH_OK")
-            return
+        # 推送文本与 rows 完全同源（同一个 picks DataFrame）
         lines = [f"☀️ **盘前选股清单** {hs.now_bj().strftime('%m-%d %H:%M')}\n"]
         if picks.empty:
             lines.append("今日无符合条件的候选（市场过冷或条件过严），建议观望。")
@@ -95,8 +100,46 @@ def main():
         lines.append("\n**📋 你的自选股表现**\n")
         lines.extend(v1.watch_performance(df))
         lines.append("\n> ⚠️ 量化筛选仅供参考，不构成投资建议")
-        ok = v1.push("\n".join(lines))
-        print("PUSH_OK" if ok else "PUSH_FAIL")
+        push_text = "\n".join(lines)
+
+        # ★ 推送前立即写入不可覆盖独立真相源
+        run_fp, run_obj = hs.finalize_run(conn, TASK, run_date, run_id, rows, run_meta,
+                                          push_text=push_text)
+        print(f"真相源已落盘(推送前): {os.path.basename(run_fp)} run_id={run_id}", flush=True)
+
+        # 派生「最新视图」文件
+        hs.archive_json(run_date, "momentum_top5.json",
+                        {"run_id": run_id, "model_version": MODEL_VERSION,
+                         "data_date": run_meta["data_date"], "data_source": run_meta["data_source"],
+                         "data_updated_at": hs._ts(), "picks": rows})
+        hs.export_run_snapshot(conn, run_date, TASK, run_id)
+        print(f"归档完成: 新增Top5 {n_pick} 条, 候选 {n_cand} 条 (重复运行时为0)", flush=True)
+
+        if "--no-push" in sys.argv:
+            print("NO_PUSH_OK")
+            return
+
+        db_codes = [r[0] for r in conn.execute(
+            "SELECT code FROM picks WHERE run_id=? ORDER BY rank", (run_id,))]
+        if db_codes != run_obj["codes"]:
+            hs.log_event(TASK, "ERROR", "推送前一致性校验失败: db名单≠归档真相源，拒绝推送")
+            raise RuntimeError("推送名单与归档名单不一致，拒绝推送")
+
+        try:
+            ok = v1.push(push_text)
+            push_ok = True if ok is None else bool(ok)
+        except Exception as e:
+            push_ok = False
+            hs.log_event(TASK, "ERROR", f"微信推送异常: {e}")
+        hs.save_push_receipt(run_date, run_id, push_text, push_ok,
+                             detail={"picks": len(rows)})
+        print(f"推送凭证已保存: push_ok={push_ok} run_id={run_id}", flush=True)
+        # 修复"假绿"缺陷：推送失败必须显式失败退出，Actions 才能真实反映业务结果
+        if not push_ok:
+            print("PUSH_FAIL: 微信推送失败，按验收纪律退出码非0（真相源与推送凭证已落盘）",
+                  flush=True)
+            sys.exit(1)
+        print("PUSH_OK", flush=True)
     except Exception as e:
         import traceback
         hs.save_run(conn, TASK, run_date, MODEL_VERSION, "failed", error_msg=str(e)[:500])

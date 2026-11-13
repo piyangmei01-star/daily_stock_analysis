@@ -20,20 +20,33 @@ def main():
     ok = True
 
     if task in ("quality", "momentum"):
-        r = conn.execute("SELECT run_id,status,universe_count,pass2,pass3,run_time_bj FROM screening_runs WHERE task=? AND run_date=?",
-                         (task, run_date)).fetchone()
-        n_pick = conn.execute("SELECT COUNT(*) FROM picks WHERE task=? AND run_date=?",
-                              (task, run_date)).fetchone()[0]
-        n_cand = conn.execute("SELECT COUNT(*) FROM candidates WHERE run_id LIKE ?",
-                              (f"{task}_{run_date.replace('-', '')}",)).fetchone()[0]
+        # 取当日最新批次（run_id 现在含微秒时间戳，同日可能有多批，各自独立保留）
+        r = conn.execute(
+            "SELECT run_id,status,universe_count,pass2,pass3,run_time_bj FROM screening_runs "
+            "WHERE task=? AND run_date=? ORDER BY created_at DESC, run_id DESC LIMIT 1",
+            (task, run_date)).fetchone()
+        rid = r[0] if r else None
+        n_pick = conn.execute("SELECT COUNT(*) FROM picks WHERE run_id=?", (rid,)).fetchone()[0]
+        n_cand = conn.execute("SELECT COUNT(*) FROM candidates WHERE run_id=?", (rid,)).fetchone()[0]
         if not r:
             lines.append("❌ 今日无选股运行记录")
             ok = False
         else:
+            lines.append(f"- 运行批次: `{rid}`")
             lines.append(f"- 运行状态: **{r[1]}**（{r[5]}）")
             lines.append(f"- 过滤漏斗: 快照{r[2]} → 业绩{r[3]} → 趋势{r[4]}")
             lines.append(f"- 入选名单: **{n_pick} 只** | 候选归档: {n_cand} 条")
-            ok = r[1] == "success" and (n_pick > 0 or allow_empty)
+            # 归档真相源存在性与完整性：缺失即判业务失败，不能只看 Actions 绿
+            import glob
+            fps = glob.glob(os.path.join(hs.ARCHIVE_ROOT, run_date.replace("-", ""),
+                                         f"run_{rid}.json"))
+            guard = "❌ 缺失" if not fps else "✅ 已落盘"
+            if fps:
+                _, errs = hs.verify_run_file(fps[0])
+                if errs:
+                    guard = "❌ 校验失败: " + ";".join(errs)
+            lines.append(f"- 不可覆盖真相源: {guard}")
+            ok = r[1] == "success" and (n_pick > 0 or allow_empty) and bool(fps) and "❌" not in guard
             if n_pick == 0:
                 lines.append("⚠️ 名单为空（--allow-empty 时视为正常）")
     elif task == "alert":

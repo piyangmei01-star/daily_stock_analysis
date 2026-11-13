@@ -57,8 +57,10 @@ def main():
 
         hs.archive_json(run_date, "market_snapshot_meta.json", meta)
         hs.archive_json(run_date, "market_snapshot_stats.json", stats)
-        hs.save_run(conn, TASK, run_date, MODEL_VERSION, "success",
-                    {"universe": meta["rows"]}, stats, hs._ts())
+        rid = hs.save_run(conn, TASK, run_date, MODEL_VERSION, "success",
+                          {"universe": meta["rows"]}, stats, hs._ts())
+        # 把本次运行的行情元数据（来源/日期/基准/条数）也导出为不可变归档，保证可重建
+        hs.export_run_snapshot(conn, run_date, TASK, rid)
         hs.log_event(TASK, "INFO", "盘前数据准备完成: " + json.dumps(stats, ensure_ascii=False))
 
         print("=== 盘前数据准备 · 业务执行摘要 ===", flush=True)

@@ -59,6 +59,10 @@ def snapshot_of(r):
     return {k: (round(float(r[k]), 4) if k in r and pd.notna(r[k]) else None) for k in keys}
 
 
+# 本次行情快照的完整元数据（来源/日期/基准/口径），随名单一起持久化，保证可追溯
+_SNAPSHOT_META = {}
+
+
 def robust_fetch_quotes_df():
     """全市场快照统一入口（V1 算法文件零改动，仅替换数据获取函数）。
 
@@ -68,6 +72,8 @@ def robust_fetch_quotes_df():
     """
     import market_data as md
     df, meta = md.fetch_snapshot()
+    _SNAPSHOT_META.clear()
+    _SNAPSHOT_META.update(meta)
     hs.log_event(TASK, "INFO",
                  f"行情快照 source={meta['source']} rows={meta['rows']} "
                  f"total={meta['universe_total']} data_date={meta['data_date']} "
@@ -140,11 +146,35 @@ def main():
         counts = {"universe": len(snap), "pass1": len(snap), "pass2": len(fund), "pass3": len(passed)}
 
         if not passed:
-            hs.save_run(conn, TASK, run_date, MODEL_VERSION, "success", counts, env, hs._ts())
-            hs.log_event(TASK, "INFO", "今日无同时满足业绩+趋势的候选")
-            hs.export_run_snapshot(conn, run_date, TASK)
-            if "--no-push" not in sys.argv:
-                v1.push("今日无同时满足「业绩质量+趋势多头」的候选，建议观望。")
+            snap_meta = dict(_SNAPSHOT_META)
+            run_meta = {"run_time_bj": hs._ts(), "data_date": snap_meta.get("data_date"),
+                        "data_source": snap_meta.get("source"),
+                        "quote_basis": snap_meta.get("quote_basis"),
+                        "date_source": snap_meta.get("date_source"),
+                        "model_version": MODEL_VERSION, "universe": counts.get("universe"),
+                        "counts": counts, "market_env": env}
+            rid0 = hs.save_run(conn, TASK, run_date, MODEL_VERSION, "success", counts, env, hs._ts())
+            push_text0 = "今日无同时满足「业绩质量+趋势多头」的候选，建议观望。"
+            # 空名单也必须独立落盘，保证每次运行都可追溯
+            fp0, _ = hs.finalize_run(conn, TASK, run_date, rid0, [], run_meta,
+                                     push_text=push_text0)
+            hs.log_event(TASK, "INFO", f"今日无同时满足业绩+趋势的候选；空名单已归档 {os.path.basename(fp0)}")
+            hs.export_run_snapshot(conn, run_date, TASK, rid0)
+            if "--no-push" not in sys.argv and "--save-only" not in sys.argv:
+                ret0 = None
+                try:
+                    ret0 = v1.push(push_text0)
+                    push_ok0 = True if ret0 is None else bool(ret0)
+                except Exception as e:
+                    push_ok0 = False
+                    hs.log_event(TASK, "ERROR", f"微信推送异常: {e}")
+                hs.save_push_receipt(run_date, rid0, push_text0, push_ok0,
+                                     detail={"picks": 0, "push_return": str(ret0)})
+                # 修复"假绿"缺陷：空名单推送失败同样必须显式失败退出
+                if not push_ok0:
+                    log("PUSH_FAIL: 微信推送失败，按验收纪律退出码非0（空名单真相源已落盘）")
+                    sys.exit(1)
+                print("PUSH_OK")
             return
 
         final = fund[fund["code"].isin(passed.keys())].copy()
@@ -164,6 +194,19 @@ def main():
                 break
         top = pd.DataFrame(picked)
 
+        snap_meta = dict(_SNAPSHOT_META)
+        run_meta = {
+            "run_time_bj": hs._ts(),
+            "data_date": snap_meta.get("data_date"),
+            "data_source": snap_meta.get("source"),
+            "quote_basis": snap_meta.get("quote_basis"),
+            "date_source": snap_meta.get("date_source"),
+            "model_version": MODEL_VERSION,
+            "universe": counts.get("universe"),
+            "counts": counts,
+            "market_env": env,
+        }
+        # 每次运行一个全局唯一 run_id，绝不复用/覆盖历史批次
         run_id = hs.save_run(conn, TASK, run_date, MODEL_VERSION, "success", counts, env, hs._ts())
 
         # 候选归档：业绩过滤后（fundamental）+ 趋势通过（trend）
@@ -178,7 +221,7 @@ def main():
                               "industry": industry.get(r["code"]), "snapshot": snapshot_of(r)})
         n_cand = hs.save_candidates(conn, run_id, cand_rows)
 
-        # Top10 归档
+        # Top10 名单（与推送文本同源，不重新排序/计算）
         pick_rows = []
         for i, (_, r) in enumerate(top.iterrows(), 1):
             ind = industry.get(r["code"], "其他")
@@ -192,30 +235,10 @@ def main():
                            f"收盘>MA20>MA60多头，20日涨幅{r['trend20']:.1f}%≤15%；行业分散[{ind}]"),
                 "risk_tags": risk_tags(r),
                 "close_price": r["price"], "snapshot": snapshot_of(r), "industry": ind})
-        n_pick = hs.save_picks(conn, run_id, TASK, run_date, MODEL_VERSION, pick_rows)
+        n_pick = hs.save_picks(conn, run_id, TASK, run_date, MODEL_VERSION, pick_rows,
+                               meta=run_meta)
 
-        # 文件归档（按日目录，历史日期不覆盖）
-        hs.archive_json(run_date, "quality_top10.json",
-                        {"run_id": run_id, "model_version": MODEL_VERSION, "market_env": env,
-                         "data_updated_at": hs._ts(), "picks": pick_rows})
-        hs.archive_json(run_date, "quality_candidates.json",
-                        {"run_id": run_id, "count": len(cand_rows), "candidates": cand_rows})
-        hs.archive_text(run_date, "quality_top10.txt", ",".join(top["code"].tolist()))
-        log(f"归档完成: 新增候选 {n_cand} 条, 新增Top10 {n_pick} 条 (重复运行时为0)")
-        log(f"Top10: {','.join(top['code'].tolist())}")
-        hs.export_run_snapshot(conn, run_date, TASK)  # 归档真相源: append-only JSON
-
-        # 兼容 V1 的 AI 下游文件
-        with open("data/screened_top10.txt", "w") as f:
-            f.write(",".join(top["code"].tolist()))
-
-        if "--save-only" in sys.argv:
-            print("SAVE_OK")
-            return
-        if "--no-push" in sys.argv:
-            print("NO_PUSH_OK")
-            return
-
+        # 推送文本：与 pick_rows 完全同源（同一个 top DataFrame）
         lines = [f"💎 **质量选股 Top{len(top)}** {hs.now_bj().strftime('%m-%d %H:%M')}\n",
                  "三重把关：业绩双增+ROE | 多头趋势(追高≤15%) | 行业分散\n"]
         for i, (_, r) in enumerate(top.iterrows(), 1):
@@ -230,7 +253,58 @@ def main():
                 e = "🔴" if r["pct"] > 0 else "🟢"
                 lines.append(f"{e} {r['name']} {r['pct']:+.2f}%")
         lines.append("\n> ⚠️ 质量筛选仅供参考，不构成投资建议")
-        v1.push("\n".join(lines))
+        push_text = "\n".join(lines)
+
+        # ★ 立即持久化：推送之前写入不可覆盖独立真相源 run_<run_id>.json
+        # 即使随后进程崩溃或归档冲突，这份原始名单也已独立落盘、可恢复
+        run_fp, run_obj = hs.finalize_run(conn, TASK, run_date, run_id, pick_rows,
+                                          run_meta, push_text=push_text)
+        log(f"真相源已落盘(推送前): {os.path.basename(run_fp)}")
+        log(f"run_id={run_id} codes_hash={run_obj['codes_hash'][:16]}")
+
+        # 派生「最新视图」文件（可更新；下游 AI/验收读取。真相源是上面的独立文件）
+        hs.archive_json(run_date, "quality_top10.json",
+                        {"run_id": run_id, "model_version": MODEL_VERSION, "market_env": env,
+                         "data_date": run_meta["data_date"], "data_source": run_meta["data_source"],
+                         "data_updated_at": hs._ts(), "picks": pick_rows})
+        hs.archive_json(run_date, "quality_candidates.json",
+                        {"run_id": run_id, "count": len(cand_rows), "candidates": cand_rows})
+        hs.archive_text(run_date, "quality_top10.txt", ",".join(top["code"].tolist()))
+        hs.export_run_snapshot(conn, run_date, TASK, run_id)
+        with open("data/screened_top10.txt", "w") as f:
+            f.write(",".join(top["code"].tolist()))
+        log(f"归档完成: 新增候选 {n_cand} 条, 新增Top10 {n_pick} 条 (重复运行时为0)")
+        log(f"Top10: {','.join(top['code'].tolist())}")
+
+        if "--save-only" in sys.argv:
+            print("SAVE_OK")
+            return
+        if "--no-push" in sys.argv:
+            print("NO_PUSH_OK")
+            return
+
+        # 推送前二次校验：db 名单必须与不可覆盖真相源完全一致，否则拒绝推送
+        db_codes = [r[0] for r in conn.execute(
+            "SELECT code FROM picks WHERE run_id=? ORDER BY rank", (run_id,))]
+        if db_codes != run_obj["codes"]:
+            hs.log_event(TASK, "ERROR", "推送前一致性校验失败: db名单≠归档真相源，拒绝推送")
+            raise RuntimeError("推送名单与归档名单不一致，拒绝推送")
+
+        ret = None
+        try:
+            ret = v1.push(push_text)
+            push_ok = True if ret is None else bool(ret)
+        except Exception as e:
+            push_ok = False
+            hs.log_event(TASK, "ERROR", f"微信推送异常: {e}")
+        hs.save_push_receipt(run_date, run_id, push_text, push_ok,
+                             detail={"picks": len(pick_rows), "push_return": str(ret)})
+        log(f"推送凭证已保存: push_ok={push_ok} run_id={run_id}")
+        # 修复"假绿"缺陷：推送失败必须显式失败退出，Actions 才能真实反映业务结果
+        if not push_ok:
+            log("PUSH_FAIL: 微信推送失败，按验收纪律退出码非0（真相源与推送凭证已落盘）")
+            sys.exit(1)
+        print("PUSH_OK")
     except Exception as e:
         import traceback
         hs.save_run(conn, TASK, run_date, MODEL_VERSION, "failed", error_msg=str(e)[:500])

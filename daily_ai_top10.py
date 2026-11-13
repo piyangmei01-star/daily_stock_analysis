@@ -68,7 +68,10 @@ def analyze_one(row):
 def main():
     conn = hs.get_conn()
     run_date = hs.today()
-    rows = hs.get_today_picks(conn, "quality", run_date)
+    # 只分析当日最新一个批次的名单，避免多批次共存时混合不同批选股结果
+    rid = hs.latest_run_id(conn, "quality", run_date)
+    rows = hs.get_today_picks(conn, "quality", run_date, run_id=rid)
+    print(f"分析批次 run_id={rid}", flush=True)
     if not rows:
         hs.log_event(TASK, "ERROR", f"{run_date} 无质量选股Top10记录，AI分析终止")
         print("NO_TOP10_TODAY")
@@ -90,8 +93,8 @@ def main():
 
     if results:
         hs.archive_json(run_date, "ai_top10.json",
-                        {"date": run_date, "model": MODEL, "count": len(results),
-                         "failed": failed, "results": results})
+                        {"date": run_date, "run_id": rid, "model": MODEL,
+                         "count": len(results), "failed": failed, "results": results})
         lines = [f"# {run_date} 质量选股Top10 · AI分析报告", "",
                  f"模型: {MODEL} | 成功 {len(results)} 只 | 失败 {len(failed)} 只",
                  "> AI仅做解释与风险分析，其评分不是上涨概率，不构成投资建议", ""]
@@ -105,10 +108,11 @@ def main():
         p = hs.archive_text(run_date, "ai_top10.md", "\n".join(lines))
         print(f"AI报告已归档: {p}", flush=True)
 
-    # 回填 picks.ai_conclusion
+    # 回填 picks.ai_conclusion（严格限定本批次，不污染历史批次）
     for r in results:
-        conn.execute("UPDATE picks SET ai_conclusion=? WHERE run_date=? AND code=? AND task='quality'",
-                     (f"{r['direction']}(信心分{r['score']})", run_date, r["code"]))
+        if rid:
+            conn.execute("UPDATE picks SET ai_conclusion=? WHERE run_id=? AND code=?",
+                         (f"{r['direction']}(信心分{r['score']})", rid, r["code"]))
     conn.commit()
     hs.log_event(TASK, "INFO", f"AI分析完成: 成功{len(results)}/失败{len(failed)}")
     print(f"AI_DONE 成功{len(results)} 失败{len(failed)}", flush=True)
