@@ -98,21 +98,24 @@ _V1_LOAD_FUNDAMENTALS = v1.load_fundamentals
 
 def robust_load_fundamentals(snap):
     """V2 侧业绩数据获取：东财业绩报表接口在美国 runner 上偶发
-    ChunkedEncodingError（响应中断），akshare 内部无重试；此处重试 3 次
-    （间隔 6/12/18 秒），全部失败才抛错。与 robust_fetch_quotes_df /
-    trend_ok_v2 同模式，V1 文件零改动。"""
+    ChunkedEncodingError（响应中断，可连续多次），akshare 内部无重试；
+    此处重试 5 次（间隔 10/20/40/80/120 秒，总退避约 4.5 分钟），
+    全部失败才抛错。与 robust_fetch_quotes_df / trend_ok_v2 同模式，
+    V1 文件零改动。"""
     last = None
-    for attempt in (1, 2, 3):
+    delays = (10, 20, 40, 80, 120)
+    for attempt, delay in enumerate(delays, 1):
         try:
             return _V1_LOAD_FUNDAMENTALS(snap)
         except Exception as e:
             last = e
             hs.log_event(TASK, "WARN",
-                         f"业绩数据获取失败(第{attempt}/3次): "
+                         f"业绩数据获取失败(第{attempt}/{len(delays)}次): "
                          f"{type(e).__name__}: {str(e)[:120]}")
-            time.sleep(6 * attempt)
+            if attempt < len(delays):
+                time.sleep(delay)
     hs.log_event(TASK, "ERROR",
-                 f"业绩数据重试3次全部失败: {type(last).__name__}: {str(last)[:200]}")
+                 f"业绩数据重试{len(delays)}次全部失败: {type(last).__name__}: {str(last)[:200]}")
     raise last
 
 
