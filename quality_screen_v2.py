@@ -8,6 +8,7 @@
 """
 import os
 import sys
+import time
 
 import pandas as pd
 import requests
@@ -91,6 +92,30 @@ _KLINE_LOCK = threading.Lock()
 _KLINE_STAT = {"ok": 0, "fail": 0, "sources": {}, "adjustments": {}}
 
 
+# 业绩数据重试包装：保存 V1 原版（必须先于 main() 中的替换执行）
+_V1_LOAD_FUNDAMENTALS = v1.load_fundamentals
+
+
+def robust_load_fundamentals(snap):
+    """V2 侧业绩数据获取：东财业绩报表接口在美国 runner 上偶发
+    ChunkedEncodingError（响应中断），akshare 内部无重试；此处重试 3 次
+    （间隔 6/12/18 秒），全部失败才抛错。与 robust_fetch_quotes_df /
+    trend_ok_v2 同模式，V1 文件零改动。"""
+    last = None
+    for attempt in (1, 2, 3):
+        try:
+            return _V1_LOAD_FUNDAMENTALS(snap)
+        except Exception as e:
+            last = e
+            hs.log_event(TASK, "WARN",
+                         f"业绩数据获取失败(第{attempt}/3次): "
+                         f"{type(e).__name__}: {str(e)[:120]}")
+            time.sleep(6 * attempt)
+    hs.log_event(TASK, "ERROR",
+                 f"业绩数据重试3次全部失败: {type(last).__name__}: {str(last)[:200]}")
+    raise last
+
+
 def trend_ok_v2(code):
     import market_data as md
     try:
@@ -114,6 +139,7 @@ def trend_ok_v2(code):
 def main():
     v1.fetch_quotes_df = robust_fetch_quotes_df  # V2侧替换数据获取，V1过滤算法不变
     v1.trend_ok = trend_ok_v2  # V2侧替换日K数据获取，MA/趋势判断逻辑与V1完全一致
+    v1.load_fundamentals = robust_load_fundamentals  # V2侧业绩数据重试包装，V1零改动
     conn = hs.get_conn()
     run_date = hs.today()
     env = market_env()
