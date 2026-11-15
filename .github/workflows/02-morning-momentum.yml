@@ -13,6 +13,7 @@ on:
 
 permissions:
   contents: write
+  actions: read  # 防重复步骤 gh run list 所需，避免权限失败被静默降级
 
 jobs:
   push:
@@ -47,14 +48,17 @@ jobs:
       - name: 业务结果校验与摘要
         if: steps.check.outputs.skip != 'yes' || inputs.force == true
         run: python verify_business.py momentum --allow-empty
+      - name: 归档完整性守卫（真相源+推送一致性，失败即判红）
+        if: always()
+        run: python archive_guard.py momentum
       - name: 归档数据提交回仓库
         if: always()
         run: |
           git config user.name "v2-archive-bot"
           git config user.email "v2-archive-bot@users.noreply.github.com"
-          git add -f data/history/ 2>/dev/null || true
+          git add -f data/history/
           if ! git diff --cached --quiet; then
-            git commit -m "data: momentum 归档 $(date -u +%Y%m%d-%H%M)"
+            git commit -m "data: momentum 归档 $(date -u +%Y%m%d-%H%M)" || { echo "ARCHIVE_FAIL git commit 失败"; exit 1; }
           fi
           # 运行时派生文件(db/缓存/txt)被脚本改动会造成 "cannot pull with rebase: unstaged changes"
           # 归档已 commit，此处只丢弃这些派生改动，绝不动已提交的 data/history/ 归档
