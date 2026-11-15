@@ -1,8 +1,8 @@
 {
-  "run_id": "quality_20261115_100512307713_c28019",
+  "run_id": "quality_20261115_175558464626_863304",
   "model_version": "v2.0-stage1",
   "market_env": {
-    "captured_at": "2026-11-15 10:03:23",
+    "captured_at": "2026-11-15 17:53:33",
     "hs300_price": 4016.29,
     "hs300_pct": -0.68,
     "sh_index_price": 3634.35,
@@ -12,18 +12,18 @@
       "total": 267,
       "rate": 0.9963,
       "sources": {
-        "eastmoney_kline_fqt1": 263,
-        "sina_kline_day": 3
+        "eastmoney_kline_fqt1": 78,
+        "sina_kline_day": 188
       },
       "adjustments": {
-        "qfq": 263,
-        "none": 3
+        "qfq": 78,
+        "none": 188
       }
     }
   },
   "data_date": "2026-11-13",
   "data_source": "sina_market_center",
-  "data_updated_at": "2026-11-15 10:05:12",
+  "data_updated_at": "2026-11-15 17:56:02",
   "picks": [
     {
       "code": "600521",
@@ -253,15 +253,15 @@
       "code": "601919",
       "name": "中远海控",
       "rank": 8,
-      "score": 58.202,
+      "score": 61.279,
       "scores": {
         "fund_score": 42.024,
-        "trend20": 3.53,
+        "trend20": 0.89,
         "profit_g": 13.22,
         "rev_g": 11.94,
         "roe": 12.74
       },
-      "reason": "净利+13%/营收+12%双增，ROE 12.7%；收盘>MA20>MA60多头，20日涨幅3.5%≤15%；行业分散[航运港口]",
+      "reason": "净利+13%/营收+12%双增，ROE 12.7%；收盘>MA20>MA60多头，20日涨幅0.9%≤15%；行业分散[航运港口]",
       "risk_tags": "无显著风险标签",
       "close_price": 17.03,
       "snapshot": {
@@ -275,9 +275,9 @@
         "rev_g": 11.9421,
         "roe": 12.74,
         "eps": 2.01,
-        "trend20": 3.5258,
+        "trend20": 0.8886,
         "fund_score": 42.0242,
-        "total": 58.2023
+        "total": 61.279
       },
       "industry": "航运港口"
     },

@@ -1,6 +1,6 @@
 {
-  "run_id": "quality_20261115_100512307713_c28019",
-  "count": 335,
+  "run_id": "quality_20261115_175558464626_863304",
+  "count": 332,
   "candidates": [
     {
       "code": "300033",
@@ -6378,7 +6378,7 @@
       "name": "中远海控",
       "stage": "trend",
       "close_price": 17.03,
-      "score": 58.202,
+      "score": 61.279,
       "industry": "航运港口",
       "snapshot": {
         "price": 17.03,
@@ -6391,9 +6391,9 @@
         "rev_g": 11.9421,
         "roe": 12.74,
         "eps": 2.01,
-        "trend20": 3.5258,
+        "trend20": 0.8886,
         "fund_score": 42.0242,
-        "total": 58.2023
+        "total": 61.279
       }
     },
     {
@@ -6447,7 +6447,7 @@
       "name": "大参林",
       "stage": "trend",
       "close_price": 20.45,
-      "score": 46.672,
+      "score": 49.561,
       "industry": null,
       "snapshot": {
         "price": 20.45,
@@ -6460,9 +6460,9 @@
         "rev_g": 6.1783,
         "roe": 15.79,
         "eps": 1.12,
-        "trend20": 12.3626,
+        "trend20": 9.8872,
         "fund_score": 40.147,
-        "total": 46.6725
+        "total": 49.5605
       }
     },
     {
@@ -6604,29 +6604,6 @@
       }
     },
     {
-      "code": "601288",
-      "name": "农业银行",
-      "stage": "trend",
-      "close_price": 7.37,
-      "score": 54.114,
-      "industry": null,
-      "snapshot": {
-        "price": 7.37,
-        "pct": 1.515,
-        "turnover": 0.1484,
-        "vol_ratio": null,
-        "amount": 3469820584.0,
-        "mktcap": 2579374959644.0,
-        "profit_g": 7.1,
-        "rev_g": 12.3324,
-        "roe": 8.01,
-        "eps": 0.65,
-        "trend20": 3.6568,
-        "fund_score": 35.9695,
-        "total": 54.1139
-      }
-    },
-    {
       "code": "600901",
       "name": "江苏金租",
       "stage": "trend",
@@ -6719,29 +6696,6 @@
       }
     },
     {
-      "code": "600926",
-      "name": "杭州银行",
-      "stage": "trend",
-      "close_price": 17.52,
-      "score": 51.052,
-      "industry": null,
-      "snapshot": {
-        "price": 17.52,
-        "pct": 1.506,
-        "turnover": 0.713,
-        "vol_ratio": null,
-        "amount": 902370268.0,
-        "mktcap": 127002524640.96,
-        "profit_g": 9.76,
-        "rev_g": 5.5011,
-        "roe": 12.12,
-        "eps": 2.34,
-        "trend20": 4.0998,
-        "fund_score": 32.0541,
-        "total": 51.052
-      }
-    },
-    {
       "code": "601939",
       "name": "建设银行",
       "stage": "trend",
@@ -6769,7 +6723,7 @@
       "name": "工商银行",
       "stage": "trend",
       "close_price": 8.85,
-      "score": 47.667,
+      "score": 49.859,
       "industry": null,
       "snapshot": {
         "price": 8.85,
@@ -6782,32 +6736,9 @@
         "rev_g": 8.737,
         "roe": 6.9975,
         "eps": 0.78,
-        "trend20": 6.2425,
+        "trend20": 4.3632,
         "fund_score": 30.6917,
-        "total": 47.6667
-      }
-    },
-    {
-      "code": "601088",
-      "name": "中国神华",
-      "stage": "trend",
-      "close_price": 50.0,
-      "score": 54.694,
-      "industry": null,
-      "snapshot": {
-        "price": 50.0,
-        "pct": 2.124,
-        "turnover": 0.208,
-        "vol_ratio": null,
-        "amount": 1753510780.0,
-        "mktcap": 1084471715200.0,
-        "profit_g": 3.8,
-        "rev_g": 8.9748,
-        "roe": 8.81,
-        "eps": 2.062,
-        "trend20": 0.0,
-        "fund_score": 30.299,
-        "total": 54.6944
+        "total": 49.8592
       }
     },
     {
@@ -7160,7 +7091,7 @@
       "name": "XD常熟银",
       "stage": "trend",
       "close_price": 6.39,
-      "score": 45.133,
+      "score": 47.734,
       "industry": null,
       "snapshot": {
         "price": 6.39,
@@ -7173,9 +7104,9 @@
         "rev_g": 3.8145,
         "roe": 10.965,
         "eps": 0.99,
-        "trend20": 5.7947,
+        "trend20": 3.5656,
         "fund_score": 25.9901,
-        "total": 45.1331
+        "total": 47.7337
       }
     },
     {
