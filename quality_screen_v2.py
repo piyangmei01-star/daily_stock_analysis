@@ -14,6 +14,7 @@ import pandas as pd
 import requests
 
 import history_store as hs
+import market_regime as mr  # 早间隔夜外围与排雷温控（内部全兜底，失败不影响选股链路）
 import quality_screen as v1
 
 MODEL_VERSION = "v2.0-stage1"
@@ -183,7 +184,18 @@ def main():
                         "model_version": MODEL_VERSION, "universe": counts.get("universe"),
                         "counts": counts, "market_env": env}
             rid0 = hs.save_run(conn, TASK, run_date, MODEL_VERSION, "success", counts, env, hs._ts())
-            push_text0 = "今日无同时满足「业绩质量+趋势多头」的候选，建议观望。"
+            # 早间隔夜温控头部（内部全兜底；失败时头部不插入，格式退回原样）
+            try:
+                mreg0 = mr.morning_regime()
+                head0 = mr.morning_header_text(mreg0)
+                hs.archive_json(run_date, "market_regime_morning.json", mreg0)
+                log(f"REGIME_OK 红绿灯={mreg0.get('light')}")
+            except Exception as e:
+                head0, mreg0 = "", None
+                hs.log_event(TASK, "WARN", f"早间温控降级: {e}")
+                log("REGIME_DEGRADED")
+            push_text0 = ((head0 + "\n") if head0 else "") + \
+                "今日无同时满足「业绩质量+趋势多头」的候选，建议观望。"
             # 空名单也必须独立落盘，保证每次运行都可追溯
             fp0, _ = hs.finalize_run(conn, TASK, run_date, rid0, [], run_meta,
                                      push_text=push_text0)
@@ -282,6 +294,19 @@ def main():
                 e = "🔴" if r["pct"] > 0 else "🟢"
                 lines.append(f"{e} {r['name']} {r['pct']:+.2f}%")
         lines.append("\n> ⚠️ 质量筛选仅供参考，不构成投资建议")
+        # ---- 早间隔夜外围与排雷风控（market_regime）：推送头部亮出温控红绿灯 ----
+        # 内部全兜底；失败时头部不插入、推送退回原格式，绝不影响已完成选股与归档
+        try:
+            mreg = mr.morning_regime()
+            head = mr.morning_header_text(mreg)
+            if head:
+                lines = [head, ""] + lines
+            hs.archive_json(run_date, "market_regime_morning.json", mreg)
+            hs.log_event(TASK, "INFO", f"早间温控红绿灯: {mreg.get('light')}")
+            log(f"REGIME_OK 红绿灯={mreg.get('light')}")
+        except Exception as e:
+            hs.log_event(TASK, "WARN", f"早间温控降级: {e}")
+            log("REGIME_DEGRADED")
         push_text = "\n".join(lines)
 
         # ★ 立即持久化：推送之前写入不可覆盖独立真相源 run_<run_id>.json

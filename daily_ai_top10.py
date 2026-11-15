@@ -15,6 +15,7 @@ import requests
 
 import morning_push as v1  # 复用已验证的 PUSH_OK 企业微信 text 通道（V1 文件零改动）
 import history_store as hs
+import market_regime as mr  # 大盘环境与情绪定调（规则定调，内部全兜底，失败不影响主链路）
 
 API_KEY = os.environ.get("OPENAI_API_KEY", "")
 BASE_URL = os.environ.get("OPENAI_BASE_URL", "https://api.deepseek.com")
@@ -81,6 +82,19 @@ def main():
         sys.exit(1)
     print(f"当日Top10共 {len(rows)} 只，开始 DeepSeek 分析...", flush=True)
 
+    # ---- 大盘环境与情绪定调（market_regime）：规则定调，失败降级，绝不影响主链路 ----
+    try:
+        regime = mr.evening_regime()
+        regime_lines = mr.evening_push_lines(regime)
+        hs.archive_json(run_date, "market_regime_evening.json", regime)
+        hs.log_event(TASK, "INFO",
+                     f"晚间大盘定调: {regime.get('classify', {}).get('label')}")
+        print(f"REGIME_OK 定调={regime.get('classify', {}).get('label')}", flush=True)
+    except Exception as e:
+        regime, regime_lines = None, ["📊 大盘定调: 数据不足，暂不定调（不编造）"]
+        hs.log_event(TASK, "WARN", f"晚间大盘定调降级: {e}")
+        print("REGIME_DEGRADED", flush=True)
+
     results, failed = [], []
     for row in rows:
         code = row[4]
@@ -97,10 +111,12 @@ def main():
     if results:
         hs.archive_json(run_date, "ai_top10.json",
                         {"date": run_date, "run_id": rid, "model": MODEL,
-                         "count": len(results), "failed": failed, "results": results})
+                         "count": len(results), "failed": failed, "results": results,
+                         "market_regime": regime})
         lines = [f"# {run_date} 质量选股Top10 · AI分析报告", "",
                  f"模型: {MODEL} | 成功 {len(results)} 只 | 失败 {len(failed)} 只",
                  "> AI仅做解释与风险分析，其评分不是上涨概率，不构成投资建议", ""]
+        lines.extend(mr.evening_md_lines(regime))  # 定调段置于报告最顶部
         for r in results:
             lines.append(f"## {r['name']}({r['code']}) — {r['direction']}（信心分 {r['score']}）")
             lines.append(f"- 分析: {r['reason']}")
@@ -133,6 +149,7 @@ def main():
     lines = [f"🌙 AI 深度复盘 · 质量选股Top{len(results)}  {hs.now_bj().strftime('%m-%d %H:%M')}",
              f"模型: {MODEL} | 成功 {len(results)} 只 | 失败 {len(failed)} 只",
              f"选股批次: {rid}",
+             *regime_lines,  # 定调段置于推送头部（失败时为降级行）
              "> AI 仅做解释与风险分析，其评分不是上涨概率，不构成投资建议", ""]
     for i, r in enumerate(results, 1):
         lines.append(f"{i}. {r['name']}({r['code']}) — {r['direction']}（信心分 {r['score']}）")
