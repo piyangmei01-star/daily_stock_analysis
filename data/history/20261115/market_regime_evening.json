@@ -1,0 +1,52 @@
+{
+  "module": "market_regime",
+  "kind": "evening",
+  "generated_at": "2026-11-15 09:58:58",
+  "indices": {
+    "上证指数": {
+      "label": "上证指数",
+      "close": 3634.35,
+      "ma20": 3668.61,
+      "bias_pct": -0.93,
+      "kline_date": "2026-11-13"
+    },
+    "沪深300": {
+      "label": "沪深300",
+      "close": 4016.29,
+      "ma20": 4069.52,
+      "bias_pct": -1.31,
+      "kline_date": "2026-11-13"
+    }
+  },
+  "breadth": {
+    "adv": 744,
+    "dec": 4414,
+    "flat": 65,
+    "amount_yuan": 1655339900194.0,
+    "amount_yi": 16553.0,
+    "snapshot_source": "sina_market_center",
+    "data_date": "2026-11-13",
+    "quote_basis": "close"
+  },
+  "limits": {
+    "zt": 37,
+    "dt": 33
+  },
+  "turnover": {
+    "ratio": 0.857,
+    "today_yi": 16557.0,
+    "prev_yi": 19321.0,
+    "source": "eastmoney_index_amount"
+  },
+  "classify": {
+    "regime": "bear",
+    "label": "退潮防守",
+    "evidence": [
+      "上证乖离-0.93%",
+      "沪深300乖离-1.31%",
+      "涨跌比0.14",
+      "涨停37/跌停33",
+      "成交额环比0.857"
+    ]
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "schema": "v2_push_receipt/1",
+  "run_id": "daily_ai_20261115_180015007762_bf0cec",
+  "run_date": "2026-11-15",
+  "pushed_at": "2026-11-15 18:00:18",
+  "push_ok": true,
+  "push_text_hash": "5a3e61660ebd7b2130656de6d90752ebccd685f676b4bbaf578758968d927c23",
+  "push_text_bytes": 4699,
+  "detail": {
+    "picks": 10,
+    "failed": 0,
+    "source_run_id": "quality_20261115_175558464626_863304",
+    "push_return": "True"
+  },
+  "immutable": true
+}
