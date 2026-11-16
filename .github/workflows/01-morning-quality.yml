@@ -14,10 +14,19 @@ on:
         description: '只归档不推送（补录历史数据用，不修改推送格式）'
         type: boolean
         default: false
+  # 外部 Cron（如 cron-job.org）调用 POST /repos/{owner}/{repo}/dispatches
+  # event_type 必须为 morning-quality-external；支持 client_payload.no_push / force 布尔参数。
+  repository_dispatch:
+    types: [morning-quality-external]
+
+# 外部触发与原 schedule 同时到达时串行执行；后者再根据真实推送凭证去重，避免重复微信。
+concurrency:
+  group: morning-quality-production
+  cancel-in-progress: false
 
 permissions:
   contents: write
-  actions: read  # 防重复步骤 gh run list 所需，避免权限失败被静默降级
+  actions: read  # 保留运行诊断权限；防重复以归档中的真实推送凭证为准
 
 jobs:
   screen:
@@ -26,39 +35,77 @@ jobs:
     env:
       GH_TOKEN: ${{ github.token }}
     steps:
+      - name: 记录触发来源（外部唤醒秒级应答证据）
+        env:
+          EVENT_NAME: ${{ github.event_name }}
+          EVENT_ACTION: ${{ github.event.action }}
+          CLIENT_NO_PUSH: ${{ github.event.client_payload.no_push || false }}
+          CLIENT_FORCE: ${{ github.event.client_payload.force || false }}
+        run: |
+          echo "TRIGGER_RECEIVED event=$EVENT_NAME utc=$(date -u +%Y-%m-%dT%H:%M:%SZ)"
+          if [ "$EVENT_NAME" = "repository_dispatch" ]; then
+            echo "EXTERNAL_DISPATCH type=$EVENT_ACTION no_push=$CLIENT_NO_PUSH force=$CLIENT_FORCE"
+          fi
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
         with:
           python-version: '3.10'
-      - name: 判断近6小时是否已成功推送（防重复）
+      - name: 判断近6小时是否已成功推送（按真实推送凭证防重复）
         id: check
         run: |
-          LAST=$(gh run list --workflow=01-morning-quality.yml --status=success --limit=1 --json createdAt --jq '.[0].createdAt' 2>/dev/null || echo "")
-          SKIP=no
-          if [ -n "$LAST" ]; then
-            AGE=$(( $(date +%s) - $(date -d "$LAST" +%s) ))
-            if [ "$AGE" -lt 21600 ]; then SKIP=yes; fi
-          fi
-          echo "skip=$SKIP" >> "$GITHUB_OUTPUT"
-          echo "上次成功推送: ${LAST:-无} -> skip=$SKIP"
+          python3 - <<'PY'
+          import datetime as dt
+          import glob
+          import json
+          import os
+          import time
+
+          latest = None
+          for fp in glob.glob('data/history/*/push_receipt_quality_*.json'):
+              try:
+                  with open(fp, encoding='utf-8') as f:
+                      obj = json.load(f)
+                  if obj.get('push_ok') is not True:
+                      continue
+                  pushed_at = dt.datetime.strptime(obj['pushed_at'], '%Y-%m-%d %H:%M:%S').replace(
+                      tzinfo=dt.timezone(dt.timedelta(hours=8)))
+                  if latest is None or pushed_at > latest[0]:
+                      latest = (pushed_at, obj.get('run_id'), fp)
+              except Exception as exc:
+                  print(f'DEDUP_WARN 无法读取凭证 {fp}: {exc}')
+
+          skip = 'no'
+          if latest:
+              pushed_at, run_id, fp = latest
+              age = time.time() - pushed_at.timestamp()
+              if 0 <= age < 21600:
+                  skip = 'yes'
+              print(f'最近成功推送凭证: {pushed_at.isoformat()} run_id={run_id} age_minutes={age/60:.1f} -> skip={skip}')
+          else:
+              print('最近成功推送凭证: 无 -> skip=no')
+          with open(os.environ['GITHUB_OUTPUT'], 'a', encoding='utf-8') as f:
+              f.write(f'skip={skip}\n')
+          PY
       - name: 安装依赖
-        if: steps.check.outputs.skip != 'yes' || inputs.force == true
+        if: steps.check.outputs.skip != 'yes' || inputs.force == true || github.event.client_payload.force == true
         run: pip install -r requirements.txt
       - name: 运行质量选股V2（归档+推送）
-        if: steps.check.outputs.skip != 'yes' || inputs.force == true
+        if: steps.check.outputs.skip != 'yes' || inputs.force == true || github.event.client_payload.force == true
         env:
           WECHAT_WEBHOOK_URL: ${{ secrets.WECHAT_WEBHOOK_URL }}
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
           OPENAI_BASE_URL: ${{ vars.OPENAI_BASE_URL || secrets.OPENAI_BASE_URL }}
           OPENAI_MODEL: ${{ vars.OPENAI_MODEL || secrets.OPENAI_MODEL }}
+          INPUT_NO_PUSH: ${{ inputs.no_push }}
+          CLIENT_NO_PUSH: ${{ github.event.client_payload.no_push }}
         run: |
-          if [ "${{ inputs.no_push }}" = "true" ]; then
+          if [ "$INPUT_NO_PUSH" = "true" ] || [ "$CLIENT_NO_PUSH" = "true" ]; then
             python quality_screen_v2.py --no-push
           else
             python quality_screen_v2.py
           fi
       - name: 业务结果校验与摘要
-        if: steps.check.outputs.skip != 'yes' || inputs.force == true
+        if: steps.check.outputs.skip != 'yes' || inputs.force == true || github.event.client_payload.force == true
         run: python verify_business.py quality --allow-empty
       - name: 归档完整性守卫（真相源+推送一致性，失败即判红）
         if: always()
