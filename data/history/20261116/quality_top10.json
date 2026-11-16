@@ -1,0 +1,91 @@
+{
+  "run_id": "quality_20261116_095926064084_0e8dab",
+  "model_version": "v2.0-stage1",
+  "market_env": {
+    "captured_at": "2026-11-16 09:56:14",
+    "hs300_price": 3972.98,
+    "hs300_pct": -1.08,
+    "kline_integrity": {
+      "ok": 92,
+      "total": 92,
+      "rate": 1.0,
+      "sources": {
+        "eastmoney_kline_fqt1": 78,
+        "sina_kline_day": 14
+      },
+      "adjustments": {
+        "qfq": 78,
+        "none": 14
+      }
+    }
+  },
+  "data_date": "2026-11-16",
+  "data_source": "sina_market_center",
+  "data_updated_at": "2026-11-16 09:59:30",
+  "picks": [
+    {
+      "code": "002415",
+      "name": "海康威视",
+      "rank": 1,
+      "score": 73.954,
+      "scores": {
+        "fund_score": 64.143,
+        "trend20": 2.35,
+        "profit_g": 38.55,
+        "rev_g": 12.6,
+        "roe": 14.99
+      },
+      "reason": "净利+39%/营收+13%双增，ROE 15.0%；收盘>MA20>MA60多头，20日涨幅2.3%≤15%；行业分散[其他]",
+      "risk_tags": "无显著风险标签",
+      "close_price": 34.98,
+      "snapshot": {
+        "price": 34.98,
+        "pct": 1.538,
+        "turnover": 0.2567,
+        "vol_ratio": null,
+        "amount": 812736190.0,
+        "mktcap": 320587206819.0,
+        "profit_g": 38.55,
+        "rev_g": 12.6016,
+        "roe": 14.99,
+        "eps": 1.409,
+        "trend20": 2.347,
+        "fund_score": 64.1425,
+        "total": 73.9545
+      },
+      "industry": "其他"
+    },
+    {
+      "code": "002265",
+      "name": "建设工业",
+      "rank": 2,
+      "score": 70.223,
+      "scores": {
+        "fund_score": 70.284,
+        "trend20": 8.97,
+        "profit_g": 321.78,
+        "rev_g": 35.7,
+        "roe": 3.22
+      },
+      "reason": "净利+322%/营收+36%双增，ROE 3.2%；收盘>MA20>MA60多头，20日涨幅9.0%≤15%；行业分散[其他]",
+      "risk_tags": "无显著风险标签",
+      "close_price": 22.45,
+      "snapshot": {
+        "price": 22.45,
+        "pct": 2.887,
+        "turnover": 1.0979,
+        "vol_ratio": null,
+        "amount": 251787943.0,
+        "mktcap": 23191757137.15,
+        "profit_g": 321.78,
+        "rev_g": 35.7018,
+        "roe": 3.22,
+        "eps": 0.12,
+        "trend20": 8.9669,
+        "fund_score": 70.2839,
+        "total": 70.2232
+      },
+      "industry": "其他"
+    }
+  ]
+}
