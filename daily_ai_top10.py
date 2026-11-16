@@ -16,6 +16,11 @@ import requests
 import morning_push as v1  # 复用已验证的 PUSH_OK 企业微信 text 通道（V1 文件零改动）
 import history_store as hs
 import market_regime as mr  # 大盘环境与情绪定调（规则定调，内部全兜底，失败不影响主链路）
+try:
+    import risk_management as rm  # 风控：ATR止损/结构止损/8%硬卡控 + 大盘仓位（规则计算，全程兜底）
+except Exception as _e:  # 风控模块缺失/异常不影响主链路
+    rm = None
+    print(f"RISK_IMPORT_DEGRADED {type(_e).__name__}", flush=True)
 
 API_KEY = os.environ.get("OPENAI_API_KEY", "")
 BASE_URL = os.environ.get("OPENAI_BASE_URL", "https://api.deepseek.com")
@@ -123,15 +128,70 @@ def main():
             print(f"  {code} 分析失败: {str(e)[:120]}", flush=True)
 
     if results:
+        # ---- 风控段（risk_management）：只进 md + 归档 json，微信推送文本不变 ----
+        # 全程独立 try-except；任何失败只降级为一行提示，绝不影响主链路与推送
+        risk_payload = {"enabled": rm is not None, "position": None, "stops": []}
+        risk_md_lines = []
+        if rm is not None:
+            try:
+                # 大盘仓位：复用已取好的真实 breadth/turnover，指数均线位置现取（失败降级）
+                idx = {}
+                try:
+                    import requests as _rq
+                    for sym, label in (("sh000001", "上证指数"), ("sz399001", "深证成指")):
+                        try:
+                            rr = _rq.get(
+                                "https://quotes.sina.cn/cn/api/json_v2.php/"
+                                "CN_MarketDataService.getKLineData",
+                                params={"symbol": sym, "scale": "240", "ma": "no", "datalen": "60"},
+                                headers={"User-Agent": "Mozilla/5.0",
+                                         "Referer": "https://finance.sina.com.cn/"}, timeout=8)
+                            ds = rr.json()
+                            closes = [float(x["close"]) for x in ds if x.get("close")]
+                            if len(closes) >= 20:
+                                c0, ma20 = closes[-1], sum(closes[-20:]) / 20.0
+                                idx[label] = {"close": c0, "ma20": round(ma20, 2),
+                                              "bias_pct": round((c0 - ma20) / ma20 * 100, 2)}
+                        except Exception:
+                            continue
+                except Exception:
+                    pass
+                breadth = (regime or {}).get("breadth")
+                turnover = (regime or {}).get("turnover")
+                risk_payload["position"] = rm.safe_market_position(
+                    breadth=breadth, turnover=turnover, indices=(idx or None))
+                risk_md_lines.extend(rm.market_position_md_lines(
+                    breadth=breadth, turnover=turnover, indices=(idx or None)))
+                risk_md_lines.append("")
+
+                # 个股止损：入场价用选股快照的真实收盘价（row[11]），逐股取日K计算
+                entry_by_code = {row_[4]: row_[11] for row_ in rows}
+                picks = [{"code": r["code"], "name": r["name"],
+                          "entry": entry_by_code.get(r["code"])} for r in results]
+                risk_md_lines.extend(rm.stops_md_table(picks))
+                risk_payload["stops"] = [
+                    dict(rm.analyze_stock_risk(p["code"], p["entry"]), name=p["name"])
+                    for p in picks]
+                print(f"RISK_OK 仓位={risk_payload['position'].get('level')} "
+                      f"止损样例={len(picks)}", flush=True)
+            except Exception as e:
+                risk_md_lines = ["## 🧭 风控参考", "", "- 数据不足，暂不给风控建议（不编造）"]
+                hs.log_event(TASK, "WARN", f"风控段降级: {e}")
+                print(f"RISK_DEGRADED {type(e).__name__}", flush=True)
+            hs.archive_json(run_date, "risk_management.json",
+                            {"date": run_date, "run_id": rid, **risk_payload})
+
         hs.archive_json(run_date, "ai_top10.json",
                         {"date": run_date, "run_id": rid, "model": MODEL,
                          "count": len(results), "failed": failed, "results": results,
-                         "market_regime": regime})
+                         "market_regime": regime, "risk_management": risk_payload})
         lines = [f"# {run_date} 质量选股Top10 · AI分析报告", "",
                  f"模型: {MODEL} | 成功 {len(results)} 只 | 失败 {len(failed)} 只",
                  "> AI仅做解释与风险分析，其评分不是上涨概率，不构成投资建议", ""]
         lines.extend(mr.evening_md_lines(regime))  # 定调段置于报告最顶部
         lines.append(f"- {market_text}")           # 市场全局概况（供 AI 与读者对照）
+        lines.append("")
+        lines.extend(risk_md_lines)                # 风控段（仅 md/归档，不进微信）
         lines.append("")
         for r in results:
             lines.append(f"- 分析: {r['reason']}")
