@@ -204,6 +204,47 @@ def _breadth_and_amount():
             "quote_basis": meta.get("quote_basis")}
 
 
+def market_overview(regime=None):
+    """市场全局概况：两市总成交额 + 涨/跌/平家数，供 AI 复盘 Prompt 拼接。
+    优先复用 evening_regime 已算好的 breadth（runner 已验证通道）；
+    regime 缺 breadth 时兜底 ak.stock_zh_a_spot_em（硬超时保护，失败返回 None 不编造）。"""
+    b = (regime or {}).get("breadth") or {}
+    if isinstance(b, dict) and b.get("adv") is not None and b.get("amount_yi") is not None:
+        lm = (regime or {}).get("limits") or {}
+        t = (regime or {}).get("turnover") or {}
+        return {"adv": b.get("adv"), "dec": b.get("dec"), "flat": b.get("flat"),
+                "amount_yi": b.get("amount_yi"), "zt": lm.get("zt"), "dt": lm.get("dt"),
+                "turnover_ratio": t.get("ratio"),
+                "source": b.get("snapshot_source") or "regime_breadth"}
+    if ak is not None:
+        try:
+            def _spot():
+                df = ak.stock_zh_a_spot_em()
+                pct = df["涨跌幅"].dropna()
+                return {"adv": int((pct > 0).sum()), "dec": int((pct < 0).sum()),
+                        "flat": int((pct == 0).sum()),
+                        "amount_yi": round(float(df["成交额"].dropna().sum()) / 1e8, 0),
+                        "source": "ak.stock_zh_a_spot_em"}
+            r = _with_timeout(_spot, AK_TIMEOUT_SEC)
+            if r is not None and r is not _TIMEOUT:
+                return r
+        except Exception:
+            pass
+    return None
+
+
+def market_overview_text(ov):
+    """把 market_overview 结果格式化为一行确定文本（None → 明确降级，不编造）。"""
+    if not ov or ov.get("adv") is None or ov.get("amount_yi") is None:
+        return "市场全局概况: 数据不足（不编造）"
+    parts = [f"两市总成交额 {ov.get('amount_yi')}亿",
+             f"上涨 {ov.get('adv')}家/下跌 {ov.get('dec')}家/平盘 {_show(ov.get('flat'))}",
+             f"涨停 {_show(ov.get('zt'))}/跌停 {_show(ov.get('dt'))}"]
+    if ov.get("turnover_ratio") is not None:
+        parts.append(f"成交额环比 {ov['turnover_ratio']}")
+    return "市场全局概况（真实数据）: " + " | ".join(parts) + f" | 来源: {ov.get('source')}"
+
+
 def _turnover_ratio():
     """两市成交额环比（今日/昨日）。东财 push2his / 腾讯 均可能断流，失败返回 None。
     akshare 内部无超时，故用 _with_timeout 保护。"""

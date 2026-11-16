@@ -32,6 +32,7 @@ PROMPT_TMPL = """你是A股风险分析助手。以下是今日量化选股模�
 入选理由: {reason}
 风险标签: {risk_tags}
 行情快照: {snapshot}
+市场环境: {market_overview}
 
 要求：
 1. 给出明确分类，五选一: 看多 / 偏多 / 观望 / 偏空 / 高风险
@@ -42,13 +43,14 @@ PROMPT_TMPL = """你是A股风险分析助手。以下是今日量化选股模�
 只返回JSON，不要其他文字。"""
 
 
-def analyze_one(row):
+def analyze_one(row, market_text):
     (pick_id, run_id, task, run_date, code, name, rank, score, scores_json, reason,
      risk_tags, close_price, snapshot_json, industry, model_version, ai_conclusion, created_at) = row
     prompt = PROMPT_TMPL.format(
         name=name, code=code, industry=industry or "未知", price=close_price,
         pct=json.loads(snapshot_json).get("pct"), score=score, scores=scores_json,
-        reason=reason, risk_tags=risk_tags, snapshot=snapshot_json)
+        reason=reason, risk_tags=risk_tags, snapshot=snapshot_json,
+        market_overview=market_text)
     r = requests.post(f"{BASE_URL}/chat/completions",
                       headers={"Authorization": f"Bearer {API_KEY}"},
                       json={"model": MODEL, "messages": [{"role": "user", "content": prompt}],
@@ -95,11 +97,23 @@ def main():
         hs.log_event(TASK, "WARN", f"晚间大盘定调降级: {e}")
         print("REGIME_DEGRADED", flush=True)
 
+    # ---- 市场全局概况（两市总成交额+涨跌家数）：优先复用 regime.breadth，缺失兜底 akshare ----
+    try:
+        ov = mr.market_overview(regime)
+        market_text = mr.market_overview_text(ov)
+        hs.archive_json(run_date, "market_overview.json",
+                        {"date": run_date, "overview": ov, "text": market_text})
+        print("MARKET_OVERVIEW_OK " + market_text, flush=True)
+    except Exception as e:
+        market_text = "市场全局概况: 数据不足（不编造）"
+        hs.log_event(TASK, "WARN", f"市场概况获取降级: {e}")
+        print("MARKET_OVERVIEW_DEGRADED", flush=True)
+
     results, failed = [], []
     for row in rows:
         code = row[4]
         try:
-            res = analyze_one(row)
+            res = analyze_one(row, market_text)
             hs.save_ai_report(conn, run_date, res)
             results.append(res)
             print(f"  {code} {res['name']}: {res['direction']} 信心分{res['score']}", flush=True)
@@ -117,8 +131,9 @@ def main():
                  f"模型: {MODEL} | 成功 {len(results)} 只 | 失败 {len(failed)} 只",
                  "> AI仅做解释与风险分析，其评分不是上涨概率，不构成投资建议", ""]
         lines.extend(mr.evening_md_lines(regime))  # 定调段置于报告最顶部
+        lines.append(f"- {market_text}")           # 市场全局概况（供 AI 与读者对照）
+        lines.append("")
         for r in results:
-            lines.append(f"## {r['name']}({r['code']}) — {r['direction']}（信心分 {r['score']}）")
             lines.append(f"- 分析: {r['reason']}")
             lines.append(f"- 风险: {r['risk']}")
             if r["evidence_insufficient"]:
