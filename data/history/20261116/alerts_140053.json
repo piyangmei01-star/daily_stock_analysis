@@ -1,0 +1,40 @@
+[
+  {
+    "event_id": "20261116_140019_000860_pct_up5",
+    "run_date": "2026-11-16",
+    "time_bj": "14:00:19",
+    "code": "000860",
+    "name": "顺鑫农业",
+    "event_type": "pct_up5",
+    "observed": 6.1,
+    "threshold": 5.0,
+    "price": 12.7,
+    "detail": {
+      "label": "🔥 大涨",
+      "turnover": 5.04,
+      "vol_ratio": 2.76,
+      "pct": 6.1,
+      "prev_close": 11.97
+    },
+    "_label": "🔥 大涨"
+  },
+  {
+    "event_id": "20261116_140019_002724_pct_down5",
+    "run_date": "2026-11-16",
+    "time_bj": "14:00:19",
+    "code": "002724",
+    "name": "海洋王",
+    "event_type": "pct_down5",
+    "observed": -5.0,
+    "threshold": -5.0,
+    "price": 12.36,
+    "detail": {
+      "label": "🌊 大跌",
+      "turnover": 14.76,
+      "vol_ratio": 1.3,
+      "pct": -5.0,
+      "prev_close": 13.01
+    },
+    "_label": "🌊 大跌"
+  }
+]
