@@ -1,0 +1,134 @@
+{
+  "run_id": "momentum_20261117_103611636170_3bc249",
+  "model_version": "v2.0-stage1",
+  "data_date": "2026-11-17",
+  "data_source": "sina_market_center",
+  "data_updated_at": "2026-11-17 10:36:11",
+  "picks": [
+    {
+      "code": "002419",
+      "name": "天虹股份",
+      "rank": 1,
+      "score": 82.594,
+      "scores": {
+        "vol_ratio": 12.48,
+        "turnover": 16.18,
+        "pct": 4.26
+      },
+      "reason": "量比12.5≥1.5放量，换手16.2%，涨幅+4.26%，成交额10.7亿，PE 79.1",
+      "risk_tags": "开盘已涨(追涨属性);高换手(>15%);量比异常放大(>5)",
+      "close_price": 5.63,
+      "snapshot": {
+        "price": 5.63,
+        "pct": 4.259,
+        "turnover": 16.1771,
+        "vol_ratio": 12.48,
+        "amount": 1067396981.0,
+        "mktcap": 6425274500.36,
+        "pe": 79.073,
+        "score": 82.5943
+      },
+      "industry": null
+    },
+    {
+      "code": "600261",
+      "name": "阳光照明",
+      "rank": 2,
+      "score": 67.051,
+      "scores": {
+        "vol_ratio": 4.2,
+        "turnover": 23.04,
+        "pct": 6.76
+      },
+      "reason": "量比4.2≥1.5放量，换手23.0%，涨幅+6.76%，成交额16.2亿，PE 39.5",
+      "risk_tags": "开盘已涨(追涨属性);当日涨幅较大(>5%);高换手(>15%)",
+      "close_price": 5.53,
+      "snapshot": {
+        "price": 5.53,
+        "pct": 6.757,
+        "turnover": 23.0363,
+        "vol_ratio": 4.2,
+        "amount": 1615740885.0,
+        "mktcap": 7382842901.98,
+        "pe": 39.5,
+        "score": 67.0507
+      },
+      "industry": null
+    },
+    {
+      "code": "605378",
+      "name": "野马电池",
+      "rank": 3,
+      "score": 66.321,
+      "scores": {
+        "vol_ratio": 12.7,
+        "turnover": 7.42,
+        "pct": 3.87
+      },
+      "reason": "量比12.7≥1.5放量，换手7.4%，涨幅+3.87%，成交额3.2亿，PE 64.5",
+      "risk_tags": "开盘已涨(追涨属性);量比异常放大(>5)",
+      "close_price": 16.12,
+      "snapshot": {
+        "price": 16.12,
+        "pct": 3.866,
+        "turnover": 7.4226,
+        "vol_ratio": 12.7,
+        "amount": 315821668.0,
+        "mktcap": 4212903968.0,
+        "pe": 64.48,
+        "score": 66.3214
+      },
+      "industry": null
+    },
+    {
+      "code": "002035",
+      "name": "华帝股份",
+      "rank": 4,
+      "score": 65.183,
+      "scores": {
+        "vol_ratio": 14.01,
+        "turnover": 10.97,
+        "pct": 2.35
+      },
+      "reason": "量比14.0≥1.5放量，换手11.0%，涨幅+2.35%，成交额4.1亿，PE 13.2",
+      "risk_tags": "开盘已涨(追涨属性);量比异常放大(>5)",
+      "close_price": 4.79,
+      "snapshot": {
+        "price": 4.79,
+        "pct": 2.35,
+        "turnover": 10.973,
+        "vol_ratio": 14.01,
+        "amount": 413439810.0,
+        "mktcap": 4060260830.22,
+        "pe": 13.225,
+        "score": 65.1835
+      },
+      "industry": null
+    },
+    {
+      "code": "002959",
+      "name": "小熊电器",
+      "rank": 5,
+      "score": 60.165,
+      "scores": {
+        "vol_ratio": 12.84,
+        "turnover": 5.89,
+        "pct": 7.2
+      },
+      "reason": "量比12.8≥1.5放量，换手5.9%，涨幅+7.20%，成交额3.2亿，PE 15.6",
+      "risk_tags": "开盘已涨(追涨属性);当日涨幅较大(>5%);量比异常放大(>5)",
+      "close_price": 38.88,
+      "snapshot": {
+        "price": 38.88,
+        "pct": 7.196,
+        "turnover": 5.8925,
+        "vol_ratio": 12.84,
+        "amount": 316750420.0,
+        "mktcap": 6058808190.72,
+        "pe": 15.562,
+        "score": 60.1654
+      },
+      "industry": null
+    }
+  ]
+}
