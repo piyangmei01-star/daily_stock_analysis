@@ -18,9 +18,14 @@ import requests
 import history_store as hs
 
 WEBHOOK = os.environ.get("WECHAT_WEBHOOK_URL", "")
-WATCHLIST = [c.strip() for c in os.environ.get(
+_BASE_WATCHLIST = [c.strip() for c in os.environ.get(
     "STOCK_LIST", "000860,600007,601919,002724,300616,001239,300314,603273,920418,002626,002613,600736,301314,300145,920509,920593"
 ).split(",") if c.strip()]
+# 2026-11-17 新增自选（12只A股，均已核实代码与名称匹配）。
+# 采用「原 STOCK_LIST + 追加列表」合并去重，绝不覆盖 secret 中已有的自选股。
+EXTRA_WATCHLIST = ["002035", "002248", "002242", "603687", "920725", "688347",
+                   "600410", "002685", "002748", "002425", "603135", "300197"]
+WATCHLIST = list(dict.fromkeys(_BASE_WATCHLIST + EXTRA_WATCHLIST))
 CALENDAR_PATH = os.path.join("data", "trade_calendar.json")
 HEADERS = {"User-Agent": "Mozilla/5.0", "Referer": "https://quote.eastmoney.com/"}
 
