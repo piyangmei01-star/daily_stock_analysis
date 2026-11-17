@@ -1,0 +1,70 @@
+{
+  "schema": "v2_db_rows/1",
+  "run_date": "2026-11-17",
+  "task": "quality",
+  "run_id": "quality_20261117_092228706434_7c9349",
+  "exported_at": "2026-11-17 09:22:31",
+  "tables": {
+    "screening_runs": [
+      {
+        "run_id": "quality_20261117_092228706434_7c9349",
+        "task": "quality",
+        "run_date": "2026-11-17",
+        "run_time_bj": "2026-11-17 09:22:28",
+        "model_version": "v2.0-stage1",
+        "status": "success",
+        "universe_count": 0,
+        "pass1": 0,
+        "pass2": 0,
+        "pass3": 0,
+        "market_env_json": "{\"captured_at\": \"2026-11-17 09:21:20\", \"hs300_price\": 3979.8, \"hs300_pct\": 0.0, \"kline_integrity\": {\"ok\": 0, \"total\": 0, \"rate\": 0.0, \"sources\": {}, \"adjustments\": {}}}",
+        "data_updated_at": "2026-11-17 09:22:28",
+        "error_msg": null,
+        "created_at": "2026-11-17 09:22:28"
+      }
+    ],
+    "picks": [],
+    "candidates": [],
+    "ai_reports": [],
+    "alert_checks": [],
+    "alert_events": [],
+    "run_logs": [
+      {
+        "id": 105,
+        "run_date": "2026-11-17",
+        "time_bj": "2026-11-17 09:21:24",
+        "task": "quality",
+        "level": "WARN",
+        "message": "市场环境指数获取失败 1.000001: Expecting value: line 1 column 1 (char 0)",
+        "created_at": "2026-11-17 09:21:24"
+      },
+      {
+        "id": 109,
+        "run_date": "2026-11-17",
+        "time_bj": "2026-11-17 09:22:06",
+        "task": "quality",
+        "level": "INFO",
+        "message": "行情快照 source=sina_market_center rows=5223 total=5223 data_date=2026-11-16 basis=prev_close date_source=calendar_inferred fetched_at=2026-11-17 09:22:06 price_basis=unadjusted",
+        "created_at": "2026-11-17 09:22:06"
+      },
+      {
+        "id": 110,
+        "run_date": "2026-11-17",
+        "time_bj": "2026-11-17 09:22:28",
+        "task": "quality",
+        "level": "INFO",
+        "message": "日K完整性 ok=0/0 成功率=0.0% 来源={} 复权口径={}",
+        "created_at": "2026-11-17 09:22:28"
+      },
+      {
+        "id": 111,
+        "run_date": "2026-11-17",
+        "time_bj": "2026-11-17 09:22:31",
+        "task": "quality",
+        "level": "INFO",
+        "message": "今日无同时满足业绩+趋势的候选；空名单已归档 run_quality_20261117_092228706434_7c9349.json",
+        "created_at": "2026-11-17 09:22:31"
+      }
+    ]
+  }
+}
