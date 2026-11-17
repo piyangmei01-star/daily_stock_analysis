@@ -1,0 +1,40 @@
+[
+  {
+    "event_id": "20261117_111645_002724_pct_down5",
+    "run_date": "2026-11-17",
+    "time_bj": "11:16:45",
+    "code": "002724",
+    "name": "海洋王",
+    "event_type": "pct_down5",
+    "observed": -8.71,
+    "threshold": -5.0,
+    "price": 10.69,
+    "detail": {
+      "label": "🌊 大跌",
+      "turnover": 12.59,
+      "vol_ratio": 1.88,
+      "pct": -8.71,
+      "prev_close": 11.71
+    },
+    "_label": "🌊 大跌"
+  },
+  {
+    "event_id": "20261117_111645_920509_pct_up5",
+    "run_date": "2026-11-17",
+    "time_bj": "11:16:45",
+    "code": "920509",
+    "name": "同惠电子",
+    "event_type": "pct_up5",
+    "observed": 5.38,
+    "threshold": 5.0,
+    "price": 18.81,
+    "detail": {
+      "label": "🔥 大涨",
+      "turnover": 3.04,
+      "vol_ratio": 2.36,
+      "pct": 5.38,
+      "prev_close": 17.85
+    },
+    "_label": "🔥 大涨"
+  }
+]
