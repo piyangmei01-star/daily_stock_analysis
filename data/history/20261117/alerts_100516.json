@@ -1,0 +1,40 @@
+[
+  {
+    "event_id": "20261117_100329_000860_vol_ratio3",
+    "run_date": "2026-11-17",
+    "time_bj": "10:03:29",
+    "code": "000860",
+    "name": "顺鑫农业",
+    "event_type": "vol_ratio3",
+    "observed": 3.68,
+    "threshold": 3.0,
+    "price": 12.47,
+    "detail": {
+      "label": "📣 放量(量比3.7)",
+      "turnover": 1.62,
+      "vol_ratio": 3.68,
+      "pct": -1.81,
+      "prev_close": 12.7
+    },
+    "_label": "📣 放量(量比3.7)"
+  },
+  {
+    "event_id": "20261117_100329_002724_limit_down",
+    "run_date": "2026-11-17",
+    "time_bj": "10:03:29",
+    "code": "002724",
+    "name": "海洋王",
+    "event_type": "limit_down",
+    "observed": -9.99,
+    "threshold": -9.5,
+    "price": 10.54,
+    "detail": {
+      "label": "💥 跌停/临停",
+      "turnover": 0.53,
+      "vol_ratio": 0.25,
+      "pct": -9.99,
+      "prev_close": 11.71
+    },
+    "_label": "💥 跌停/临停"
+  }
+]
