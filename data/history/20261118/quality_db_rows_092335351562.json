@@ -1,0 +1,61 @@
+{
+  "schema": "v2_db_rows/1",
+  "run_date": "2026-11-18",
+  "task": "quality",
+  "run_id": "quality_20261118_092331175260_6ad3f5",
+  "exported_at": "2026-11-18 09:23:35",
+  "tables": {
+    "screening_runs": [
+      {
+        "run_id": "quality_20261118_092331175260_6ad3f5",
+        "task": "quality",
+        "run_date": "2026-11-18",
+        "run_time_bj": "2026-11-18 09:23:31",
+        "model_version": "v2.0-stage1",
+        "status": "success",
+        "universe_count": 0,
+        "pass1": 0,
+        "pass2": 0,
+        "pass3": 0,
+        "market_env_json": "{\"captured_at\": \"2026-11-18 09:21:30\", \"hs300_price\": 3976.46, \"hs300_pct\": 0.0, \"sh_index_price\": 3584.56, \"sh_index_pct\": 0.0, \"kline_integrity\": {\"ok\": 0, \"total\": 0, \"rate\": 0.0, \"sources\": {}, \"adjustments\": {}}}",
+        "data_updated_at": "2026-11-18 09:23:31",
+        "error_msg": null,
+        "created_at": "2026-11-18 09:23:31"
+      }
+    ],
+    "picks": [],
+    "candidates": [],
+    "ai_reports": [],
+    "alert_checks": [],
+    "alert_events": [],
+    "run_logs": [
+      {
+        "id": 151,
+        "run_date": "2026-11-18",
+        "time_bj": "2026-11-18 09:22:43",
+        "task": "quality",
+        "level": "INFO",
+        "message": "行情快照 source=sina_market_center rows=5223 total=5223 data_date=2026-11-17 basis=prev_close date_source=calendar_inferred fetched_at=2026-11-18 09:22:42 price_basis=unadjusted",
+        "created_at": "2026-11-18 09:22:43"
+      },
+      {
+        "id": 152,
+        "run_date": "2026-11-18",
+        "time_bj": "2026-11-18 09:23:31",
+        "task": "quality",
+        "level": "INFO",
+        "message": "日K完整性 ok=0/0 成功率=0.0% 来源={} 复权口径={}",
+        "created_at": "2026-11-18 09:23:31"
+      },
+      {
+        "id": 153,
+        "run_date": "2026-11-18",
+        "time_bj": "2026-11-18 09:23:35",
+        "task": "quality",
+        "level": "INFO",
+        "message": "今日无同时满足业绩+趋势的候选；空名单已归档 run_quality_20261118_092331175260_6ad3f5.json",
+        "created_at": "2026-11-18 09:23:35"
+      }
+    ]
+  }
+}

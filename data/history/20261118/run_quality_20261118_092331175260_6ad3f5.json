@@ -1,0 +1,41 @@
+{
+  "schema": "v2_run_snapshot/1",
+  "run_id": "quality_20261118_092331175260_6ad3f5",
+  "task": "quality",
+  "run_date": "2026-11-18",
+  "run_time_bj": "2026-11-18 09:23:31",
+  "data_date": "2026-11-17",
+  "data_source": "sina_market_center",
+  "quote_basis": "prev_close",
+  "date_source": "calendar_inferred",
+  "model_version": "v2.0-stage1",
+  "universe": 0,
+  "counts": {
+    "universe": 0,
+    "pass1": 0,
+    "pass2": 0,
+    "pass3": 0
+  },
+  "market_env": {
+    "captured_at": "2026-11-18 09:21:30",
+    "hs300_price": 3976.46,
+    "hs300_pct": 0.0,
+    "sh_index_price": 3584.56,
+    "sh_index_pct": 0.0,
+    "kline_integrity": {
+      "ok": 0,
+      "total": 0,
+      "rate": 0.0,
+      "sources": {},
+      "adjustments": {}
+    }
+  },
+  "picks": [],
+  "picks_count": 0,
+  "codes": [],
+  "codes_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "push_text": "🚦 开盘温控: 🟡（外围信号中性或数据不全（谨慎观察））\n   A50期指 +0.45% | 中国金龙 -1.89% | 离岸人民币 +0.01%\n   AI排雷: 央行公开市场净回笼138亿元，港股开盘恒指跌0.34%、恒生科技跌0.17%，外部情绪偏弱；日本央行行长提及日元走弱推升进口及食品价格，或扰动外资风险偏好。 ⚠️\n   情绪定调: 谨慎\n   > 外围与排雷仅供开盘防守参考，不构成投资建议\n今日无同时满足「业绩质量+趋势多头」的候选，建议观望。",
+  "push_text_hash": "866aa06de5829001fbf409310bebd990aa89d3cd76d977ba79ff04e2c5761784",
+  "persisted_at": "2026-11-18 09:23:35",
+  "immutable": true
+}

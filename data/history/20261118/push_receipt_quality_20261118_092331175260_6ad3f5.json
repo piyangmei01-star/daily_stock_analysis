@@ -1,0 +1,14 @@
+{
+  "schema": "v2_push_receipt/1",
+  "run_id": "quality_20261118_092331175260_6ad3f5",
+  "run_date": "2026-11-18",
+  "pushed_at": "2026-11-18 09:23:36",
+  "push_ok": true,
+  "push_text_hash": "866aa06de5829001fbf409310bebd990aa89d3cd76d977ba79ff04e2c5761784",
+  "push_text_bytes": 549,
+  "detail": {
+    "picks": 0,
+    "push_return": "True"
+  },
+  "immutable": true
+}
