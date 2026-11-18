@@ -1,0 +1,252 @@
+{
+  "schema": "v2_db_rows/1",
+  "run_date": "2026-11-18",
+  "task": "alert",
+  "run_id": "alert_20261118",
+  "exported_at": "2026-11-18 10:13:07",
+  "tables": {
+    "screening_runs": [],
+    "picks": [],
+    "candidates": [],
+    "ai_reports": [],
+    "alert_checks": [
+      {
+        "check_id": "20261118_101306697844_2be1",
+        "run_date": "2026-11-18",
+        "time_bj": "10:13:06",
+        "in_session": 1,
+        "checked_count": 27,
+        "anomaly_count": 12,
+        "data_ok": 1,
+        "error_msg": "1只行情缺失:920509",
+        "created_at": "2026-11-18 10:13:06"
+      }
+    ],
+    "alert_events": [
+      {
+        "event_id": "20261118_101121_002724_limit_down",
+        "run_date": "2026-11-18",
+        "time_bj": "10:11:21",
+        "code": "002724",
+        "name": "海洋王",
+        "event_type": "limit_down",
+        "observed": -9.96,
+        "threshold": -9.5,
+        "price": 9.49,
+        "detail_json": "{\"label\": \"💥 跌停/临停\", \"turnover\": 3.03, \"vol_ratio\": 1.16, \"pct\": -9.96, \"prev_close\": 10.54}",
+        "pushed": 1,
+        "created_at": "2026-11-18 10:13:07"
+      },
+      {
+        "event_id": "20261118_101121_002035_vol_ratio3",
+        "run_date": "2026-11-18",
+        "time_bj": "10:11:21",
+        "code": "002035",
+        "name": "华帝股份",
+        "event_type": "vol_ratio3",
+        "observed": 9.09,
+        "threshold": 3.0,
+        "price": 4.99,
+        "detail_json": "{\"label\": \"📣 放量(量比9.1)\", \"turnover\": 8.71, \"vol_ratio\": 9.09, \"pct\": 3.74, \"prev_close\": 4.81}",
+        "pushed": 1,
+        "created_at": "2026-11-18 10:13:07"
+      },
+      {
+        "event_id": "20261118_101121_002248_vol_ratio3",
+        "run_date": "2026-11-18",
+        "time_bj": "10:11:21",
+        "code": "002248",
+        "name": "华东数控",
+        "event_type": "vol_ratio3",
+        "observed": 10.76,
+        "threshold": 3.0,
+        "price": 9.39,
+        "detail_json": "{\"label\": \"📣 放量(量比10.8)\", \"turnover\": 10.63, \"vol_ratio\": 10.76, \"pct\": 0.0, \"prev_close\": 9.39}",
+        "pushed": 1,
+        "created_at": "2026-11-18 10:13:07"
+      },
+      {
+        "event_id": "20261118_101121_002242_limit_up",
+        "run_date": "2026-11-18",
+        "time_bj": "10:11:21",
+        "code": "002242",
+        "name": "九阳股份",
+        "event_type": "limit_up",
+        "observed": 9.99,
+        "threshold": 9.5,
+        "price": 34.67,
+        "detail_json": "{\"label\": \"🚀 涨停/临停\", \"turnover\": 9.51, \"vol_ratio\": 4.19, \"pct\": 9.99, \"prev_close\": 31.52}",
+        "pushed": 1,
+        "created_at": "2026-11-18 10:13:07"
+      },
+      {
+        "event_id": "20261118_101121_002242_vol_ratio3",
+        "run_date": "2026-11-18",
+        "time_bj": "10:11:21",
+        "code": "002242",
+        "name": "九阳股份",
+        "event_type": "vol_ratio3",
+        "observed": 4.19,
+        "threshold": 3.0,
+        "price": 34.67,
+        "detail_json": "{\"label\": \"📣 放量(量比4.2)\", \"turnover\": 9.51, \"vol_ratio\": 4.19, \"pct\": 9.99, \"prev_close\": 31.52}",
+        "pushed": 1,
+        "created_at": "2026-11-18 10:13:07"
+      },
+      {
+        "event_id": "20261118_101121_688347_vol_ratio3",
+        "run_date": "2026-11-18",
+        "time_bj": "10:11:21",
+        "code": "688347",
+        "name": "华虹宏力",
+        "event_type": "vol_ratio3",
+        "observed": 3.35,
+        "threshold": 3.0,
+        "price": 181.0,
+        "detail_json": "{\"label\": \"📣 放量(量比3.4)\", \"turnover\": 4.37, \"vol_ratio\": 3.35, \"pct\": 4.98, \"prev_close\": 172.42}",
+        "pushed": 1,
+        "created_at": "2026-11-18 10:13:07"
+      },
+      {
+        "event_id": "20261118_101121_600410_limit_up",
+        "run_date": "2026-11-18",
+        "time_bj": "10:11:21",
+        "code": "600410",
+        "name": "华胜天成",
+        "event_type": "limit_up",
+        "observed": 10.01,
+        "threshold": 9.5,
+        "price": 16.82,
+        "detail_json": "{\"label\": \"🚀 涨停/临停\", \"turnover\": 18.35, \"vol_ratio\": 8.62, \"pct\": 10.01, \"prev_close\": 15.29}",
+        "pushed": 1,
+        "created_at": "2026-11-18 10:13:07"
+      },
+      {
+        "event_id": "20261118_101121_600410_vol_ratio3",
+        "run_date": "2026-11-18",
+        "time_bj": "10:11:21",
+        "code": "600410",
+        "name": "华胜天成",
+        "event_type": "vol_ratio3",
+        "observed": 8.62,
+        "threshold": 3.0,
+        "price": 16.82,
+        "detail_json": "{\"label\": \"📣 放量(量比8.6)\", \"turnover\": 18.35, \"vol_ratio\": 8.62, \"pct\": 10.01, \"prev_close\": 15.29}",
+        "pushed": 1,
+        "created_at": "2026-11-18 10:13:07"
+      },
+      {
+        "event_id": "20261118_101121_002685_limit_up",
+        "run_date": "2026-11-18",
+        "time_bj": "10:11:21",
+        "code": "002685",
+        "name": "华东重机",
+        "event_type": "limit_up",
+        "observed": 10.0,
+        "threshold": 9.5,
+        "price": 7.37,
+        "detail_json": "{\"label\": \"🚀 涨停/临停\", \"turnover\": 1.47, \"vol_ratio\": 1.05, \"pct\": 10.0, \"prev_close\": 6.7}",
+        "pushed": 1,
+        "created_at": "2026-11-18 10:13:07"
+      },
+      {
+        "event_id": "20261118_101121_002748_vol_ratio3",
+        "run_date": "2026-11-18",
+        "time_bj": "10:11:21",
+        "code": "002748",
+        "name": "世龙实业",
+        "event_type": "vol_ratio3",
+        "observed": 3.04,
+        "threshold": 3.0,
+        "price": 12.9,
+        "detail_json": "{\"label\": \"📣 放量(量比3.0)\", \"turnover\": 5.47, \"vol_ratio\": 3.04, \"pct\": -1.23, \"prev_close\": 13.06}",
+        "pushed": 1,
+        "created_at": "2026-11-18 10:13:07"
+      },
+      {
+        "event_id": "20261118_101121_002425_pct_down5",
+        "run_date": "2026-11-18",
+        "time_bj": "10:11:21",
+        "code": "002425",
+        "name": "凯撒文化",
+        "event_type": "pct_down5",
+        "observed": -6.24,
+        "threshold": -5.0,
+        "price": 4.36,
+        "detail_json": "{\"label\": \"🌊 大跌\", \"turnover\": 18.68, \"vol_ratio\": 4.14, \"pct\": -6.24, \"prev_close\": 4.65}",
+        "pushed": 1,
+        "created_at": "2026-11-18 10:13:07"
+      },
+      {
+        "event_id": "20261118_101121_002425_vol_ratio3",
+        "run_date": "2026-11-18",
+        "time_bj": "10:11:21",
+        "code": "002425",
+        "name": "凯撒文化",
+        "event_type": "vol_ratio3",
+        "observed": 4.14,
+        "threshold": 3.0,
+        "price": 4.36,
+        "detail_json": "{\"label\": \"📣 放量(量比4.1)\", \"turnover\": 18.68, \"vol_ratio\": 4.14, \"pct\": -6.24, \"prev_close\": 4.65}",
+        "pushed": 1,
+        "created_at": "2026-11-18 10:13:07"
+      }
+    ],
+    "run_logs": [
+      {
+        "id": 154,
+        "run_date": "2026-11-18",
+        "time_bj": "2026-11-18 10:11:34",
+        "task": "alert",
+        "level": "INFO",
+        "message": "000860 使用备用行情 source=tencent_qt data_date=2026-11-18",
+        "created_at": "2026-11-18 10:11:34"
+      },
+      {
+        "id": 155,
+        "run_date": "2026-11-18",
+        "time_bj": "2026-11-18 10:11:52",
+        "task": "alert",
+        "level": "INFO",
+        "message": "300616 使用备用行情 source=tencent_qt data_date=2026-11-18",
+        "created_at": "2026-11-18 10:11:52"
+      },
+      {
+        "id": 156,
+        "run_date": "2026-11-18",
+        "time_bj": "2026-11-18 10:12:03",
+        "task": "alert",
+        "level": "INFO",
+        "message": "001239 使用备用行情 source=tencent_qt data_date=2026-11-18",
+        "created_at": "2026-11-18 10:12:03"
+      },
+      {
+        "id": 157,
+        "run_date": "2026-11-18",
+        "time_bj": "2026-11-18 10:12:19",
+        "task": "alert",
+        "level": "INFO",
+        "message": "002626 使用备用行情 source=tencent_qt data_date=2026-11-18",
+        "created_at": "2026-11-18 10:12:19"
+      },
+      {
+        "id": 158,
+        "run_date": "2026-11-18",
+        "time_bj": "2026-11-18 10:12:41",
+        "task": "alert",
+        "level": "WARN",
+        "message": "920509 行情获取失败或停牌无数据",
+        "created_at": "2026-11-18 10:12:41"
+      },
+      {
+        "id": 159,
+        "run_date": "2026-11-18",
+        "time_bj": "2026-11-18 10:13:07",
+        "task": "alert",
+        "level": "INFO",
+        "message": "检测27只/异常12条/新增事件12条/推送=True/in_session=True",
+        "created_at": "2026-11-18 10:13:07"
+      }
+    ]
+  }
+}
