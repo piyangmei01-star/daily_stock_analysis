@@ -1,0 +1,154 @@
+[
+  {
+    "event_id": "20261118_112126_002724_limit_down",
+    "run_date": "2026-11-18",
+    "time_bj": "11:21:26",
+    "code": "002724",
+    "name": "海洋王",
+    "event_type": "limit_down",
+    "observed": -9.96,
+    "threshold": -9.5,
+    "price": 9.49,
+    "detail": {
+      "label": "💥 跌停/临停",
+      "turnover": 3.14,
+      "vol_ratio": 0.45,
+      "pct": -9.96,
+      "prev_close": 10.54
+    },
+    "_label": "💥 跌停/临停"
+  },
+  {
+    "event_id": "20261118_112126_002035_vol_ratio3",
+    "run_date": "2026-11-18",
+    "time_bj": "11:21:26",
+    "code": "002035",
+    "name": "华帝股份",
+    "event_type": "vol_ratio3",
+    "observed": 4.42,
+    "threshold": 3.0,
+    "price": 4.9,
+    "detail": {
+      "label": "📣 放量(量比4.4)",
+      "turnover": 11.12,
+      "vol_ratio": 4.42,
+      "pct": 1.87,
+      "prev_close": 4.81
+    },
+    "_label": "📣 放量(量比4.4)"
+  },
+  {
+    "event_id": "20261118_112126_002248_vol_ratio3",
+    "run_date": "2026-11-18",
+    "time_bj": "11:21:26",
+    "code": "002248",
+    "name": "华东数控",
+    "event_type": "vol_ratio3",
+    "observed": 4.68,
+    "threshold": 3.0,
+    "price": 9.25,
+    "detail": {
+      "label": "📣 放量(量比4.7)",
+      "turnover": 12.16,
+      "vol_ratio": 4.68,
+      "pct": -1.49,
+      "prev_close": 9.39
+    },
+    "_label": "📣 放量(量比4.7)"
+  },
+  {
+    "event_id": "20261118_112126_002242_pct_up5",
+    "run_date": "2026-11-18",
+    "time_bj": "11:21:26",
+    "code": "002242",
+    "name": "九阳股份",
+    "event_type": "pct_up5",
+    "observed": 8.66,
+    "threshold": 5.0,
+    "price": 34.25,
+    "detail": {
+      "label": "🔥 大涨",
+      "turnover": 13.16,
+      "vol_ratio": 2.21,
+      "pct": 8.66,
+      "prev_close": 31.52
+    },
+    "_label": "🔥 大涨"
+  },
+  {
+    "event_id": "20261118_112126_600410_limit_up",
+    "run_date": "2026-11-18",
+    "time_bj": "11:21:26",
+    "code": "600410",
+    "name": "华胜天成",
+    "event_type": "limit_up",
+    "observed": 10.01,
+    "threshold": 9.5,
+    "price": 16.82,
+    "detail": {
+      "label": "🚀 涨停/临停",
+      "turnover": 18.64,
+      "vol_ratio": 3.33,
+      "pct": 10.01,
+      "prev_close": 15.29
+    },
+    "_label": "🚀 涨停/临停"
+  },
+  {
+    "event_id": "20261118_112126_600410_vol_ratio3",
+    "run_date": "2026-11-18",
+    "time_bj": "11:21:26",
+    "code": "600410",
+    "name": "华胜天成",
+    "event_type": "vol_ratio3",
+    "observed": 3.33,
+    "threshold": 3.0,
+    "price": 16.82,
+    "detail": {
+      "label": "📣 放量(量比3.3)",
+      "turnover": 18.64,
+      "vol_ratio": 3.33,
+      "pct": 10.01,
+      "prev_close": 15.29
+    },
+    "_label": "📣 放量(量比3.3)"
+  },
+  {
+    "event_id": "20261118_112126_002685_limit_up",
+    "run_date": "2026-11-18",
+    "time_bj": "11:21:26",
+    "code": "002685",
+    "name": "华东重机",
+    "event_type": "limit_up",
+    "observed": 10.0,
+    "threshold": 9.5,
+    "price": 7.37,
+    "detail": {
+      "label": "🚀 涨停/临停",
+      "turnover": 1.84,
+      "vol_ratio": 0.5,
+      "pct": 10.0,
+      "prev_close": 6.7
+    },
+    "_label": "🚀 涨停/临停"
+  },
+  {
+    "event_id": "20261118_112126_002425_pct_down5",
+    "run_date": "2026-11-18",
+    "time_bj": "11:21:26",
+    "code": "002425",
+    "name": "凯撒文化",
+    "event_type": "pct_down5",
+    "observed": -9.03,
+    "threshold": -5.0,
+    "price": 4.23,
+    "detail": {
+      "label": "🌊 大跌",
+      "turnover": 28.88,
+      "vol_ratio": 2.49,
+      "pct": -9.03,
+      "prev_close": 4.65
+    },
+    "_label": "🌊 大跌"
+  }
+]
