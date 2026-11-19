@@ -1,0 +1,134 @@
+{
+  "run_id": "momentum_20261119_103434834255_b4c1d9",
+  "model_version": "v2.0-stage1",
+  "data_date": "2026-11-19",
+  "data_source": "sina_market_center",
+  "data_updated_at": "2026-11-19 10:34:34",
+  "picks": [
+    {
+      "code": "603629",
+      "name": "利通电子",
+      "rank": 1,
+      "score": 77.261,
+      "scores": {
+        "vol_ratio": 6.1,
+        "turnover": 12.85,
+        "pct": 3.92
+      },
+      "reason": "量比6.1≥1.5放量，换手12.9%，涨幅+3.92%，成交额30.6亿，PE 56.5",
+      "risk_tags": "开盘已涨(追涨属性);量比异常放大(>5)",
+      "close_price": 63.32,
+      "snapshot": {
+        "price": 63.32,
+        "pct": 3.923,
+        "turnover": 12.8548,
+        "vol_ratio": 6.1,
+        "amount": 3055506969.0,
+        "mktcap": 23221216960.0,
+        "pe": 56.536,
+        "score": 77.2605
+      },
+      "industry": null
+    },
+    {
+      "code": "600863",
+      "name": "华能蒙电",
+      "rank": 2,
+      "score": 69.965,
+      "scores": {
+        "vol_ratio": 10.05,
+        "turnover": 3.23,
+        "pct": 5.18
+      },
+      "reason": "量比10.1≥1.5放量，换手3.2%，涨幅+5.18%，成交额13.3亿，PE 16.7",
+      "risk_tags": "开盘已涨(追涨属性);当日涨幅较大(>5%);量比异常放大(>5)",
+      "close_price": 5.68,
+      "snapshot": {
+        "price": 5.68,
+        "pct": 5.185,
+        "turnover": 3.2346,
+        "vol_ratio": 10.05,
+        "amount": 1332415992.0,
+        "mktcap": 44503876700.8,
+        "pe": 16.706,
+        "score": 69.9653
+      },
+      "industry": null
+    },
+    {
+      "code": "600839",
+      "name": "四川长虹",
+      "rank": 3,
+      "score": 63.502,
+      "scores": {
+        "vol_ratio": 14.71,
+        "turnover": 6.33,
+        "pct": 1.76
+      },
+      "reason": "量比14.7≥1.5放量，换手6.3%，涨幅+1.76%，成交额17.1亿，PE 27.0",
+      "risk_tags": "开盘已涨(追涨属性);量比异常放大(>5)",
+      "close_price": 5.78,
+      "snapshot": {
+        "price": 5.78,
+        "pct": 1.761,
+        "turnover": 6.3273,
+        "vol_ratio": 14.71,
+        "amount": 1709864947.0,
+        "mktcap": 26681891603.16,
+        "pe": 26.984,
+        "score": 63.5025
+      },
+      "industry": null
+    },
+    {
+      "code": "001358",
+      "name": "兴欣新材",
+      "rank": 4,
+      "score": 62.062,
+      "scores": {
+        "vol_ratio": 4.19,
+        "turnover": 17.27,
+        "pct": 4.59
+      },
+      "reason": "量比4.2≥1.5放量，换手17.3%，涨幅+4.59%，成交额2.4亿，PE 69.6",
+      "risk_tags": "开盘已涨(追涨属性);高换手(>15%)",
+      "close_price": 27.14,
+      "snapshot": {
+        "price": 27.14,
+        "pct": 4.586,
+        "turnover": 17.2709,
+        "vol_ratio": 4.19,
+        "amount": 235936879.0,
+        "mktcap": 3343648000.0,
+        "pe": 69.59,
+        "score": 62.0623
+      },
+      "industry": null
+    },
+    {
+      "code": "603078",
+      "name": "江化微",
+      "rank": 5,
+      "score": 60.942,
+      "scores": {
+        "vol_ratio": 6.8,
+        "turnover": 9.23,
+        "pct": 7.29
+      },
+      "reason": "量比6.8≥1.5放量，换手9.2%，涨幅+7.29%，成交额9.1亿，PE 96.4",
+      "risk_tags": "开盘已涨(追涨属性);当日涨幅较大(>5%);量比异常放大(>5);高估值(PE>80)",
+      "close_price": 26.2,
+      "snapshot": {
+        "price": 26.2,
+        "pct": 7.289,
+        "turnover": 9.2336,
+        "vol_ratio": 6.8,
+        "amount": 911111242.0,
+        "mktcap": 10103695897.6,
+        "pe": 96.394,
+        "score": 60.9416
+      },
+      "industry": null
+    }
+  ]
+}
