@@ -1,0 +1,28 @@
+{
+  "schema": "v2_db_rows/1",
+  "run_date": "2026-11-20",
+  "task": "alert",
+  "run_id": "alert_20261120",
+  "exported_at": "2026-11-20 16:03:26",
+  "tables": {
+    "screening_runs": [],
+    "picks": [],
+    "candidates": [],
+    "ai_reports": [],
+    "alert_checks": [
+      {
+        "check_id": "20261120_160326288867_ec3a",
+        "run_date": "2026-11-20",
+        "time_bj": "16:03:26",
+        "in_session": 0,
+        "checked_count": 0,
+        "anomaly_count": 0,
+        "data_ok": 1,
+        "error_msg": "非交易时段跳过",
+        "created_at": "2026-11-20 16:03:26"
+      }
+    ],
+    "alert_events": [],
+    "run_logs": []
+  }
+}
