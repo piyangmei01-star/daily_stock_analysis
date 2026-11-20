@@ -1,0 +1,41 @@
+{
+  "schema": "v2_run_snapshot/1",
+  "run_id": "quality_20261120_092324573950_68ff72",
+  "task": "quality",
+  "run_date": "2026-11-20",
+  "run_time_bj": "2026-11-20 09:23:24",
+  "data_date": "2026-11-19",
+  "data_source": "sina_market_center",
+  "quote_basis": "prev_close",
+  "date_source": "calendar_inferred",
+  "model_version": "v2.0-stage1",
+  "universe": 0,
+  "counts": {
+    "universe": 0,
+    "pass1": 0,
+    "pass2": 0,
+    "pass3": 0
+  },
+  "market_env": {
+    "captured_at": "2026-11-20 09:21:57",
+    "hs300_price": 3984.59,
+    "hs300_pct": -0.01,
+    "sh_index_price": 3577.08,
+    "sh_index_pct": -0.02,
+    "kline_integrity": {
+      "ok": 0,
+      "total": 0,
+      "rate": 0.0,
+      "sources": {},
+      "adjustments": {}
+    }
+  },
+  "picks": [],
+  "picks_count": 0,
+  "codes": [],
+  "codes_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "push_text": "🚦 开盘温控: 🔴（存在明确外围利空（阈值触发））\n   A50期指 -1.81% | 中国金龙 -1.86% | 离岸人民币 -0.17%\n   AI排雷: 央行净回笼6880亿，港股恒指低开1.57%、科技指数跌2.95%，网易重挫13.3%，恒指期货低水，外围情绪偏空。 ⚠️\n   情绪定调: 谨慎\n   > 外围与排雷仅供开盘防守参考，不构成投资建议\n今日无同时满足「业绩质量+趋势多头」的候选，建议观望。",
+  "push_text_hash": "75d11572061172affb91595d18627a57ed2bbd610a7b948020f19d6ac3c203d9",
+  "persisted_at": "2026-11-20 09:23:27",
+  "immutable": true
+}
