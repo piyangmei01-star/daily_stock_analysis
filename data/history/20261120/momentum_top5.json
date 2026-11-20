@@ -1,0 +1,134 @@
+{
+  "run_id": "momentum_20261120_170918796542_af8bf1",
+  "model_version": "v2.0-stage1",
+  "data_date": "2026-11-20",
+  "data_source": "sina_market_center",
+  "data_updated_at": "2026-11-20 17:09:18",
+  "picks": [
+    {
+      "code": "603223",
+      "name": "恒通股份",
+      "rank": 1,
+      "score": 47.53,
+      "scores": {
+        "vol_ratio": 5.29,
+        "turnover": 3.13,
+        "pct": 5.93
+      },
+      "reason": "量比5.3≥1.5放量，换手3.1%，涨幅+5.93%，成交额1.8亿，PE 19.6",
+      "risk_tags": "开盘已涨(追涨属性);当日涨幅较大(>5%);量比异常放大(>5)",
+      "close_price": 8.22,
+      "snapshot": {
+        "price": 8.22,
+        "pct": 5.928,
+        "turnover": 3.1279,
+        "vol_ratio": 5.29,
+        "amount": 176404085.0,
+        "mktcap": 5801858426.46,
+        "pe": 19.571,
+        "score": 47.53
+      },
+      "industry": null
+    },
+    {
+      "code": "300905",
+      "name": "宝丽迪",
+      "rank": 2,
+      "score": 45.793,
+      "scores": {
+        "vol_ratio": 1.98,
+        "turnover": 14.7,
+        "pct": 3.62
+      },
+      "reason": "量比2.0≥1.5放量，换手14.7%，涨幅+3.62%，成交额6.1亿，PE 35.4",
+      "risk_tags": "开盘已涨(追涨属性)",
+      "close_price": 30.05,
+      "snapshot": {
+        "price": 30.05,
+        "pct": 3.621,
+        "turnover": 14.7003,
+        "vol_ratio": 1.98,
+        "amount": 606835248.0,
+        "mktcap": 5415853683.8,
+        "pe": 35.353,
+        "score": 45.7935
+      },
+      "industry": null
+    },
+    {
+      "code": "300416",
+      "name": "苏试试验",
+      "rank": 3,
+      "score": 43.55,
+      "scores": {
+        "vol_ratio": 3.97,
+        "turnover": 9.99,
+        "pct": 1.95
+      },
+      "reason": "量比4.0≥1.5放量，换手10.0%，涨幅+1.95%，成交额6.8亿，PE 25.8",
+      "risk_tags": "开盘已涨(追涨属性)",
+      "close_price": 13.06,
+      "snapshot": {
+        "price": 13.06,
+        "pct": 1.952,
+        "turnover": 9.9913,
+        "vol_ratio": 3.97,
+        "amount": 680560189.0,
+        "mktcap": 6641634346.36,
+        "pe": 25.8,
+        "score": 43.5499
+      },
+      "industry": null
+    },
+    {
+      "code": "603928",
+      "name": "兴业股份",
+      "rank": 4,
+      "score": 41.919,
+      "scores": {
+        "vol_ratio": 1.83,
+        "turnover": 17.99,
+        "pct": 1.62
+      },
+      "reason": "量比1.8≥1.5放量，换手18.0%，涨幅+1.62%，成交额7.6亿，PE 32.3",
+      "risk_tags": "开盘已涨(追涨属性);高换手(>15%)",
+      "close_price": 12.58,
+      "snapshot": {
+        "price": 12.58,
+        "pct": 1.616,
+        "turnover": 17.9919,
+        "vol_ratio": 1.83,
+        "amount": 762948302.0,
+        "mktcap": 4286056320.0,
+        "pe": 32.256,
+        "score": 41.9186
+      },
+      "industry": null
+    },
+    {
+      "code": "301225",
+      "name": "恒勃股份",
+      "rank": 5,
+      "score": 40.483,
+      "scores": {
+        "vol_ratio": 2.13,
+        "turnover": 13.2,
+        "pct": 7.04
+      },
+      "reason": "量比2.1≥1.5放量，换手13.2%，涨幅+7.04%，成交额3.0亿，PE 39.5",
+      "risk_tags": "开盘已涨(追涨属性);当日涨幅较大(>5%)",
+      "close_price": 52.88,
+      "snapshot": {
+        "price": 52.88,
+        "pct": 7.045,
+        "turnover": 13.1975,
+        "vol_ratio": 2.13,
+        "amount": 303255209.0,
+        "mktcap": 7619594531.28,
+        "pe": 39.463,
+        "score": 40.4832
+      },
+      "industry": null
+    }
+  ]
+}
