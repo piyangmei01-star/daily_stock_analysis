@@ -1,0 +1,45 @@
+{
+  "schema": "v2_db_rows/1",
+  "run_date": "2026-11-20",
+  "task": "premarket_data",
+  "run_id": "premarket_data_20261120_163417168183_b1949d",
+  "exported_at": "2026-11-20 16:34:17",
+  "tables": {
+    "screening_runs": [
+      {
+        "run_id": "premarket_data_20261120_163417168183_b1949d",
+        "task": "premarket_data",
+        "run_date": "2026-11-20",
+        "run_time_bj": "2026-11-20 16:34:17",
+        "model_version": "v2.0-stage1",
+        "status": "success",
+        "universe_count": 5223,
+        "pass1": null,
+        "pass2": null,
+        "pass3": null,
+        "market_env_json": "{\"expected_data_date\": \"2026-11-20\", \"expected_basis\": \"intraday\", \"source\": \"sina_market_center\", \"data_date\": \"2026-11-20\", \"date_source\": \"calendar_inferred\", \"quote_basis\": \"intraday\", \"universe_total\": 5223, \"rows\": 5223, \"complete\": true, \"fetched_at\": \"2026-11-20 16:34:17\", \"price_basis\": \"unadjusted\", \"amount_unit\": \"CNY\", \"mktcap_unit\": \"CNY\", \"code_rule\": \"6位数字字符串，去市场前缀\", \"board_counts\": {\"00\": 1494, \"30\": 1411, \"60\": 1700, \"68\": 618}, \"missing_field_counts\": {\"price\": 0, \"pct\": 0, \"turnover\": 0, \"vol_ratio\": 5223, \"amount\": 0, \"mktcap\": 0, \"open\": 0, \"high\": 0, \"low\": 0, \"prev_close\": 0, \"pe\": 0}, \"raw_total_including_bj\": 5579, \"excluded_beijing\": 356, \"universe_scope\": \"沪深主板00/60 + 创业板30 + 科创板68（排除北交所）\"}",
+        "data_updated_at": "2026-11-20 16:34:17",
+        "error_msg": null,
+        "created_at": "2026-11-20 16:34:17"
+      }
+    ],
+    "picks": [],
+    "candidates": [],
+    "ai_reports": [],
+    "alert_checks": [
+      {
+        "check_id": "20261120_160326288867_ec3a",
+        "run_date": "2026-11-20",
+        "time_bj": "16:03:26",
+        "in_session": 0,
+        "checked_count": 0,
+        "anomaly_count": 0,
+        "data_ok": 1,
+        "error_msg": "非交易时段跳过",
+        "created_at": "2026-11-20 16:03:26"
+      }
+    ],
+    "alert_events": [],
+    "run_logs": []
+  }
+}
