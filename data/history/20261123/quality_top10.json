@@ -1,0 +1,349 @@
+{
+  "run_id": "quality_20261123_171707217351_da3533",
+  "model_version": "v2.0-stage1",
+  "market_env": {
+    "captured_at": "2026-11-23 17:13:57",
+    "hs300_price": 3958.29,
+    "hs300_pct": 0.09,
+    "sh_index_price": 3538.95,
+    "sh_index_pct": 0.15,
+    "kline_integrity": {
+      "ok": 496,
+      "total": 500,
+      "rate": 0.992,
+      "sources": {
+        "eastmoney_kline_fqt1": 178,
+        "sina_kline_day": 318
+      },
+      "adjustments": {
+        "qfq": 178,
+        "none": 318
+      }
+    }
+  },
+  "data_date": "2026-11-23",
+  "data_source": "sina_market_center",
+  "data_updated_at": "2026-11-23 17:17:13",
+  "picks": [
+    {
+      "code": "002415",
+      "name": "海康威视",
+      "rank": 1,
+      "score": 78.776,
+      "scores": {
+        "fund_score": 68.169,
+        "trend20": 0.46,
+        "profit_g": 38.55,
+        "rev_g": 12.6,
+        "roe": 14.99
+      },
+      "reason": "净利+39%/营收+13%双增，ROE 15.0%；收盘>MA20>MA60多头，20日涨幅0.5%≤15%；行业分散[计算机设备]",
+      "risk_tags": "无显著风险标签",
+      "close_price": 35.15,
+      "snapshot": {
+        "price": 35.15,
+        "pct": -0.284,
+        "turnover": 0.513,
+        "vol_ratio": null,
+        "amount": 1618063089.0,
+        "mktcap": 322145234982.5,
+        "profit_g": 38.55,
+        "rev_g": 12.6016,
+        "roe": 14.99,
+        "eps": 1.409,
+        "trend20": 0.4573,
+        "fund_score": 68.1692,
+        "total": 78.7765
+      },
+      "industry": "计算机设备"
+    },
+    {
+      "code": "601225",
+      "name": "陕西煤业",
+      "rank": 2,
+      "score": 67.021,
+      "scores": {
+        "fund_score": 56.226,
+        "trend20": 3.88,
+        "profit_g": 34.23,
+        "rev_g": 3.97,
+        "roe": 16.7
+      },
+      "reason": "净利+34%/营收+4%双增，ROE 16.7%；收盘>MA20>MA60多头，20日涨幅3.9%≤15%；行业分散[煤炭开采]",
+      "risk_tags": "无显著风险标签",
+      "close_price": 27.58,
+      "snapshot": {
+        "price": 27.58,
+        "pct": -1.147,
+        "turnover": 0.3497,
+        "vol_ratio": null,
+        "amount": 932343624.0,
+        "mktcap": 267388100000.0,
+        "profit_g": 34.23,
+        "rev_g": 3.966,
+        "roe": 16.7,
+        "eps": 1.76,
+        "trend20": 3.8795,
+        "fund_score": 56.2257,
+        "total": 67.0207
+      },
+      "industry": "煤炭开采"
+    },
+    {
+      "code": "002832",
+      "name": "比音勒芬",
+      "rank": 3,
+      "score": 65.305,
+      "scores": {
+        "fund_score": 57.162,
+        "trend20": 5.87,
+        "profit_g": 20.51,
+        "rev_g": 27.36,
+        "roe": 13.47
+      },
+      "reason": "净利+21%/营收+27%双增，ROE 13.5%；收盘>MA20>MA60多头，20日涨幅5.9%≤15%；行业分散[服装家纺]",
+      "risk_tags": "无显著风险标签",
+      "close_price": 28.85,
+      "snapshot": {
+        "price": 28.85,
+        "pct": 0.839,
+        "turnover": 2.0496,
+        "vol_ratio": null,
+        "amount": 224083463.0,
+        "mktcap": 16464899373.4,
+        "profit_g": 20.51,
+        "rev_g": 27.3554,
+        "roe": 13.47,
+        "eps": 1.31,
+        "trend20": 5.8716,
+        "fund_score": 57.1621,
+        "total": 65.3052
+      },
+      "industry": "服装家纺"
+    },
+    {
+      "code": "002557",
+      "name": "洽洽食品",
+      "rank": 4,
+      "score": 64.323,
+      "scores": {
+        "fund_score": 66.493,
+        "trend20": 11.91,
+        "profit_g": 130.97,
+        "rev_g": 19.11,
+        "roe": 7.44
+      },
+      "reason": "净利+131%/营收+19%双增，ROE 7.4%；收盘>MA20>MA60多头，20日涨幅11.9%≤15%；行业分散[休闲食品]",
+      "risk_tags": "20日涨幅偏高(>10%)",
+      "close_price": 20.95,
+      "snapshot": {
+        "price": 20.95,
+        "pct": 1.11,
+        "turnover": 2.4261,
+        "vol_ratio": null,
+        "amount": 253717048.0,
+        "mktcap": 10597703500.55,
+        "profit_g": 130.97,
+        "rev_g": 19.1097,
+        "roe": 7.44,
+        "eps": 0.7689,
+        "trend20": 11.9124,
+        "fund_score": 66.4934,
+        "total": 64.3229
+      },
+      "industry": "休闲食品"
+    },
+    {
+      "code": "601919",
+      "name": "中远海控",
+      "rank": 5,
+      "score": 54.983,
+      "scores": {
+        "fund_score": 44.786,
+        "trend20": 7.82,
+        "profit_g": 13.22,
+        "rev_g": 11.94,
+        "roe": 12.74
+      },
+      "reason": "净利+13%/营收+12%双增，ROE 12.7%；收盘>MA20>MA60多头，20日涨幅7.8%≤15%；行业分散[航运港口]",
+      "risk_tags": "无显著风险标签",
+      "close_price": 17.64,
+      "snapshot": {
+        "price": 17.64,
+        "pct": -0.508,
+        "turnover": 0.7575,
+        "vol_ratio": null,
+        "amount": 1666692498.0,
+        "mktcap": 268451247478.68,
+        "profit_g": 13.22,
+        "rev_g": 11.9421,
+        "roe": 12.74,
+        "eps": 2.01,
+        "trend20": 7.824,
+        "fund_score": 44.7862,
+        "total": 54.9831
+      },
+      "industry": "航运港口"
+    },
+    {
+      "code": "601156",
+      "name": "东航物流",
+      "rank": 6,
+      "score": 54.224,
+      "scores": {
+        "fund_score": 39.472,
+        "trend20": 5.51,
+        "profit_g": 7.46,
+        "rev_g": 23.03,
+        "roe": 10.55
+      },
+      "reason": "净利+7%/营收+23%双增，ROE 10.6%；收盘>MA20>MA60多头，20日涨幅5.5%≤15%；行业分散[物流]",
+      "risk_tags": "无显著风险标签",
+      "close_price": 19.52,
+      "snapshot": {
+        "price": 19.52,
+        "pct": -0.964,
+        "turnover": 1.2222,
+        "vol_ratio": null,
+        "amount": 224288242.0,
+        "mktcap": 30989084453.12,
+        "profit_g": 7.46,
+        "rev_g": 23.0342,
+        "roe": 10.55,
+        "eps": 1.35,
+        "trend20": 5.5135,
+        "fund_score": 39.4721,
+        "total": 54.2245
+      },
+      "industry": "物流"
+    },
+    {
+      "code": "600028",
+      "name": "中国石化",
+      "rank": 7,
+      "score": 53.567,
+      "scores": {
+        "fund_score": 40.187,
+        "trend20": 6.47,
+        "profit_g": 30.0,
+        "rev_g": 4.39,
+        "roe": 4.67
+      },
+      "reason": "净利+30%/营收+4%双增，ROE 4.7%；收盘>MA20>MA60多头，20日涨幅6.5%≤15%；行业分散[炼化及贸易]",
+      "risk_tags": "无显著风险标签",
+      "close_price": 5.92,
+      "snapshot": {
+        "price": 5.92,
+        "pct": -1.824,
+        "turnover": 0.2388,
+        "vol_ratio": null,
+        "amount": 1337588085.0,
+        "mktcap": 714629716698.24,
+        "profit_g": 30.0,
+        "rev_g": 4.3935,
+        "roe": 4.67,
+        "eps": 0.323,
+        "trend20": 6.4748,
+        "fund_score": 40.1867,
+        "total": 53.5674
+      },
+      "industry": "炼化及贸易"
+    },
+    {
+      "code": "603345",
+      "name": "安井食品",
+      "rank": 8,
+      "score": 52.248,
+      "scores": {
+        "fund_score": 42.281,
+        "trend20": 8.77,
+        "profit_g": 20.27,
+        "rev_g": 18.38,
+        "roe": 7.23
+      },
+      "reason": "净利+20%/营收+18%双增，ROE 7.2%；收盘>MA20>MA60多头，20日涨幅8.8%≤15%；行业分散[食品加工]",
+      "risk_tags": "无显著风险标签",
+      "close_price": 89.52,
+      "snapshot": {
+        "price": 89.52,
+        "pct": -0.467,
+        "turnover": 1.3098,
+        "vol_ratio": null,
+        "amount": 341931609.0,
+        "mktcap": 29836025192.64,
+        "profit_g": 20.27,
+        "rev_g": 18.3818,
+        "roe": 7.23,
+        "eps": 3.44,
+        "trend20": 8.7728,
+        "fund_score": 42.2813,
+        "total": 52.2479
+      },
+      "industry": "食品加工"
+    },
+    {
+      "code": "300357",
+      "name": "我武生物",
+      "rank": 9,
+      "score": 52.076,
+      "scores": {
+        "fund_score": 34.818,
+        "trend20": 4.76,
+        "profit_g": 13.46,
+        "rev_g": 6.64,
+        "roe": 14.07
+      },
+      "reason": "净利+13%/营收+7%双增，ROE 14.1%；收盘>MA20>MA60多头，20日涨幅4.8%≤15%；行业分散[生物制品]",
+      "risk_tags": "无显著风险标签",
+      "close_price": 22.0,
+      "snapshot": {
+        "price": 22.0,
+        "pct": 4.068,
+        "turnover": 1.824,
+        "vol_ratio": null,
+        "amount": 186229434.0,
+        "mktcap": 11518848000.0,
+        "profit_g": 13.46,
+        "rev_g": 6.637,
+        "roe": 14.07,
+        "eps": 0.7473,
+        "trend20": 4.7619,
+        "fund_score": 34.8175,
+        "total": 52.0758
+      },
+      "industry": "生物制品"
+    },
+    {
+      "code": "601088",
+      "name": "中国神华",
+      "rank": 10,
+      "score": 51.831,
+      "scores": {
+        "fund_score": 29.044,
+        "trend20": 1.75,
+        "profit_g": 3.8,
+        "rev_g": 8.97,
+        "roe": 8.81
+      },
+      "reason": "净利+4%/营收+9%双增，ROE 8.8%；收盘>MA20>MA60多头，20日涨幅1.8%≤15%；行业分散[煤炭开采]",
+      "risk_tags": "无显著风险标签",
+      "close_price": 51.03,
+      "snapshot": {
+        "price": 51.03,
+        "pct": -1.865,
+        "turnover": 0.1732,
+        "vol_ratio": null,
+        "amount": 1502448168.0,
+        "mktcap": 1106811832533.0999,
+        "profit_g": 3.8,
+        "rev_g": 8.9748,
+        "roe": 8.81,
+        "eps": 2.062,
+        "trend20": 1.7547,
+        "fund_score": 29.0437,
+        "total": 51.8312
+      },
+      "industry": "煤炭开采"
+    }
+  ]
+}
