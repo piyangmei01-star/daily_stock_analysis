@@ -1,0 +1,349 @@
+{
+  "run_id": "quality_20261124_191023786325_552547",
+  "model_version": "v2.0-stage1",
+  "market_env": {
+    "captured_at": "2026-11-24 19:07:05",
+    "hs300_price": 3963.82,
+    "hs300_pct": 0.14,
+    "sh_index_price": 3548.37,
+    "sh_index_pct": 0.27,
+    "kline_integrity": {
+      "ok": 484,
+      "total": 486,
+      "rate": 0.9959,
+      "sources": {
+        "eastmoney_kline_fqt1": 89,
+        "sina_kline_day": 395
+      },
+      "adjustments": {
+        "qfq": 89,
+        "none": 395
+      }
+    }
+  },
+  "data_date": "2026-11-24",
+  "data_source": "sina_market_center",
+  "data_updated_at": "2026-11-24 19:10:28",
+  "picks": [
+    {
+      "code": "301275",
+      "name": "汉朔科技",
+      "rank": 1,
+      "score": 79.296,
+      "scores": {
+        "fund_score": 81.036,
+        "trend20": 7.18,
+        "profit_g": 53.41,
+        "rev_g": 59.41,
+        "roe": 11.48
+      },
+      "reason": "净利+53%/营收+59%双增，ROE 11.5%；收盘>MA20>MA60多头，20日涨幅7.2%≤15%；行业分散[其他电子Ⅱ]",
+      "risk_tags": "无显著风险标签",
+      "close_price": 40.3,
+      "snapshot": {
+        "price": 40.3,
+        "pct": 3.148,
+        "turnover": 2.7938,
+        "vol_ratio": null,
+        "amount": 337292089.0,
+        "mktcap": 17022720000.0,
+        "profit_g": 53.41,
+        "rev_g": 59.4125,
+        "roe": 11.48,
+        "eps": 1.151,
+        "trend20": 7.1809,
+        "fund_score": 81.0365,
+        "total": 79.296
+      },
+      "industry": "其他电子Ⅱ"
+    },
+    {
+      "code": "600233",
+      "name": "圆通速递",
+      "rank": 2,
+      "score": 73.179,
+      "scores": {
+        "fund_score": 63.778,
+        "trend20": 2.81,
+        "profit_g": 60.94,
+        "rev_g": 7.82,
+        "roe": 12.56
+      },
+      "reason": "净利+61%/营收+8%双增，ROE 12.6%；收盘>MA20>MA60多头，20日涨幅2.8%≤15%；行业分散[物流]",
+      "risk_tags": "无显著风险标签",
+      "close_price": 18.3,
+      "snapshot": {
+        "price": 18.3,
+        "pct": 1.554,
+        "turnover": 0.5017,
+        "vol_ratio": null,
+        "amount": 311513571.0,
+        "mktcap": 62681385785.4,
+        "profit_g": 60.94,
+        "rev_g": 7.8246,
+        "roe": 12.56,
+        "eps": 1.3524,
+        "trend20": 2.809,
+        "fund_score": 63.7781,
+        "total": 73.1786
+      },
+      "industry": "物流"
+    },
+    {
+      "code": "601225",
+      "name": "陕西煤业",
+      "rank": 3,
+      "score": 69.313,
+      "scores": {
+        "fund_score": 55.861,
+        "trend20": 1.71,
+        "profit_g": 34.23,
+        "rev_g": 3.97,
+        "roe": 16.7
+      },
+      "reason": "净利+34%/营收+4%双增，ROE 16.7%；收盘>MA20>MA60多头，20日涨幅1.7%≤15%；行业分散[煤炭开采]",
+      "risk_tags": "无显著风险标签",
+      "close_price": 27.34,
+      "snapshot": {
+        "price": 27.34,
+        "pct": -0.87,
+        "turnover": 0.3255,
+        "vol_ratio": null,
+        "amount": 859391793.0,
+        "mktcap": 265061300000.0,
+        "profit_g": 34.23,
+        "rev_g": 3.966,
+        "roe": 16.7,
+        "eps": 1.76,
+        "trend20": 1.7113,
+        "fund_score": 55.861,
+        "total": 69.3131
+      },
+      "industry": "煤炭开采"
+    },
+    {
+      "code": "002557",
+      "name": "洽洽食品",
+      "rank": 4,
+      "score": 62.456,
+      "scores": {
+        "fund_score": 66.022,
+        "trend20": 13.25,
+        "profit_g": 130.97,
+        "rev_g": 19.11,
+        "roe": 7.44
+      },
+      "reason": "净利+131%/营收+19%双增，ROE 7.4%；收盘>MA20>MA60多头，20日涨幅13.2%≤15%；行业分散[休闲食品]",
+      "risk_tags": "20日涨幅偏高(>10%)",
+      "close_price": 20.77,
+      "snapshot": {
+        "price": 20.77,
+        "pct": -0.859,
+        "turnover": 1.5291,
+        "vol_ratio": null,
+        "amount": 159478649.0,
+        "mktcap": 10506649246.13,
+        "profit_g": 130.97,
+        "rev_g": 19.1097,
+        "roe": 7.44,
+        "eps": 0.7689,
+        "trend20": 13.2497,
+        "fund_score": 66.0222,
+        "total": 62.4564
+      },
+      "industry": "休闲食品"
+    },
+    {
+      "code": "300012",
+      "name": "华测检测",
+      "rank": 5,
+      "score": 61.308,
+      "scores": {
+        "fund_score": 44.078,
+        "trend20": 2.01,
+        "profit_g": 18.04,
+        "rev_g": 15.27,
+        "roe": 11.88
+      },
+      "reason": "净利+18%/营收+15%双增，ROE 11.9%；收盘>MA20>MA60多头，20日涨幅2.0%≤15%；行业分散[专业服务]",
+      "risk_tags": "无显著风险标签",
+      "close_price": 15.75,
+      "snapshot": {
+        "price": 15.75,
+        "pct": 0.382,
+        "turnover": 1.8277,
+        "vol_ratio": null,
+        "amount": 413848346.0,
+        "mktcap": 26504544370.5,
+        "profit_g": 18.04,
+        "rev_g": 15.2715,
+        "roe": 11.88,
+        "eps": 0.5712,
+        "trend20": 2.0078,
+        "fund_score": 44.0775,
+        "total": 61.308
+      },
+      "industry": "专业服务"
+    },
+    {
+      "code": "601919",
+      "name": "中远海控",
+      "rank": 6,
+      "score": 55.517,
+      "scores": {
+        "fund_score": 44.223,
+        "trend20": 7.05,
+        "profit_g": 13.22,
+        "rev_g": 11.94,
+        "roe": 12.74
+      },
+      "reason": "净利+13%/营收+12%双增，ROE 12.7%；收盘>MA20>MA60多头，20日涨幅7.1%≤15%；行业分散[航运港口]",
+      "risk_tags": "无显著风险标签",
+      "close_price": 17.76,
+      "snapshot": {
+        "price": 17.76,
+        "pct": 0.68,
+        "turnover": 0.6997,
+        "vol_ratio": null,
+        "amount": 1554113804.0,
+        "mktcap": 270277446441.12,
+        "profit_g": 13.22,
+        "rev_g": 11.9421,
+        "roe": 12.74,
+        "eps": 2.01,
+        "trend20": 7.0524,
+        "fund_score": 44.2233,
+        "total": 55.5173
+      },
+      "industry": "航运港口"
+    },
+    {
+      "code": "600036",
+      "name": "招商银行",
+      "rank": 7,
+      "score": 52.414,
+      "scores": {
+        "fund_score": 29.003,
+        "trend20": 1.23,
+        "profit_g": 2.38,
+        "rev_g": 5.34,
+        "roe": 10.12
+      },
+      "reason": "净利+2%/营收+5%双增，ROE 10.1%；收盘>MA20>MA60多头，20日涨幅1.2%≤15%；行业分散[银行Ⅱ]",
+      "risk_tags": "无显著风险标签",
+      "close_price": 43.52,
+      "snapshot": {
+        "price": 43.52,
+        "pct": 0.601,
+        "turnover": 0.5128,
+        "vol_ratio": null,
+        "amount": 4577969148.0,
+        "mktcap": 1097567680555.5,
+        "profit_g": 2.38,
+        "rev_g": 5.3425,
+        "roe": 10.1175,
+        "eps": 4.57,
+        "trend20": 1.2328,
+        "fund_score": 29.0029,
+        "total": 52.4136
+      },
+      "industry": "银行Ⅱ"
+    },
+    {
+      "code": "600901",
+      "name": "江苏金租",
+      "rank": 8,
+      "score": 52.157,
+      "scores": {
+        "fund_score": 35.638,
+        "trend20": 5.15,
+        "profit_g": 10.22,
+        "rev_g": 15.18,
+        "roe": 10.38
+      },
+      "reason": "净利+10%/营收+15%双增，ROE 10.4%；收盘>MA20>MA60多头，20日涨幅5.1%≤15%；行业分散[多元金融]",
+      "risk_tags": "无显著风险标签",
+      "close_price": 7.76,
+      "snapshot": {
+        "price": 7.76,
+        "pct": -0.257,
+        "turnover": 0.8215,
+        "vol_ratio": null,
+        "amount": 367740153.0,
+        "mktcap": 44944883504.56,
+        "profit_g": 10.22,
+        "rev_g": 15.1775,
+        "roe": 10.38,
+        "eps": 0.47,
+        "trend20": 5.1491,
+        "fund_score": 35.6376,
+        "total": 52.1572
+      },
+      "industry": "多元金融"
+    },
+    {
+      "code": "600177",
+      "name": "雅戈尔",
+      "rank": 9,
+      "score": 51.78,
+      "scores": {
+        "fund_score": 40.737,
+        "trend20": 8.31,
+        "profit_g": 31.17,
+        "rev_g": 5.62,
+        "roe": 7.18
+      },
+      "reason": "净利+31%/营收+6%双增，ROE 7.2%；收盘>MA20>MA60多头，20日涨幅8.3%≤15%；行业分散[服装家纺]",
+      "risk_tags": "无显著风险标签",
+      "close_price": 8.99,
+      "snapshot": {
+        "price": 8.99,
+        "pct": -0.443,
+        "turnover": 1.0546,
+        "vol_ratio": null,
+        "amount": 427793508.0,
+        "mktcap": 41564742698.98,
+        "profit_g": 31.17,
+        "rev_g": 5.6241,
+        "roe": 7.18,
+        "eps": 0.67,
+        "trend20": 8.3133,
+        "fund_score": 40.7367,
+        "total": 51.7801
+      },
+      "industry": "服装家纺"
+    },
+    {
+      "code": "601077",
+      "name": "渝农商行",
+      "rank": 10,
+      "score": 51.681,
+      "scores": {
+        "fund_score": 25.663,
+        "trend20": 0.0,
+        "profit_g": 7.86,
+        "rev_g": 8.47,
+        "roe": 8.23
+      },
+      "reason": "净利+8%/营收+8%双增，ROE 8.2%；收盘>MA20>MA60多头，20日涨幅0.0%≤15%；行业分散[银行Ⅱ]",
+      "risk_tags": "无显著风险标签",
+      "close_price": 7.25,
+      "snapshot": {
+        "price": 7.25,
+        "pct": 0.416,
+        "turnover": 0.637,
+        "vol_ratio": null,
+        "amount": 406029266.0,
+        "mktcap": 82338250000.0,
+        "profit_g": 7.86,
+        "rev_g": 8.4725,
+        "roe": 8.2275,
+        "eps": 0.99,
+        "trend20": 0.0,
+        "fund_score": 25.663,
+        "total": 51.6809
+      },
+      "industry": "银行Ⅱ"
+    }
+  ]
+}
