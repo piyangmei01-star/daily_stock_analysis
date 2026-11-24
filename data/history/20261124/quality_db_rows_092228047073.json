@@ -1,0 +1,61 @@
+{
+  "schema": "v2_db_rows/1",
+  "run_date": "2026-11-24",
+  "task": "quality",
+  "run_id": "quality_20261124_092223688254_7c62f4",
+  "exported_at": "2026-11-24 09:22:28",
+  "tables": {
+    "screening_runs": [
+      {
+        "run_id": "quality_20261124_092223688254_7c62f4",
+        "task": "quality",
+        "run_date": "2026-11-24",
+        "run_time_bj": "2026-11-24 09:22:23",
+        "model_version": "v2.0-stage1",
+        "status": "success",
+        "universe_count": 0,
+        "pass1": 0,
+        "pass2": 0,
+        "pass3": 0,
+        "market_env_json": "{\"captured_at\": \"2026-11-24 09:21:17\", \"hs300_price\": 3958.29, \"hs300_pct\": 0.0, \"sh_index_price\": 3538.93, \"sh_index_pct\": 0.0, \"kline_integrity\": {\"ok\": 0, \"total\": 0, \"rate\": 0.0, \"sources\": {}, \"adjustments\": {}}}",
+        "data_updated_at": "2026-11-24 09:22:23",
+        "error_msg": null,
+        "created_at": "2026-11-24 09:22:23"
+      }
+    ],
+    "picks": [],
+    "candidates": [],
+    "ai_reports": [],
+    "alert_checks": [],
+    "alert_events": [],
+    "run_logs": [
+      {
+        "id": 258,
+        "run_date": "2026-11-24",
+        "time_bj": "2026-11-24 09:22:08",
+        "task": "quality",
+        "level": "INFO",
+        "message": "行情快照 source=sina_market_center rows=5223 total=5223 data_date=2026-11-23 basis=prev_close date_source=calendar_inferred fetched_at=2026-11-24 09:22:07 price_basis=unadjusted",
+        "created_at": "2026-11-24 09:22:08"
+      },
+      {
+        "id": 259,
+        "run_date": "2026-11-24",
+        "time_bj": "2026-11-24 09:22:23",
+        "task": "quality",
+        "level": "INFO",
+        "message": "日K完整性 ok=0/0 成功率=0.0% 来源={} 复权口径={}",
+        "created_at": "2026-11-24 09:22:23"
+      },
+      {
+        "id": 260,
+        "run_date": "2026-11-24",
+        "time_bj": "2026-11-24 09:22:28",
+        "task": "quality",
+        "level": "INFO",
+        "message": "今日无同时满足业绩+趋势的候选；空名单已归档 run_quality_20261124_092223688254_7c62f4.json",
+        "created_at": "2026-11-24 09:22:28"
+      }
+    ]
+  }
+}
