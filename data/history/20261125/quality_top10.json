@@ -1,0 +1,91 @@
+{
+  "run_id": "quality_20261125_175945085013_2e51ad",
+  "model_version": "v2.0-stage1",
+  "market_env": {
+    "captured_at": "2026-11-25 17:57:00",
+    "hs300_price": 3898.24,
+    "hs300_pct": -1.65,
+    "kline_integrity": {
+      "ok": 173,
+      "total": 173,
+      "rate": 1.0,
+      "sources": {
+        "eastmoney_kline_fqt1": 172,
+        "sina_kline_day": 1
+      },
+      "adjustments": {
+        "qfq": 172,
+        "none": 1
+      }
+    }
+  },
+  "data_date": "2026-11-25",
+  "data_source": "sina_market_center",
+  "data_updated_at": "2026-11-25 17:59:50",
+  "picks": [
+    {
+      "code": "600233",
+      "name": "圆通速递",
+      "rank": 1,
+      "score": 71.197,
+      "scores": {
+        "fund_score": 64.264,
+        "trend20": 4.78,
+        "profit_g": 60.94,
+        "rev_g": 7.82,
+        "roe": 12.56
+      },
+      "reason": "净利+61%/营收+8%双增，ROE 12.6%；收盘>MA20>MA60多头，20日涨幅4.8%≤15%；行业分散[其他]",
+      "risk_tags": "无显著风险标签",
+      "close_price": 18.2,
+      "snapshot": {
+        "price": 18.2,
+        "pct": -0.546,
+        "turnover": 0.6528,
+        "vol_ratio": null,
+        "amount": 408679955.0,
+        "mktcap": 62338864551.6,
+        "profit_g": 60.94,
+        "rev_g": 7.8246,
+        "roe": 12.56,
+        "eps": 1.3524,
+        "trend20": 4.7784,
+        "fund_score": 64.2639,
+        "total": 71.1968
+      },
+      "industry": "其他"
+    },
+    {
+      "code": "601225",
+      "name": "陕西煤业",
+      "rank": 2,
+      "score": 70.047,
+      "scores": {
+        "fund_score": 55.654,
+        "trend20": 0.97,
+        "profit_g": 34.23,
+        "rev_g": 3.97,
+        "roe": 16.7
+      },
+      "reason": "净利+34%/营收+4%双增，ROE 16.7%；收盘>MA20>MA60多头，20日涨幅1.0%≤15%；行业分散[其他]",
+      "risk_tags": "无显著风险标签",
+      "close_price": 27.15,
+      "snapshot": {
+        "price": 27.15,
+        "pct": -0.695,
+        "turnover": 0.3116,
+        "vol_ratio": null,
+        "amount": 817946540.0,
+        "mktcap": 263219250000.0,
+        "profit_g": 34.23,
+        "rev_g": 3.966,
+        "roe": 16.7,
+        "eps": 1.76,
+        "trend20": 0.9669,
+        "fund_score": 55.6537,
+        "total": 70.0469
+      },
+      "industry": "其他"
+    }
+  ]
+}
