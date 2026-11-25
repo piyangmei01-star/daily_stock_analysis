@@ -1,0 +1,13 @@
+{
+  "schema": "v2_push_receipt/1",
+  "run_id": "momentum_20261125_182626119281_afa9a0",
+  "run_date": "2026-11-25",
+  "pushed_at": "2026-11-25 18:26:27",
+  "push_ok": true,
+  "push_text_hash": "a8800a1668e5650c5caee5a535a333378734d4767b0143435bae4c591ff7a53e",
+  "push_text_bytes": 2149,
+  "detail": {
+    "picks": 5
+  },
+  "immutable": true
+}
