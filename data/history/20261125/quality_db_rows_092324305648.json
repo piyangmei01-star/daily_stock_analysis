@@ -1,0 +1,70 @@
+{
+  "schema": "v2_db_rows/1",
+  "run_date": "2026-11-25",
+  "task": "quality",
+  "run_id": "quality_20261125_092320346854_feed0c",
+  "exported_at": "2026-11-25 09:23:24",
+  "tables": {
+    "screening_runs": [
+      {
+        "run_id": "quality_20261125_092320346854_feed0c",
+        "task": "quality",
+        "run_date": "2026-11-25",
+        "run_time_bj": "2026-11-25 09:23:20",
+        "model_version": "v2.0-stage1",
+        "status": "success",
+        "universe_count": 0,
+        "pass1": 0,
+        "pass2": 0,
+        "pass3": 0,
+        "market_env_json": "{\"captured_at\": \"2026-11-25 09:21:50\", \"sh_index_price\": 3548.1, \"sh_index_pct\": -0.01, \"kline_integrity\": {\"ok\": 0, \"total\": 0, \"rate\": 0.0, \"sources\": {}, \"adjustments\": {}}}",
+        "data_updated_at": "2026-11-25 09:23:20",
+        "error_msg": null,
+        "created_at": "2026-11-25 09:23:20"
+      }
+    ],
+    "picks": [],
+    "candidates": [],
+    "ai_reports": [],
+    "alert_checks": [],
+    "alert_events": [],
+    "run_logs": [
+      {
+        "id": 273,
+        "run_date": "2026-11-25",
+        "time_bj": "2026-11-25 09:22:00",
+        "task": "quality",
+        "level": "WARN",
+        "message": "市场环境指数获取失败 1.000300: HTTPSConnectionPool(host='push2.eastmoney.com', port=443): Read timed out. (read timeout=10)",
+        "created_at": "2026-11-25 09:22:00"
+      },
+      {
+        "id": 277,
+        "run_date": "2026-11-25",
+        "time_bj": "2026-11-25 09:22:57",
+        "task": "quality",
+        "level": "INFO",
+        "message": "行情快照 source=sina_market_center rows=5223 total=5223 data_date=2026-11-24 basis=prev_close date_source=calendar_inferred fetched_at=2026-11-25 09:22:57 price_basis=unadjusted",
+        "created_at": "2026-11-25 09:22:57"
+      },
+      {
+        "id": 278,
+        "run_date": "2026-11-25",
+        "time_bj": "2026-11-25 09:23:20",
+        "task": "quality",
+        "level": "INFO",
+        "message": "日K完整性 ok=0/0 成功率=0.0% 来源={} 复权口径={}",
+        "created_at": "2026-11-25 09:23:20"
+      },
+      {
+        "id": 279,
+        "run_date": "2026-11-25",
+        "time_bj": "2026-11-25 09:23:24",
+        "task": "quality",
+        "level": "INFO",
+        "message": "今日无同时满足业绩+趋势的候选；空名单已归档 run_quality_20261125_092320346854_feed0c.json",
+        "created_at": "2026-11-25 09:23:24"
+      }
+    ]
+  }
+}
