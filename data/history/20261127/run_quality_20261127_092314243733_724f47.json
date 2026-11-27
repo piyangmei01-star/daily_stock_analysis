@@ -1,0 +1,37 @@
+{
+  "schema": "v2_run_snapshot/1",
+  "run_id": "quality_20261127_092314243733_724f47",
+  "task": "quality",
+  "run_date": "2026-11-27",
+  "run_time_bj": "2026-11-27 09:23:14",
+  "data_date": "2026-11-26",
+  "data_source": "sina_market_center",
+  "quote_basis": "prev_close",
+  "date_source": "calendar_inferred",
+  "model_version": "v2.0-stage1",
+  "universe": 0,
+  "counts": {
+    "universe": 0,
+    "pass1": 0,
+    "pass2": 0,
+    "pass3": 0
+  },
+  "market_env": {
+    "captured_at": "2026-11-27 09:21:41",
+    "kline_integrity": {
+      "ok": 0,
+      "total": 0,
+      "rate": 0.0,
+      "sources": {},
+      "adjustments": {}
+    }
+  },
+  "picks": [],
+  "picks_count": 0,
+  "codes": [],
+  "codes_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "push_text": "🚦 开盘温控: 🟢（外围环境偏暖（三项齐备且全部达标））\n   A50期指 +0.75% | 中国金龙 +1.87% | 离岸人民币 -0.01%\n   AI排雷: 未见明显利空。韩国KOSDAQ暂停程序化买盘属海外局部事件，对A股影响有限；央行净投放2225亿元，流动性偏暖。\n   情绪定调: 中性偏暖，流动性投放与港股高开支撑情绪，但缺乏强催化。\n   > 外围与排雷仅供开盘防守参考，不构成投资建议\n今日无同时满足「业绩质量+趋势多头」的候选，建议观望。",
+  "push_text_hash": "4ebd037821fc9edef9ef06f3d449445581bb90fd5e99d33762949ba53ddc2cf7",
+  "persisted_at": "2026-11-27 09:23:19",
+  "immutable": true
+}
