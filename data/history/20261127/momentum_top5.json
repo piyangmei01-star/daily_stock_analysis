@@ -1,0 +1,134 @@
+{
+  "run_id": "momentum_20261127_180757786848_4c5df3",
+  "model_version": "v2.0-stage1",
+  "data_date": "2026-11-27",
+  "data_source": "sina_market_center",
+  "data_updated_at": "2026-11-27 18:07:57",
+  "picks": [
+    {
+      "code": "301190",
+      "name": "善水科技",
+      "rank": 1,
+      "score": 65.75,
+      "scores": {
+        "vol_ratio": 4.18,
+        "turnover": 19.89,
+        "pct": 6.27
+      },
+      "reason": "量比4.2≥1.5放量，换手19.9%，涨幅+6.27%，成交额10.1亿，PE 86.8",
+      "risk_tags": "开盘已涨(追涨属性);当日涨幅较大(>5%);高换手(>15%);高估值(PE>80)",
+      "close_price": 30.35,
+      "snapshot": {
+        "price": 30.35,
+        "pct": 6.268,
+        "turnover": 19.886,
+        "vol_ratio": 4.18,
+        "amount": 1012955533.0,
+        "mktcap": 6514217775.0,
+        "pe": 86.814,
+        "score": 65.7503
+      },
+      "industry": null
+    },
+    {
+      "code": "600814",
+      "name": "杭州解百",
+      "rank": 2,
+      "score": 61.943,
+      "scores": {
+        "vol_ratio": 2.99,
+        "turnover": 21.1,
+        "pct": 3.7
+      },
+      "reason": "量比3.0≥1.5放量，换手21.1%，涨幅+3.70%，成交额14.4亿，PE 30.7",
+      "risk_tags": "开盘已涨(追涨属性);高换手(>15%)",
+      "close_price": 9.53,
+      "snapshot": {
+        "price": 9.53,
+        "pct": 3.7,
+        "turnover": 21.1049,
+        "vol_ratio": 2.99,
+        "amount": 1438505746.0,
+        "mktcap": 7005299038.94,
+        "pe": 30.742,
+        "score": 61.9425
+      },
+      "industry": null
+    },
+    {
+      "code": "000993",
+      "name": "闽东电力",
+      "rank": 3,
+      "score": 59.006,
+      "scores": {
+        "vol_ratio": 4.35,
+        "turnover": 21.47,
+        "pct": 1.71
+      },
+      "reason": "量比4.3≥1.5放量，换手21.5%，涨幅+1.71%，成交额10.8亿，PE 86.8",
+      "risk_tags": "开盘已涨(追涨属性);高换手(>15%);高估值(PE>80)",
+      "close_price": 11.29,
+      "snapshot": {
+        "price": 11.29,
+        "pct": 1.712,
+        "turnover": 21.4698,
+        "vol_ratio": 4.35,
+        "amount": 1081631207.0,
+        "mktcap": 5170271926.95,
+        "pe": 86.846,
+        "score": 59.0062
+      },
+      "industry": null
+    },
+    {
+      "code": "600628",
+      "name": "新世界",
+      "rank": 4,
+      "score": 56.598,
+      "scores": {
+        "vol_ratio": 4.23,
+        "turnover": 11.03,
+        "pct": 5.17
+      },
+      "reason": "量比4.2≥1.5放量，换手11.0%，涨幅+5.17%，成交额4.7亿，PE 67.1",
+      "risk_tags": "开盘已涨(追涨属性);当日涨幅较大(>5%)",
+      "close_price": 6.71,
+      "snapshot": {
+        "price": 6.71,
+        "pct": 5.172,
+        "turnover": 11.0335,
+        "vol_ratio": 4.23,
+        "amount": 468750656.0,
+        "mktcap": 4340533826.64,
+        "pe": 67.1,
+        "score": 56.5976
+      },
+      "industry": null
+    },
+    {
+      "code": "603396",
+      "name": "金辰股份",
+      "rank": 5,
+      "score": 49.518,
+      "scores": {
+        "vol_ratio": 2.1,
+        "turnover": 13.74,
+        "pct": 5.14
+      },
+      "reason": "量比2.1≥1.5放量，换手13.7%，涨幅+5.14%，成交额4.8亿，PE 67.0",
+      "risk_tags": "开盘已涨(追涨属性);当日涨幅较大(>5%)",
+      "close_price": 26.79,
+      "snapshot": {
+        "price": 26.79,
+        "pct": 5.141,
+        "turnover": 13.7447,
+        "vol_ratio": 2.1,
+        "amount": 480223008.0,
+        "mktcap": 3711151135.62,
+        "pe": 66.975,
+        "score": 49.518
+      },
+      "industry": null
+    }
+  ]
+}
