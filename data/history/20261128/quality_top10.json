@@ -1,0 +1,347 @@
+{
+  "run_id": "quality_20261128_092353201046_3da198",
+  "model_version": "v2.0-stage1",
+  "market_env": {
+    "captured_at": "2026-11-28 09:21:50",
+    "hs300_price": 4063.06,
+    "hs300_pct": 4.17,
+    "sh_index_price": 3606.49,
+    "sh_index_pct": 3.73,
+    "kline_integrity": {
+      "ok": 313,
+      "total": 313,
+      "rate": 1.0,
+      "sources": {
+        "eastmoney_kline_fqt1": 313
+      },
+      "adjustments": {
+        "qfq": 313
+      }
+    }
+  },
+  "data_date": "2026-11-27",
+  "data_source": "sina_market_center",
+  "data_updated_at": "2026-11-28 09:23:55",
+  "picks": [
+    {
+      "code": "603317",
+      "name": "天味食品",
+      "rank": 1,
+      "score": 78.641,
+      "scores": {
+        "fund_score": 81.701,
+        "trend20": 8.11,
+        "profit_g": 49.41,
+        "rev_g": 35.95,
+        "roe": 13.09
+      },
+      "reason": "净利+49%/营收+36%双增，ROE 13.1%；收盘>MA20>MA60多头，20日涨幅8.1%≤15%；行业分散[调味发酵品Ⅱ]",
+      "risk_tags": "无显著风险标签",
+      "close_price": 14.26,
+      "snapshot": {
+        "price": 14.26,
+        "pct": -0.35,
+        "turnover": 1.0771,
+        "vol_ratio": null,
+        "amount": 162047660.0,
+        "mktcap": 15145219631.38,
+        "profit_g": 49.41,
+        "rev_g": 35.953,
+        "roe": 13.09,
+        "eps": 0.5545,
+        "trend20": 8.1122,
+        "fund_score": 81.7007,
+        "total": 78.6412
+      },
+      "industry": "调味发酵品Ⅱ"
+    },
+    {
+      "code": "600189",
+      "name": "泉阳泉",
+      "rank": 2,
+      "score": 70.699,
+      "scores": {
+        "fund_score": 61.215,
+        "trend20": 3.51,
+        "profit_g": 89.94,
+        "rev_g": 17.11,
+        "roe": 3.75
+      },
+      "reason": "净利+90%/营收+17%双增，ROE 3.8%；收盘>MA20>MA60多头，20日涨幅3.5%≤15%；行业分散[饮料乳品]",
+      "risk_tags": "市值偏小(<100亿)",
+      "close_price": 9.15,
+      "snapshot": {
+        "price": 9.15,
+        "pct": 1.105,
+        "turnover": 7.0296,
+        "vol_ratio": null,
+        "amount": 453768627.0,
+        "mktcap": 6544059979.8,
+        "profit_g": 89.94,
+        "rev_g": 17.1107,
+        "roe": 3.75,
+        "eps": 0.066,
+        "trend20": 3.5068,
+        "fund_score": 61.2153,
+        "total": 70.6987
+      },
+      "industry": "饮料乳品"
+    },
+    {
+      "code": "600233",
+      "name": "圆通速递",
+      "rank": 3,
+      "score": 70.618,
+      "scores": {
+        "fund_score": 64.163,
+        "trend20": 5.22,
+        "profit_g": 60.94,
+        "rev_g": 7.82,
+        "roe": 12.56
+      },
+      "reason": "净利+61%/营收+8%双增，ROE 12.6%；收盘>MA20>MA60多头，20日涨幅5.2%≤15%；行业分散[物流]",
+      "risk_tags": "无显著风险标签",
+      "close_price": 18.35,
+      "snapshot": {
+        "price": 18.35,
+        "pct": 0.164,
+        "turnover": 0.6302,
+        "vol_ratio": null,
+        "amount": 388453685.0,
+        "mktcap": 62852646402.3,
+        "profit_g": 60.94,
+        "rev_g": 7.8246,
+        "roe": 12.56,
+        "eps": 1.3524,
+        "trend20": 5.2179,
+        "fund_score": 64.1628,
+        "total": 70.6183
+      },
+      "industry": "物流"
+    },
+    {
+      "code": "002557",
+      "name": "洽洽食品",
+      "rank": 4,
+      "score": 67.224,
+      "scores": {
+        "fund_score": 66.136,
+        "trend20": 9.23,
+        "profit_g": 130.97,
+        "rev_g": 19.11,
+        "roe": 7.44
+      },
+      "reason": "净利+131%/营收+19%双增，ROE 7.4%；收盘>MA20>MA60多头，20日涨幅9.2%≤15%；行业分散[休闲食品]",
+      "risk_tags": "无显著风险标签",
+      "close_price": 20.48,
+      "snapshot": {
+        "price": 20.48,
+        "pct": 1.186,
+        "turnover": 1.7852,
+        "vol_ratio": null,
+        "amount": 182251258.0,
+        "mktcap": 10359950725.12,
+        "profit_g": 130.97,
+        "rev_g": 19.1097,
+        "roe": 7.44,
+        "eps": 0.7689,
+        "trend20": 9.2267,
+        "fund_score": 66.136,
+        "total": 67.224
+      },
+      "industry": "休闲食品"
+    },
+    {
+      "code": "600320",
+      "name": "振华重工",
+      "rank": 5,
+      "score": 66.113,
+      "scores": {
+        "fund_score": 47.867,
+        "trend20": 0.0,
+        "profit_g": 46.72,
+        "rev_g": 4.03,
+        "roe": 4.79
+      },
+      "reason": "净利+47%/营收+4%双增，ROE 4.8%；收盘>MA20>MA60多头，20日涨幅0.0%≤15%；行业分散[专用设备]",
+      "risk_tags": "无显著风险标签",
+      "close_price": 4.23,
+      "snapshot": {
+        "price": 4.23,
+        "pct": 1.932,
+        "turnover": 1.6517,
+        "vol_ratio": null,
+        "amount": 228415881.0,
+        "mktcap": 22331235410.1,
+        "profit_g": 46.72,
+        "rev_g": 4.0335,
+        "roe": 4.79,
+        "eps": 0.145,
+        "trend20": 0.0,
+        "fund_score": 47.8668,
+        "total": 66.1134
+      },
+      "industry": "专用设备"
+    },
+    {
+      "code": "600276",
+      "name": "恒瑞医药",
+      "rank": 6,
+      "score": 63.85,
+      "scores": {
+        "fund_score": 45.903,
+        "trend20": 0.85,
+        "profit_g": 20.38,
+        "rev_g": 5.26,
+        "roe": 12.17
+      },
+      "reason": "净利+20%/营收+5%双增，ROE 12.2%；收盘>MA20>MA60多头，20日涨幅0.8%≤15%；行业分散[化学制药]",
+      "risk_tags": "无显著风险标签",
+      "close_price": 48.87,
+      "snapshot": {
+        "price": 48.87,
+        "pct": 3.21,
+        "turnover": 0.8365,
+        "vol_ratio": null,
+        "amount": 2574544598.0,
+        "mktcap": 324359957842.38,
+        "profit_g": 20.38,
+        "rev_g": 5.2643,
+        "roe": 12.17,
+        "eps": 1.05,
+        "trend20": 0.8461,
+        "fund_score": 45.9034,
+        "total": 63.8501
+      },
+      "industry": "化学制药"
+    },
+    {
+      "code": "300012",
+      "name": "华测检测",
+      "rank": 7,
+      "score": 60.803,
+      "scores": {
+        "fund_score": 44.931,
+        "trend20": 2.92,
+        "profit_g": 18.04,
+        "rev_g": 15.27,
+        "roe": 11.88
+      },
+      "reason": "净利+18%/营收+15%双增，ROE 11.9%；收盘>MA20>MA60多头，20日涨幅2.9%≤15%；行业分散[专业服务]",
+      "risk_tags": "无显著风险标签",
+      "close_price": 15.88,
+      "snapshot": {
+        "price": 15.88,
+        "pct": 4.271,
+        "turnover": 2.6375,
+        "vol_ratio": null,
+        "amount": 584611065.0,
+        "mktcap": 26723312038.32,
+        "profit_g": 18.04,
+        "rev_g": 15.2715,
+        "roe": 11.88,
+        "eps": 0.5712,
+        "trend20": 2.9164,
+        "fund_score": 44.9313,
+        "total": 60.8029
+      },
+      "industry": "专业服务"
+    },
+    {
+      "code": "000100",
+      "name": "TCL科技",
+      "rank": 8,
+      "score": 60.787,
+      "scores": {
+        "fund_score": 61.211,
+        "trend20": 12.0,
+        "profit_g": 68.06,
+        "rev_g": 1.98,
+        "roe": 7.65
+      },
+      "reason": "净利+68%/营收+2%双增，ROE 7.7%；收盘>MA20>MA60多头，20日涨幅12.0%≤15%；行业分散[光学光电子]",
+      "risk_tags": "20日涨幅偏高(>10%)",
+      "close_price": 5.04,
+      "snapshot": {
+        "price": 5.04,
+        "pct": 1.411,
+        "turnover": 2.2598,
+        "vol_ratio": null,
+        "amount": 2255848430.0,
+        "mktcap": 110609937401.04,
+        "profit_g": 68.06,
+        "rev_g": 1.9783,
+        "roe": 7.65,
+        "eps": 0.2466,
+        "trend20": 12.0,
+        "fund_score": 61.2111,
+        "total": 60.7872
+      },
+      "industry": "光学光电子"
+    },
+    {
+      "code": "600885",
+      "name": "宏发股份",
+      "rank": 9,
+      "score": 60.277,
+      "scores": {
+        "fund_score": 63.805,
+        "trend20": 13.88,
+        "profit_g": 23.15,
+        "rev_g": 34.27,
+        "roe": 13.63
+      },
+      "reason": "净利+23%/营收+34%双增，ROE 13.6%；收盘>MA20>MA60多头，20日涨幅13.9%≤15%；行业分散[电网设备]",
+      "risk_tags": "20日涨幅偏高(>10%);当日涨幅>5%",
+      "close_price": 35.52,
+      "snapshot": {
+        "price": 35.52,
+        "pct": 5.246,
+        "turnover": 1.2172,
+        "vol_ratio": null,
+        "amount": 649490420.0,
+        "mktcap": 54970549997.76,
+        "profit_g": 23.15,
+        "rev_g": 34.2687,
+        "roe": 13.63,
+        "eps": 1.1696,
+        "trend20": 13.8827,
+        "fund_score": 63.805,
+        "total": 60.2768
+      },
+      "industry": "电网设备"
+    },
+    {
+      "code": "600919",
+      "name": "江苏银行",
+      "rank": 10,
+      "score": 58.087,
+      "scores": {
+        "fund_score": 42.443,
+        "trend20": 3.86,
+        "profit_g": 8.21,
+        "rev_g": 13.24,
+        "roe": 11.87
+      },
+      "reason": "净利+8%/营收+13%双增，ROE 11.9%；收盘>MA20>MA60多头，20日涨幅3.9%≤15%；行业分散[银行Ⅱ]",
+      "risk_tags": "无显著风险标签",
+      "close_price": 13.46,
+      "snapshot": {
+        "price": 13.46,
+        "pct": -1.68,
+        "turnover": 0.9238,
+        "vol_ratio": null,
+        "amount": 2278062411.0,
+        "mktcap": 247008827271.98,
+        "profit_g": 8.21,
+        "rev_g": 13.2413,
+        "roe": 11.8725,
+        "eps": 1.73,
+        "trend20": 3.858,
+        "fund_score": 42.4431,
+        "total": 58.087
+      },
+      "industry": "银行Ⅱ"
+    }
+  ]
+}
